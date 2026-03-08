@@ -1,1027 +1,1569 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نماء - لوحة الخدمات</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <style>
-        :root {
-            --brand-primary: #724077;
-            --brand-light: #9d6ba1;
-            --brand-dark: #5a2f5e;
-            --brand-pale: #f3e5f5;
-            --brand-lighter: #e1bee7;
-            --accent-gold: #d4af37;
-            --accent-teal: #2dd4bf;
-            --white: #ffffff;
-            --light-bg: #fafafa;
-            --light-gray: #f5f5f5;
-            --border-light: #e0e0e0;
-            --text-dark: #2d2d2d;
-            --text-gray: #757575;
-            --success: #22c55e;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Tajawal', sans-serif;
-            background: var(--light-bg);
-            color: var(--text-dark);
-            min-height: 100vh;
-        }
-
-        /* Hero Section with Wave */
-        .hero-section {
-            background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-dark) 50%, var(--brand-light) 100%);
-            padding: 3rem 2rem 8rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-section::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 150px;
-            background: url('data:image/svg+xml,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg"><path d="M0,64 C300,120 900,0 1200,64 L1200,120 L0,120 Z" fill="%23fafafa"/></svg>') no-repeat;
-            background-size: cover;
-        }
-
-        .hero-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-content {
-            text-align: center;
-            animation: fadeInDown 0.8s ease-out;
-        }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .hero-logo {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 1.5rem;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            border-radius: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        .hero-title {
-            font-family: 'Cairo', sans-serif;
-            font-size: 3rem;
-            font-weight: 900;
-            color: white;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .hero-subtitle {
-            font-size: 1.3rem;
-            color: rgba(255, 255, 255, 0.95);
-            font-weight: 300;
-        }
-
-        .hero-stats {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin-top: 2rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            color: white;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 900;
-            display: block;
-            margin-bottom: 0.25rem;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
-        /* Main Container */
-        .main-container {
-            max-width: 1400px;
-            margin: -5rem auto 3rem;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Quick Actions Bar */
-        .quick-actions-bar {
-            background: white;
-            border-radius: 25px;
-            padding: 1.5rem 2rem;
-            box-shadow: 0 10px 40px rgba(114, 64, 119, 0.15);
-            margin-bottom: 3rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            animation: slideUp 0.6s ease-out;
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .search-box-main {
-            flex: 1;
-            min-width: 300px;
-            position: relative;
-        }
-
-        .search-input-main {
-            width: 100%;
-            padding: 0.9rem 1.2rem 0.9rem 3.5rem;
-            border: 2px solid var(--border-light);
-            border-radius: 15px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .search-input-main:focus {
-            outline: none;
-            border-color: var(--brand-primary);
-            box-shadow: 0 0 0 4px rgba(114, 64, 119, 0.1);
-        }
-
-        .search-icon-main {
-            position: absolute;
-            right: 1.2rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-gray);
-            font-size: 1.2rem;
-        }
-
-        .quick-action-btn {
-            padding: 0.9rem 1.5rem;
-            background: var(--brand-pale);
-            border: none;
-            border-radius: 15px;
-            color: var(--brand-primary);
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-family: 'Tajawal', sans-serif;
-        }
-
-        .quick-action-btn:hover {
-            background: var(--brand-primary);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(114, 64, 119, 0.3);
-        }
-
-        /* Dashboard Grid - Bento Box Style */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        /* Large Feature Card */
-        .feature-card-large {
-            grid-column: span 8;
-            background: white;
-            border-radius: 25px;
-            padding: 2.5rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            position: relative;
-            overflow: hidden;
-            animation: fadeInCard 0.6s ease-out 0.1s both;
-        }
-
-        @keyframes fadeInCard {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        .feature-card-large::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(114, 64, 119, 0.05) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            justify-content: between;
-            margin-bottom: 2rem;
-        }
-
-        .card-icon-large {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, var(--brand-primary), var(--brand-light));
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: white;
-            box-shadow: 0 8px 25px rgba(114, 64, 119, 0.3);
-            margin-left: 1.5rem;
-        }
-
-        .card-title-section h2 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--brand-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .card-description {
-            color: var(--text-gray);
-            font-size: 0.95rem;
-        }
-
-        .services-grid-inline {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-
-        .service-item-inline {
-            padding: 1.25rem;
-            background: var(--light-bg);
-            border: 2px solid transparent;
-            border-radius: 16px;
-            text-decoration: none;
-            color: var(--text-dark);
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .service-item-inline:hover {
-            background: white;
-            border-color: var(--brand-primary);
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(114, 64, 119, 0.15);
-        }
-
-        .service-icon-small {
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(135deg, var(--brand-primary), var(--brand-light));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.3rem;
-            flex-shrink: 0;
-        }
-
-        .service-info h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .service-info p {
-            font-size: 0.8rem;
-            color: var(--text-gray);
-        }
-
-        /* Side Widget Cards */
-        .widget-card {
-            grid-column: span 4;
-            background: white;
-            border-radius: 25px;
-            padding: 2rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            animation: fadeInCard 0.6s ease-out 0.2s both;
-        }
-
-        .widget-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1.5rem;
-        }
-
-        .widget-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--brand-primary);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .view-all-link {
-            color: var(--brand-primary);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .view-all-link:hover {
-            color: var(--brand-dark);
-        }
-
-        /* Activity Item */
-        .activity-item {
-            display: flex;
-            gap: 1rem;
-            padding: 1rem;
-            border-radius: 12px;
-            margin-bottom: 0.75rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .activity-item:hover {
-            background: var(--brand-pale);
-        }
-
-        .activity-icon {
-            width: 45px;
-            height: 45px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, var(--accent-teal), #5eead4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            flex-shrink: 0;
-        }
-
-        .activity-content {
-            flex: 1;
-        }
-
-        .activity-title {
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-            color: var(--text-dark);
-        }
-
-        .activity-time {
-            font-size: 0.8rem;
-            color: var(--text-gray);
-        }
-
-        .activity-status {
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            white-space: nowrap;
-        }
-
-        .status-success {
-            background: rgba(34, 197, 94, 0.1);
-            color: var(--success);
-        }
-
-        .status-pending {
-            background: rgba(245, 158, 11, 0.1);
-            color: var(--warning);
-        }
-
-        /* Services Categories Grid */
-        .categories-section {
-            margin-top: 3rem;
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 2rem;
-        }
-
-        .section-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--brand-primary);
-        }
-
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .category-card {
-            background: white;
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            transition: all 0.4s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            animation: fadeInUp 0.6s ease-out both;
-        }
-
-        .category-card:nth-child(1) { animation-delay: 0.1s; }
-        .category-card:nth-child(2) { animation-delay: 0.2s; }
-        .category-card:nth-child(3) { animation-delay: 0.3s; }
-        .category-card:nth-child(4) { animation-delay: 0.4s; }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .category-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(114, 64, 119, 0.05), transparent);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .category-card:hover::before {
-            opacity: 1;
-        }
-
-        .category-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 50px rgba(114, 64, 119, 0.2);
-        }
-
-        .category-icon {
-            width: 65px;
-            height: 65px;
-            background: linear-gradient(135deg, var(--brand-primary), var(--brand-light));
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: white;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 6px 20px rgba(114, 64, 119, 0.3);
-            transition: transform 0.4s ease;
-        }
-
-        .category-card:hover .category-icon {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .category-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--brand-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .category-description {
-            color: var(--text-gray);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .category-count {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: var(--brand-pale);
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--brand-primary);
-        }
-
-        /* Stats Cards */
-        .stats-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin: 3rem 0;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            text-align: center;
-            transition: all 0.3s ease;
-            animation: fadeInCard 0.6s ease-out both;
-        }
-
-        .stat-card:nth-child(1) { animation-delay: 0.1s; }
-        .stat-card:nth-child(2) { animation-delay: 0.2s; }
-        .stat-card:nth-child(3) { animation-delay: 0.3s; }
-        .stat-card:nth-child(4) { animation-delay: 0.4s; }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(114, 64, 119, 0.15);
-        }
-
-        .stat-card-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--brand-primary), var(--brand-light));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1rem;
-            font-size: 1.8rem;
-            color: white;
-        }
-
-        .stat-value {
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: var(--brand-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: var(--text-gray);
-            font-size: 0.95rem;
-        }
-
-        /* Footer */
-        .footer {
-            background: white;
-            padding: 3rem 2rem;
-            margin-top: 4rem;
-            border-top: 1px solid var(--border-light);
-        }
-
-        .footer-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .footer-logo {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--brand-primary), var(--brand-light));
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            margin: 0 auto 1rem;
-        }
-
-        .footer-text {
-            color: var(--text-gray);
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-text strong {
-            color: var(--brand-primary);
-        }
-
-        /* Floating Help Button */
-        .help-fab {
-            position: fixed;
-            bottom: 2rem;
-            left: 2rem;
-            width: 65px;
-            height: 65px;
-            background: linear-gradient(135deg, var(--brand-primary), var(--brand-light));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.8rem;
-            box-shadow: 0 8px 30px rgba(114, 64, 119, 0.4);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 100;
-            border: none;
-        }
-
-        .help-fab:hover {
-            transform: scale(1.15);
-            box-shadow: 0 12px 40px rgba(114, 64, 119, 0.5);
-        }
-
-        /* Responsive */
-        @media (max-width: 1200px) {
-            .feature-card-large {
-                grid-column: span 12;
-            }
-
-            .widget-card {
-                grid-column: span 6;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1rem;
-            }
-
-            .hero-stats {
-                gap: 1.5rem;
-                flex-wrap: wrap;
-            }
-
-            .stat-number {
-                font-size: 2rem;
-            }
-
-            .main-container {
-                margin-top: -3rem;
-                padding: 0 1rem;
-            }
-
-            .quick-actions-bar {
-                padding: 1rem;
-            }
-
-            .search-box-main {
-                min-width: 100%;
-            }
-
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .feature-card-large,
-            .widget-card {
-                grid-column: span 1;
-            }
-
-            .services-grid-inline {
-                grid-template-columns: 1fr;
-            }
-
-            .categories-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>منصة دعم - DAAM Portal</title>
+ <link rel="icon" type="image/png" href="logo1.png">
+    <link rel="apple-touch-icon" href="logo1.png">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Noto+Kufi+Arabic:wght@400;700;900&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --P:#744379;
+  --P2:#9B6BA0;
+  --P3:#C094C8;
+  --P4:#EDD8F5;
+  --gold:#ffffff;
+  --gold2:#ffffff;
+  --gold3:#eeeeec;
+  --bg:#FAFAFA;
+  --surface:#FFFFFF;
+  --surface2:#F8F2FC;
+  --surface3:#F3EAF8;
+  --text:#3A1E40;
+  --text2:#6B4E74;
+  --text3:#A888B0;
+  --border:rgba(116,67,121,0.12);
+  --shadow:rgba(116,67,121,0.09);
+  --glow:rgba(116,67,121,0.20);
+  --card-h:290px;
+}
+
+[data-theme="dark"]{
+  --bg:#160C1E;
+  --surface:#201030;
+  --surface2:#2A1540;
+  --surface3:#321A4A;
+  --text:#F0E8F8;
+  --text2:#CDB8DA;
+  --text3:#906898;
+  --border:rgba(192,148,200,0.15);
+  --shadow:rgba(0,0,0,0.45);
+  --glow:rgba(116,67,121,0.30);
+  --P4:rgba(192,148,200,0.13);
+}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:'Cairo',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  transition:background .4s,color .4s;
+  overflow-x:hidden;
+  min-height:100vh;
+}
+
+/* ── Subtle dot grid background ── */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:radial-gradient(circle, rgba(107,58,125,0.06) 1px, transparent 1px);
+  background-size:32px 32px;
+  pointer-events:none;
+  z-index:0;
+}
+[data-theme="dark"] body::before{
+  background-image:radial-gradient(circle, rgba(192,132,204,0.07) 1px, transparent 1px);
+}
+
+/* ══════════════════════════ HEADER ══════════════════════════ */
+header{position:relative;z-index:50}
+
+.hbg{
+  background:linear-gradient(160deg,#3D1A4A 0%,#744379 45%,#9B5EA5 80%,#5C2A6E 100%);
+  position:relative;
+  overflow:hidden;
+}
+
+/* Decorative mesh blobs */
+.hbg::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(ellipse 60% 80% at 20% -10%, rgba(180,100,210,0.30) 0%,transparent 60%),
+    radial-gradient(ellipse 50% 60% at 80% 110%, rgba(60,15,90,0.45) 0%,transparent 55%),
+    radial-gradient(ellipse 30% 40% at 60% 50%, rgba(255,255,255,0.04) 0%,transparent 50%);
+  pointer-events:none;
+}
+
+/* Animated gold top bar */
+.hbg::after{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:3px;
+  background:linear-gradient(90deg,transparent,var(--gold),var(--gold2),var(--gold3),var(--gold2),var(--gold),transparent);
+  background-size:200% 100%;
+  animation:goldShimmer 4s ease-in-out infinite;
+}
+@keyframes goldShimmer{
+  0%,100%{background-position:150% 0}
+  50%{background-position:-50% 0}
+}
+
+/* Floating orbs */
+.orb{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(60px);
+  pointer-events:none;
+  opacity:0.25;
+}
+.orb1{width:300px;height:300px;background:#9B6BA0;top:-80px;right:-60px;animation:orbFloat 9s ease-in-out infinite}
+.orb2{width:200px;height:200px;background:#f9f9f9;bottom:-50px;left:10%;animation:orbFloat 12s ease-in-out infinite reverse}
+.orb3{width:180px;height:180px;background:#FFFFFF;top:30%;left:30%;animation:orbFloat 7s ease-in-out infinite 2s;opacity:.07}
+@keyframes orbFloat{
+  0%,100%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(20px,-20px) scale(1.05)}
+  66%{transform:translate(-15px,15px) scale(0.97)}
+}
+
+.hcontrols{
+  position:absolute;
+  top:1.2rem;
+  left:1.8rem;
+  display:flex;
+  gap:.6rem;
+  z-index:10;
+}
+[dir="ltr"] .hcontrols{left:auto;right:1.8rem}
+
+.cbtn{
+  width:40px;height:40px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.18);
+  border-radius:12px;
+  color:white;
+  font-size:1rem;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  backdrop-filter:blur(12px);
+  transition:all .3s ease;
+}
+.cbtn:hover{
+  background:rgba(255,255,255,0.18);
+  border-color:rgba(255,255,255,0.35);
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(0,0,0,0.2);
+}
+.cbtn.ton{
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  border-color:transparent;
+  color:#2E0845;
+  box-shadow:0 0 20px rgba(11, 11, 11, 0.5);
+}
+.lbtn span{
+  font-family:'Outfit',sans-serif;
+  font-weight:800;
+  font-size:.7rem;
+  letter-spacing:2px;
+}
+
+.hhero{
+  position:relative;
+  z-index:2;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:2rem 2rem 3rem;
+  gap:1.8rem;
+}
+
+/* Logo with ring effect */
+.logo-wrap{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+
+@keyframes ringPulse{
+  0%,100%{transform:scale(1);opacity:.5}
+  50%{transform:scale(1.04);opacity:1}
+}
+.logo-glow{
+  position:absolute;
+  width:160px;height:60px;
+  background:radial-gradient(ellipse,rgba(255, 255, 255, 0.35) 0%,transparent 70%);
+  filter:blur(18px);
+  bottom:-10px;
+}
+.logo-img{
+  width:250px;height:250px;
+  object-fit:contain;
+  position:relative;z-index:2;
+  filter:drop-shadow(0 8px 28px rgba(0,0,0,0.25));
+  animation:logoFloat 6s ease-in-out infinite;
+}
+@keyframes logoFloat{
+  0%,100%{transform:translateY(0px)}
+  50%{transform:translateY(-8px)}
+}
+
+.htitle{
+  text-align:center;
+  display:flex;flex-direction:column;align-items:center;
+  gap:.7rem;
+}
+.htitle h1{
+  font-family:'Noto Kufi Arabic','Cairo',sans-serif;
+  font-size:clamp(2.4rem,5.5vw,4rem);
+  font-weight:900;
+  color:white;
+  letter-spacing:-1px;
+  text-shadow:0 4px 24px rgba(0,0,0,0.3), 0 0 60px rgba(150,60,200,0.4);
+}
+
+.title-ornament{
+  display:flex;align-items:center;gap:1rem;
+  width:220px;
+}
+.orn-line{
+  flex:1;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(242, 242, 242, 0.7),transparent);
+}
+.orn-diamond{
+  width:7px;height:7px;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  transform:rotate(45deg);
+  box-shadow:0 0 12px var(--gold);
+  flex-shrink:0;
+}
+.orn-dot{
+  width:4px;height:4px;
+  background:rgba(255, 255, 255, 0.5);
+  border-radius:50%;
+  flex-shrink:0;
+}
+
+.htitle .sub{
+  font-family:'Outfit',sans-serif;
+  font-size:.82rem;
+  color:rgba(255,255,255,0.5);
+  letter-spacing:6px;
+  text-transform:uppercase;
+}
+
+.hnav{
+  display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;
+}
+.nlink{
+  color:rgba(255,255,255,0.8);
+  text-decoration:none;
+  font-weight:600;
+  font-size:.88rem;
+  padding:.55rem 1.4rem;
+  border-radius:50px;
+  border:1px solid rgba(255,255,255,0.14);
+  background:rgba(255,255,255,0.06);
+  backdrop-filter:blur(10px);
+  transition:all .3s ease;
+  position:relative;overflow:hidden;
+}
+.nlink::before{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  opacity:0;
+  transition:opacity .25s;
+  border-radius:50px;
+}
+.nlink:hover::before{opacity:1}
+.nlink:hover{
+  color:#2E0845;
+  border-color:transparent;
+  transform:translateY(-3px);
+  box-shadow:0 10px 28px rgba(0, 0, 0, 0.35);
+}
+.nlink span{position:relative;z-index:1}
+
+/* Stats bar */
+.hstats{
+  display:flex;gap:2.5rem;
+  background:rgba(255,255,255,0.07);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:20px;
+  padding:.9rem 2.5rem;
+  backdrop-filter:blur(12px);
+}
+.hstat{
+  display:flex;flex-direction:column;align-items:center;gap:.2rem;
+}
+.hstat-num{
+  font-family:'Outfit',sans-serif;
+  font-size:1.4rem;font-weight:800;
+  color:var(--gold2);
+  text-shadow:0 0 20px rgba(0, 0, 0, 0.4);
+}
+.hstat-lbl{
+  font-size:.72rem;
+  color:rgba(255,255,255,0.5);
+  letter-spacing:.5px;
+}
+.hstat-sep{
+  width:1px;
+  background:rgba(255,255,255,0.12);
+  align-self:stretch;
+}
+
+.hwave{display:block;width:100%;height:56px}
+
+/* ══════════════════════════ CATEGORY BAR ══════════════════════════ */
+.cat-bar{
+  background:var(--surface);
+  box-shadow:0 4px 24px var(--shadow);
+  padding:1.8rem 2rem 2rem;
+  position:sticky;top:0;z-index:40;
+  transition:background .4s,box-shadow .3s;
+  border-bottom:1px solid var(--border);
+}
+.cat-bar.scrolled{box-shadow:0 8px 40px var(--shadow)}
+
+.cat-bar-title{
+  text-align:center;
+  font-size:.8rem;
+  font-weight:700;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--text3);
+  margin-bottom:1.4rem;
+}
+
+.cat-tabs{
+  display:flex;gap:.8rem;
+  justify-content:center;
+  flex-wrap:wrap;
+  max-width:1100px;
+  margin:0 auto;
+}
+
+.cat-tab{
+  flex:1;
+  min-width:140px;max-width:210px;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:.5rem;
+  background:var(--surface3);
+  border:2px solid transparent;
+  border-radius:16px;
+  color:var(--text2);
+  font-family:'Cairo',sans-serif;
+  font-size:.88rem;font-weight:700;
+  padding:1rem .9rem;
+  cursor:pointer;
+  transition:all .3s cubic-bezier(.4,0,.2,1);
+  position:relative;
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
+  outline:none;
+}
+.cat-tab::after{
+  content:'';
+  position:absolute;
+  bottom:0;left:50%;
+  transform:translateX(-50%) scaleX(0);
+  width:40%;height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--gold2));
+  border-radius:3px 3px 0 0;
+  transition:transform .3s ease;
+}
+.cat-tab:hover{
+  border-color:var(--border);
+  color:var(--P);
+  transform:translateY(-4px);
+  box-shadow:0 10px 28px var(--shadow);
+}
+.cat-tab:hover::after{transform:translateX(-50%) scaleX(1)}
+.cat-tab.active{
+  background:linear-gradient(135deg,var(--P),var(--P2));
+  border-color:transparent;
+  color:#fff;
+  transform:translateY(-4px);
+  box-shadow:0 12px 36px rgba(107,58,125,0.35);
+}
+.cat-tab.active::after{transform:translateX(-50%) scaleX(1);background:rgba(255,255,255,0.6)}
+.cat-icon{font-size:1.8rem;line-height:1;transition:transform .25s ease}
+.cat-tab:hover .cat-icon{transform:scale(1.15)}
+.cat-tab.active .cat-icon{transform:scale(1.1)}
+
+/* ══════════════════════════ MAIN ══════════════════════════ */
+main{
+  max-width:1380px;
+  margin:0 auto;
+  padding:2.8rem 2rem 5rem;
+  position:relative;z-index:1;
+}
+
+/* Section card */
+.sc{
+  background:var(--surface);
+  border-radius:24px;
+  padding:2.2rem 2.5rem;
+  margin-bottom:2.2rem;
+  border:1px solid var(--border);
+  box-shadow:0 8px 40px var(--shadow);
+  position:relative;overflow:hidden;
+  transition:all .4s cubic-bezier(.4,0,.2,1);
+  animation:sfade .5s ease-out both;
+}
+.sc:nth-child(2){animation-delay:.07s}
+.sc:nth-child(3){animation-delay:.14s}
+.sc:nth-child(4){animation-delay:.21s}
+.sc:nth-child(5){animation-delay:.28s}
+@keyframes sfade{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* Top accent line */
+.sc::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:3px;
+  background:linear-gradient(90deg,var(--P),var(--P3),var(--gold),var(--P3),var(--P));
+  background-size:300% 100%;
+  animation:bslide 5s ease-in-out infinite;
+}
+@keyframes bslide{0%,100%{background-position:0%}50%{background-position:100%}}
+
+.sc:hover{transform:translateY(-4px);box-shadow:0 20px 64px var(--glow)}
+
+/* Section corner decoration */
+.sc::after{
+  content:'';
+  position:absolute;
+  top:-40px;right:-40px;
+  width:120px;height:120px;
+  border-radius:50%;
+  background:radial-gradient(circle,var(--P4) 0%,transparent 70%);
+  pointer-events:none;
+}
+[dir="ltr"] .sc::after{right:auto;left:-40px}
+
+.slabel{
+  display:flex;align-items:center;gap:1.2rem;
+  margin-bottom:2rem;
+}
+.sicon{
+  width:60px;height:60px;
+  background:linear-gradient(135deg,var(--P),var(--P2));
+  border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.8rem;
+  box-shadow:0 8px 28px rgba(116,67,121,0.25);
+  flex-shrink:0;
+  transition:transform .3s ease;
+}
+.sc:hover .sicon{transform:rotate(6deg) scale(1.05)}
+.stext h2{
+  font-family:'Noto Kufi Arabic','Cairo',sans-serif;
+  font-size:1.45rem;font-weight:800;
+  color:var(--P);
+}
+[data-theme="dark"] .stext h2{color:var(--P3)}
+.stext p{font-size:.84rem;color:var(--text3);margin-top:.15rem}
+
+/* Card grid */
+.cgrid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+  gap:1.2rem;
+}
+
+/* Flip card */
+.fc{
+  height:var(--card-h);
+  perspective:1200px;
+  cursor:pointer;
+}
+.fi{
+  width:100%;height:100%;
+  position:relative;
+    border-radius:20px;
+  transform-style:preserve-3d;
+  transition:transform .65s cubic-bezier(.4,.2,.2,1);
+}
+.fc:hover .fi,
+.fc:focus-within .fi,
+.fc.flipped .fi{transform:rotateY(180deg)}
+
+.ff,.fb{
+  position:absolute;inset:0;
+  border-radius:20px;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:1.6rem 1.2rem;
+  overflow:visible;
+}
+
+/* Front face */
+.ff{
+  background:linear-gradient(145deg,#744379 0%,#3D1A4A 55%,#9B6BA0 100%);
+  color:white;
+    border-radius:20px;
+  box-shadow:0 12px 40px rgba(116,67,121,0.35);
+}
+
+/* Shimmer overlay */
+.ff::before{
+  content:'';
+  position:absolute;inset:0;
+  background:conic-gradient(from 0deg at 30% 50%,transparent,rgba(255,255,255,0.025) 60deg,transparent 120deg);
+  animation:cspin 12s linear infinite;
+  border-radius:20px;
+}
+@keyframes cspin{to{transform:rotate(360deg)}}
+
+/* Bottom glow on front */
+.ff::after{
+  content:'';
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:50%;
+    border-radius:20px;
+  background:linear-gradient(to top,rgba(107,58,125,0.3),transparent);
+  pointer-events:none;
+}
+
+.cicon{
+  font-size:3rem;
+  margin-bottom:.9rem;
+  position:relative;z-index:1;
+  filter:drop-shadow(0 4px 12px rgba(232, 232, 232, 0.25));
+  animation:ifloat 4.5s ease-in-out infinite;
+}
+@keyframes ifloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
+}
+
+.ctitle{
+  font-family:'Noto Kufi Arabic','Cairo',sans-serif;
+  font-size:1.1rem;font-weight:700;
+  text-align:center;
+  margin-bottom:.3rem;
+  position:relative;z-index:1;
+  color:white;
+}
+.csub{
+  font-size:.78rem;
+  color:rgba(255,255,255,0.55);
+  text-align:center;
+  position:relative;z-index:1;
+}
+
+/* Card tag chip */
+.ctag{
+  position:relative;z-index:1;
+  margin-top:.8rem;
+  background:rgba(255,255,255,0.1);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:50px;
+  padding:.2rem .75rem;
+  font-size:.68rem;
+  color:rgba(255,255,255,0.6);
+  font-family:'Outfit',sans-serif;
+  letter-spacing:.5px;
+}
+
+/* NEW badge */
+.nbadge{
+  position:absolute;
+  top:0;right:0;
+  overflow:hidden;
+  width:72px;height:72px;
+  pointer-events:none;z-index:20;
+}
+[dir="ltr"] .nbadge{right:0;left:auto}
+.nbadge::before{
+  content:'NEW';
+  position:absolute;
+  top:15px;right:-14px;
+  width:70px;
+  text-align:center;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#1C0A00;
+  font-family:'Outfit',sans-serif;
+  font-size:.55rem;font-weight:900;
+  letter-spacing:1.5px;
+  padding:3px 0;
+  transform:rotate(45deg);
+  box-shadow:0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Back face */
+.fb{
+  background:var(--surface);
+  border:1.5px solid var(--border);
+  transform:rotateY(180deg);
+  box-shadow:0 12px 40px var(--shadow);
+  gap:.8rem;
+  pointer-events:auto !important;
+  z-index:2;
+}
+[data-theme="dark"] .fb{background:var(--surface2)}
+
+.fb h3{
+  font-family:'Cairo',sans-serif;
+  font-size:.98rem;font-weight:700;
+  color:var(--P);text-align:center;
+}
+[data-theme="dark"] .fb h3{color:var(--P3)}
+
+.bdiv{
+  width:36px;height:2px;
+  background:linear-gradient(90deg,var(--gold),var(--gold2));
+  border-radius:2px;
+}
+
+.bbtns{
+  display:flex;flex-direction:column;
+  gap:.65rem;width:100%;
+}
+
+.bbtn{
+  padding:.65rem 1rem;
+  border-radius:12px;
+  border:1.5px solid var(--border);
+  background:var(--surface3);
+  color:var(--P);
+  font-family:'Cairo',sans-serif;
+  font-size:.85rem;font-weight:700;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:.45rem;
+  transition:all .25s cubic-bezier(.4,0,.2,1);
+  position:relative;overflow:visible;
+  text-decoration:none;
+  will-change:transform,box-shadow,border-color,color;
+  pointer-events:auto !important;
+  z-index:10;
+  -webkit-user-select:none;
+  user-select:none;
+}
+.bbtn::before{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--P),var(--P2));
+  opacity:0;
+  transition:opacity .22s cubic-bezier(.4,0,.2,1);
+  border-radius:12px;
+  pointer-events:none;
+}
+.bbtn:hover::before{
+  opacity:1;
+}
+.bbtn:hover{
+  color:white !important;
+  border-color:transparent !important;
+  transform:translateY(-2px);
+  box-shadow:0 6px 20px var(--glow) !important;
+}
+.bbtn:active{
+  transform:translateY(0px);
+}
+.bbtn span,.bbtn i{position:relative;z-index:1}
+[data-theme="dark"] .bbtn{
+  background:rgba(192,132,204,0.08);
+  border-color:rgba(192,132,204,0.2);
+  color:var(--P3);
+}
+[data-theme="dark"] .bbtn:hover{
+  color:white !important;
+}
+
+/* ══════════════════════════ FOOTER ══════════════════════════ */
+footer{
+  background:linear-gradient(160deg,#3D1A4A 0%,#744379 50%,#5C2A6E 100%);
+  position:relative;overflow:hidden;
+  margin-top:1rem;
+}
+footer::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),var(--gold2),var(--gold),transparent);
+  background-size:200% 100%;
+  animation:goldShimmer 4s ease-in-out infinite;
+  z-index:5;
+}
+.fbg-orb{
+  position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;
+}
+.fbg-orb1{width:350px;height:350px;background:#744379;top:-100px;right:-80px;opacity:.25}
+.fbg-orb2{width:250px;height:250px;background:#FFFFFF;bottom:-80px;left:5%;opacity:.05}
+
+.fwave{display:block;width:100%;height:52px;position:relative;z-index:2}
+.finn{max-width:1380px;margin:0 auto;padding:2.5rem 2.5rem 2rem;position:relative;z-index:3}
+
+.footer-brand{
+  display:flex;flex-direction:column;align-items:center;
+  padding-bottom:2rem;margin-bottom:2rem;
+  border-bottom:1px solid rgba(255,255,255,0.1);
+  gap:.9rem;
+}
+.footer-logo{
+  width:64px;height:64px;
+  object-fit:contain;border-radius:50%;
+  filter:drop-shadow(0 4px 16px rgba(201,168,76,0.3));
+  opacity:.9;
+}
+.footer-brand-name{
+  font-family:'Noto Kufi Arabic','Cairo',sans-serif;
+  font-size:1.2rem;font-weight:800;color:white;
+}
+.footer-brand-tagline{
+  font-family:'Outfit',sans-serif;
+  font-size:.72rem;letter-spacing:3.5px;
+  color:rgba(255,255,255,0.4);
+  text-transform:uppercase;
+  margin-top:-.2rem;
+}
+
+.fgrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.1rem;
+  padding-bottom:2rem;margin-bottom:1.8rem;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.fcard{
+  display:flex;align-items:center;gap:.9rem;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:16px;
+  padding:1rem 1.2rem;
+  transition:all .3s ease;
+  backdrop-filter:blur(8px);
+}
+.fcard:hover{
+  background:rgba(255,255,255,0.09);
+  border-color:rgba(255,255,255,0.18);
+  transform:translateY(-3px);
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+.fcard-icon{
+  width:44px;height:44px;
+  border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.fcard-icon.wa{background:rgba(37,211,102,0.15);border:1px solid rgba(37,211,102,0.3)}
+.fcard-icon.mail{background:rgba(255, 255, 255, 0.15);border:1px solid rgba(255, 255, 255, 0.3)}
+.fcard-icon.phone{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15)}
+.fcard-text strong{
+  display:block;
+  font-family:'Outfit',sans-serif;
+  font-size:.65rem;font-weight:700;
+  letter-spacing:1px;text-transform:uppercase;
+  color:var(--gold2);margin-bottom:.25rem;
+}
+.fcard-text span{
+  font-size:.86rem;
+  color:rgba(255,255,255,0.75);
+  font-family:'Cairo',sans-serif;
+  direction:ltr;display:block;
+}
+.fcard-text span.small{font-size:.74rem}
+
+.footer-bottom{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:1rem;
+}
+.fcopy{font-size:.78rem;color:rgba(255,255,255,0.3);font-family:'Cairo',sans-serif}
+.footer-made{font-size:.7rem;color:rgba(255,255,255,0.2);font-family:'Outfit',sans-serif;letter-spacing:.5px}
+
+/* ══════════════════════════ TOAST ══════════════════════════ */
+.toast-wrap{
+  position:fixed;bottom:26px;z-index:9999;
+  pointer-events:none;
+  display:flex;flex-direction:column;gap:.5rem;
+}
+[dir="rtl"] .toast-wrap{right:26px}
+[dir="ltr"] .toast-wrap{left:26px}
+
+.toast{
+  background:linear-gradient(135deg,var(--P),var(--P2));
+  color:white;
+  padding:.8rem 1.5rem;
+  border-radius:14px;
+  font-family:'Cairo',sans-serif;
+  font-size:.88rem;font-weight:700;
+  box-shadow:0 10px 36px rgba(0, 0, 0, 0.45);
+  border:1px solid rgba(255,255,255,0.15);
+  display:flex;align-items:center;gap:.6rem;
+  animation:toastIn .35s cubic-bezier(.4,0,.2,1) both;
+}
+.toast.out{animation:toastOut .28s ease both}
+@keyframes toastIn{from{opacity:0;transform:translateY(16px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes toastOut{to{opacity:0;transform:translateY(16px) scale(.96)}}
+
+/* ══════════════════════════ RESPONSIVE ══════════════════════════ */
+@media(max-width:1024px){
+  .cat-tab{min-width:120px;padding:.9rem .8rem;font-size:.83rem}
+  .cat-icon{font-size:1.65rem}
+}
+@media(max-width:768px){
+  .cat-bar{padding:1.3rem 1.2rem 1.5rem}
+  .cat-tabs{gap:.6rem}
+  .cat-tab{min-width:calc(33.33% - .6rem);max-width:none;font-size:.78rem;padding:.8rem .6rem;border-radius:14px}
+  .cat-icon{font-size:1.5rem}
+  .hstats{gap:1.5rem;padding:.8rem 1.5rem}
+  .hhero{padding:3rem 1.5rem 2.5rem;gap:1.5rem}
+  .logo-img{width:155px;height:155px}
+  .htitle h1{font-size:2rem}
+  .sc{padding:1.5rem}
+  .cgrid{grid-template-columns:1fr 1fr;gap:1rem}
+  .fc{height:265px}
+  main{padding:2rem 1rem 4rem}
+  .fgrid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;align-items:center;text-align:center}
+  .finn{padding:2rem 1.5rem 1.5rem}
+}
+@media(max-width:500px){
+  .cat-tab{min-width:calc(50% - .6rem)}
+  .cgrid{grid-template-columns:1fr}
+  .logo-img{width:140px;height:140px}
+  .htitle h1{font-size:1.75rem}
+  .hstats{gap:1rem;padding:.7rem 1rem}
+  .hstat-num{font-size:1.1rem}
+}
+/* Mobile touch flip control */
+@media (hover: none) {
+  .fc:hover .fi { transform: none; }
+  .fc.flipped .fi { transform: rotateY(180deg); }
+}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--P);border-radius:6px}
+::-webkit-scrollbar-thumb:hover{background:var(--P2)}
+</style>
 </head>
 <body>
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="hero-container">
-            <div class="hero-content">
-                <div class="hero-logo">🌱</div>
-                <h1 class="hero-title">نماء</h1>
-                <p class="hero-subtitle">منصتك المتكاملة لجميع خدمات الدعم</p>
-                
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <span class="stat-number">127</span>
-                        <span class="stat-label">طلب نشط</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">95%</span>
-                        <span class="stat-label">معدل الرضا</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">24/7</span>
-                        <span class="stat-label">دعم متواصل</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Main Container -->
-    <div class="main-container">
-        <!-- Quick Actions Bar -->
-        <div class="quick-actions-bar">
-            <div class="search-box-main">
-                <i class="bi bi-search search-icon-main"></i>
-                <input type="text" class="search-input-main" placeholder="ابحث عن خدمة، قسم، أو طلب...">
-            </div>
-            <button class="quick-action-btn">
-                <i class="bi bi-plus-circle-fill"></i>
-                طلب جديد
-            </button>
-            <button class="quick-action-btn">
-                <i class="bi bi-clock-history"></i>
-                طلباتي
-            </button>
-            <button class="quick-action-btn">
-                <i class="bi bi-bookmark-fill"></i>
-                المفضلة
-            </button>
-        </div>
+<header>
+<div class="hbg">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
 
-        <!-- Dashboard Grid -->
-        <div class="dashboard-grid">
-            <!-- Large Feature Card - Fleet Services -->
-            <div class="feature-card-large">
-                <div class="card-header">
-                    <div style="display: flex; align-items: center; flex: 1;">
-                        <div class="card-icon-large">
-                            <i class="bi bi-car-front-fill"></i>
-                        </div>
-                        <div class="card-title-section">
-                            <h2>خدمات الأسطول</h2>
-                            <p class="card-description">إدارة شاملة لجميع احتياجات النقل والمركبات</p>
-                        </div>
-                    </div>
-                    <span class="category-count">
-                        <i class="bi bi-star-fill"></i>
-                        مميزة
-                    </span>
-                </div>
+  <div class="hcontrols">
+    <button id="themeBtn" class="cbtn" onclick="toggleTheme()" title="Toggle theme">
+      <i id="themeIcon" class="bi bi-moon-stars-fill"></i>
+    </button>
+    <button class="cbtn lbtn" onclick="toggleLang()" title="Toggle language">
+      <span id="langLabel">EN</span>
+    </button>
+  </div>
 
-                <div class="services-grid-inline">
-                    <a href="#" class="service-item-inline">
-                        <div class="service-icon-small">
-                            <i class="bi bi-plus-circle-fill"></i>
-                        </div>
-                        <div class="service-info">
-                            <h4>طلب مركبة</h4>
-                            <p>حجز فوري</p>
-                        </div>
-                    </a>
-                    <a href="#" class="service-item-inline">
-                        <div class="service-icon-small">
-                            <i class="bi bi-wrench-adjustable"></i>
-                        </div>
-                        <div class="service-info">
-                            <h4>صيانة المركبات</h4>
-                            <p>جدولة وتتبع</p>
-                        </div>
-                    </a>
-                    <a href="#" class="service-item-inline">
-                        <div class="service-icon-small">
-                            <i class="bi bi-exclamation-triangle-fill"></i>
-                        </div>
-                        <div class="service-info">
-                            <h4>الإبلاغ عن حوادث</h4>
-                            <p>استجابة سريعة</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Recent Activity Widget -->
-            <div class="widget-card">
-                <div class="widget-header">
-                    <h3 class="widget-title">
-                        <i class="bi bi-clock-history"></i>
-                        النشاط الأخير
-                    </h3>
-                    <a href="#" class="view-all-link">عرض الكل</a>
-                </div>
-
-                <div class="activity-item">
-                    <div class="activity-icon">
-                        <i class="bi bi-check-circle-fill"></i>
-                    </div>
-                    <div class="activity-content">
-                        <div class="activity-title">تمت الموافقة على طلب المركبة</div>
-                        <div class="activity-time">منذ 15 دقيقة</div>
-                    </div>
-                    <span class="activity-status status-success">مكتمل</span>
-                </div>
-
-                <div class="activity-item">
-                    <div class="activity-icon" style="background: linear-gradient(135deg, var(--warning), #fbbf24);">
-                        <i class="bi bi-hourglass-split"></i>
-                    </div>
-                    <div class="activity-content">
-                        <div class="activity-title">طلب صيانة قيد المعالجة</div>
-                        <div class="activity-time">منذ ساعة</div>
-                    </div>
-                    <span class="activity-status status-pending">معلق</span>
-                </div>
-
-                <div class="activity-item">
-                    <div class="activity-icon" style="background: linear-gradient(135deg, var(--brand-primary), var(--brand-light));">
-                        <i class="bi bi-file-text"></i>
-                    </div>
-                    <div class="activity-content">
-                        <div class="activity-title">طلب TAR الجديد</div>
-                        <div class="activity-time">منذ 3 ساعات</div>
-                    </div>
-                    <span class="activity-status status-success">مكتمل</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Stats Row -->
-        <div class="stats-row">
-            <div class="stat-card">
-                <div class="stat-card-icon">
-                    <i class="bi bi-clipboard-check"></i>
-                </div>
-                <div class="stat-value">42</div>
-                <div class="stat-label">طلبات مكتملة</div>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-card-icon">
-                    <i class="bi bi-hourglass-split"></i>
-                </div>
-                <div class="stat-value">8</div>
-                <div class="stat-label">طلبات قيد المعالجة</div>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-card-icon">
-                    <i class="bi bi-star-fill"></i>
-                </div>
-                <div class="stat-value">4.8</div>
-                <div class="stat-label">تقييم الخدمات</div>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-card-icon">
-                    <i class="bi bi-lightning-charge-fill"></i>
-                </div>
-                <div class="stat-value">2س</div>
-                <div class="stat-label">متوسط وقت الاستجابة</div>
-            </div>
-        </div>
-
-        <!-- Categories Section -->
-        <section class="categories-section">
-            <div class="section-header">
-                <h2 class="section-title">جميع الخدمات</h2>
-                <a href="#" class="view-all-link">استكشاف المزيد ←</a>
-            </div>
-
-            <div class="categories-grid">
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="bi bi-building-fill"></i>
-                    </div>
-                    <h3 class="category-title">خدمات المرافق</h3>
-                    <p class="category-description">دعم المكتب، الصيانة العامة، والدعم اللوجستي</p>
-                    <span class="category-count">
-                        <i class="bi bi-grid-3x3-gap-fill"></i>
-                        3 خدمات
-                    </span>
-                </div>
-
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="bi bi-clipboard-check-fill"></i>
-                    </div>
-                    <h3 class="category-title">الخدمات الإدارية</h3>
-                    <p class="category-description">طلبات TAR، المقصف، القرطاسية والاتصالات</p>
-                    <span class="category-count">
-                        <i class="bi bi-grid-3x3-gap-fill"></i>
-                        4 خدمات
-                    </span>
-                </div>
-
-                <div class="category-card">
-                    <div class="category-icon">💻</div>
-                    <h3 class="category-title">خدمات IT</h3>
-                    <p class="category-description">الدعم التقني والمساعدة في تقنية المعلومات</p>
-                    <span class="category-count">
-                        <i class="bi bi-grid-3x3-gap-fill"></i>
-                        1 خدمة
-                    </span>
-                </div>
-
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="bi bi-lightbulb-fill"></i>
-                    </div>
-                    <h3 class="category-title">الاقتراحات والتقارير</h3>
-                    <p class="category-description">شارك أفكارك واطلع على التقارير</p>
-                    <span class="category-count">
-                        <i class="bi bi-grid-3x3-gap-fill"></i>
-                        2 خدمة
-                    </span>
-                </div>
-            </div>
-        </section>
+  <div class="hhero">
+    <!-- ✅ اللوجو داخل logo-wrap مع الحلقات والتأثيرات -->
+    <div class="logo-wrap">
+      <img id="logoImg" class="logo-img" src="logo.png" alt="DAAM Logo">
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-logo">🌱</div>
-            <p class="footer-text"><strong>نماء</strong> - نمو مستدام، مستقبل مزدهر</p>
-            <p class="footer-text" style="font-size: 0.85rem; opacity: 0.7;">© 2024 جميع الحقوق محفوظة</p>
-        </div>
-    </footer>
+    <div class="htitle">
+      <div class="title-ornament">
+        <div class="orn-line"></div>
+        <div class="orn-dot"></div>
+        <div class="orn-diamond"></div>
+        <div class="orn-dot"></div>
+        <div class="orn-line"></div>
+      </div>
+      <span class="sub" data-ar="DAAM PORTAL" data-en="DAAM PORTAL">DAAM PORTAL</span>
+    </div>
 
-    <!-- Floating Help Button -->
-    <button class="help-fab" title="المساعدة">
-        <i class="bi bi-question-circle-fill"></i>
+    <nav class="hnav">
+      <a class="nlink" href="http://edms.dpcoman.com/edms/Administration_Facilities/Pages/faq.aspx" target="_blank"><span data-ar="التعليمات" data-en="FAQ">التعليمات</span></a>
+      <a class="nlink" href="http://edms.dpcoman.com/edms/Administration_Facilities/_layouts/15/AccessDenied.aspx" target="_blank"><span data-ar="دليل المستخدم" data-en="DAAM User Manual">دليل المستخدم</span></a>
+      <a class="nlink" href="#sec-feedback"><span data-ar="اتصل بنا" data-en="Contact Us">اتصل بنا</span></a>
+    </nav>
+
+    <div class="hstats">
+      <div class="hstat">
+        <span class="hstat-num">5</span>
+        <span class="hstat-lbl" data-ar="أقسام" data-en="Sections">أقسام</span>
+      </div>
+      <div class="hstat-sep"></div>
+      <div class="hstat">
+        <span class="hstat-num">13</span>
+        <span class="hstat-lbl" data-ar="خدمة" data-en="Services">خدمة</span>
+      </div>
+      <div class="hstat-sep"></div>
+      <div class="hstat">
+        <span class="hstat-num">24/7</span>
+        <span class="hstat-lbl" data-ar="دعم" data-en="Support">دعم</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<svg class="hwave" id="hwave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 56" preserveAspectRatio="none">
+  <path id="wavePath" d="M0,28 C240,56 480,0 720,28 C960,56 1200,0 1440,28 L1440,56 L0,56 Z" fill="#FAFAFA"/>
+</svg>
+</header>
+
+<!-- ══ CATEGORY BAR ══ -->
+<div class="cat-bar" id="catBar">
+  <p class="cat-bar-title" data-ar="اختر القسم" data-en="SELECT DEPARTMENT">اختر القسم</p>
+  <div class="cat-tabs">
+    <button class="cat-tab active" data-target="sec-fleet" onclick="selectCat(this)">
+      <i class="bi bi-car-front-fill cat-icon"></i>
+      <span data-ar="خدمات الأسطول" data-en="Fleet Services">خدمات الأسطول</span>
     </button>
+    <button class="cat-tab" data-target="sec-facility" onclick="selectCat(this)">
+      <i class="bi bi-buildings-fill cat-icon"></i>
+      <span data-ar="خدمات المرافق" data-en="Facility Services">خدمات المرافق</span>
+    </button>
+    <button class="cat-tab" data-target="sec-admin" onclick="selectCat(this)">
+      <i class="bi bi-clipboard2-check-fill cat-icon"></i>
+      <span data-ar="الخدمات الإدارية" data-en="Administrative Services">الخدمات الإدارية</span>
+    </button>
+    <button class="cat-tab" data-target="sec-it" onclick="selectCat(this)">
+      <i class="bi bi-pc-display-horizontal cat-icon"></i>
+      <span data-ar="خدمات IT" data-en="IT Services">خدمات IT</span>
+    </button>
+    <button class="cat-tab" data-target="sec-feedback" onclick="selectCat(this)">
+      <i class="bi bi-lightbulb-fill cat-icon"></i>
+      <span data-ar="اقتراحات وتقارير" data-en="Suggestions & Reports">اقتراحات وتقارير</span>
+    </button>
+  </div>
+</div>
 
-    <script>
-        // Search functionality
-        const searchInput = document.querySelector('.search-input-main');
-        searchInput.addEventListener('focus', function() {
-            this.parentElement.parentElement.style.transform = 'scale(1.01)';
-        });
-        searchInput.addEventListener('blur', function() {
-            this.parentElement.parentElement.style.transform = '';
-        });
+<main>
 
-        // Quick action buttons
-        document.querySelectorAll('.quick-action-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                this.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    this.style.transform = '';
-                }, 200);
-            });
-        });
+<!-- ── Fleet ── -->
+<div class="sc" id="sec-fleet">
+  <div class="slabel">
+    <div class="sicon"> <i class="bi bi-car-front-fill cat-icon"></i></div>
+    <div class="stext">
+      <h2 data-ar="خدمات الأسطول" data-en="Fleet Services">خدمات الأسطول</h2>
+      <p data-ar="إدارة المركبات والصيانة والحوادث" data-en="Vehicle management, maintenance & incidents">إدارة المركبات والصيانة والحوادث</p>
+    </div>
+  </div>
+  <div class="cgrid">
 
-        // Category cards interaction
-        document.querySelectorAll('.category-card').forEach(card => {
-            card.addEventListener('click', function() {
-                console.log('Category clicked:', this.querySelector('.category-title').textContent);
-            });
-        });
+    <div class="fc" tabindex="0">
+      <div class="fi">
+        <div class="ff">
+          <div class="nbadge"></div>
+          <i class="bi bi-car-front cicon"></i>
+          <div class="ctitle" data-ar="طلب مركبة" data-en="Vehicle Request">طلب مركبة</div>
+          <div class="csub" data-ar="اطلب مركبة جديدة" data-en="Request a new vehicle">اطلب مركبة جديدة</div>
+          <div class="ctag" data-ar="أسطول" data-en="Fleet">أسطول</div>
+        </div>
+        <div class="fb">
+          <h3 data-ar="طلب مركبة" data-en="Vehicle Request">طلب مركبة</h3>
+          <div class="bdiv"></div>
+          <div class="bbtns">
+            <a class="bbtn" href="http://edms.dpcoman.com/edms/Administration_Facilities/Lists/Vehicle_Request_/NewForm.aspx?PID=5220261010555108e&Section=Fleet&ar=n" target="_blank">
+              <i class="bi bi-plus-circle"></i><span data-ar="طلب جديد" data-en="New Request">طلب جديد</span>
+            </a>
+            <a class="bbtn" href="http://edms.dpcoman.com/edms/Administration_Facilities/Lists/Vehicle_Request_/AllItems.aspx" target="_blank">
+              <i class="bi bi-clock-history"></i><span data-ar="طلبات سابقة" data-en="Previous Requests">طلبات سابقة</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
 
-        // Help FAB
-        document.querySelector('.help-fab').addEventListener('click', function() {
-            alert('مرحباً! كيف يمكننا مساعدتك اليوم؟');
-        });
+    <div class="fc" tabindex="0">
+      <div class="fi">
+        <div class="ff">
+          <i class="bi bi-wrench cicon"></i>
+          <div class="ctitle" data-ar="صيانة المركبات" data-en="Vehicle Maintenance">صيانة المركبات</div>
+          <div class="csub" data-ar="طلب صيانة عاجلة أو دورية" data-en="Request urgent or periodic maintenance">طلب صيانة عاجلة أو دورية</div>
+          <div class="ctag" data-ar="صيانة" data-en="Maintenance">صيانة</div>
+        </div>
+        <div class="fb">
+          <h3 data-ar="صيانة المركبات" data-en="Vehicle Maintenance">صيانة المركبات</h3>
+          <div class="bdiv"></div>
+          <div class="bbtns">
+            <a class="bbtn" href="http://edms.dpcoman.com/edms/Administration_Facilities/Lists/Vehicle_Maintenance/NewForm.aspx?PID=5220261021639889d&Section=Fleet&ar=n" target="_blank">
+              <i class="bi bi-plus-circle"></i><span data-ar="طلب جديد" data-en="New Request">طلب جديد</span>
+            </a>
+            <a class="bbtn" href="http://edms.dpcoman.com/edms/Administration_Facilities/Lists/Vehicle_Maintenance/AllItems.aspx" target="_blank">
+              <i class="bi bi-clock-history"></i><span data-ar="طلبات سابقة" data-en="Previous Requests">طلبات سابقة</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
 
-        // Activity items interaction
-        document.querySelectorAll('.activity-item').forEach(item => {
-            item.addEventListener('click', function() {
-                this.style.transform = 'scale(0.98)';
-                setTimeout(() => {
-                    this.style.transform = '';
-                }, 200);
-            });
-        });
+    <div class="fc" tabindex="0">
+      <div class="fi">
+        <div class="ff">
+          <i class="bi bi-exclamation-triangle cicon"></i>
+          <div class="ctitle" data-ar="الإبلاغ عن الحوادث" data-en="Report Accidents">الإبلاغ عن الحوادث</div>
+          <div class="csub" data-ar="أبلغ عن حادث مروري" data-en="Report a traffic accident">أبلغ عن حادث مروري</div>
+          <div class="ctag" data-ar="حوادث" data-en="Incidents">حوادث</div>
+        </div>
+        <div class="fb">
+          <h3 data-ar="الإبلاغ عن حادث" data-en="Accident Report">الإبلاغ عن حادث</h3>
+          <div class="bdiv"></div>
+          <div class="bbtns">
+            <a class="bbtn" href="http://edms.dpcoman.com/edms/Administration_Facilities/Lists/Accidents/NewForm.aspx?PID=522026105765000e1&Section=Fleet&ar=y" target="_blank">
+              <i class="bi bi-plus-circle"></i><span data-ar="طلب جديد" data-en="New Request">طلب جديد</span>
+            </a>
+            <a class="bbtn" href="http://edms.dpcoman.com/edms/Administration_Facilities/Lists/Accidents/AllItems.aspx" target="_blank">
+              <i class="bi bi-clock-history"></i><span data-ar="طلبات سابقة" data-en="Previous Requests">طلبات سابقة</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
 
-        // Service items interaction
-        document.querySelectorAll('.service-item-inline').forEach(item => {
-            item.addEventListener('click', function(e) {
-                e.preventDefault();
-                console.log('Service clicked:', this.querySelector('h4').textContent);
-            });
-        });
+  </div>
+</div>
 
-        // Smooth scroll for links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-    </script>
+<!-- ── Facility ── -->
+<div class="sc" id="sec-facility">
+  <div class="slabel">
+    <div class="sicon">  <i class="bi bi-buildings-fill cat-icon"></i></div>
+    <div class="stext">
+      <h2 data-ar="خدمات المرافق" data-en="Facility Services">خدمات المرافق</h2>
+      <p data-ar="الصيانة والدعم اللوجستي للمباني" data-en="Building maintenance & logistical support">الصيانة والدعم اللوجستي للمباني</p>
+    </div>
+  </div>
+  <div class="cgrid">
+
+    <div class="fc" tabindex="0">
+      <div class="fi">
+        <div class="ff">
+          <i class="bi bi-building cicon"></i>
+          <div class="ctitle" data-ar="دعم المرافق" data-en="Office Support">دعم المرافق</div>
+          <div class="csub" data-ar="احصل على الدعم الفوري" data-en="Get immediate support">احصل على الدعم الفوري</div>
+          <div class="ctag" data-ar="مرافق" data-en="Facility">مرافق</div>
+        </div>
+        <div class="fb">
+          <h3 data-ar="دعم المرافق" data-en="Office Support">دعم المرافق</h3>
+          <div class="bdiv"></div>
+          <div class="bbtns">
+            <a class="bbtn" href="http://edms.dpcoman.com/edms/Administration_Facilities/Lists/RequestOfficeSpace/NewForm.aspx?PID=522026101132230f7&Section=Facility&ar=y" target="_blank">
+              <i class="bi bi-plus-circle"></i><span data-ar="طلب جديد" data-en="New Request">طلب جديد</span>
+            </a>
+            <a class="bbtn" href="http://edms.dpcoman.com/edms/Administration_Facilities/Lists/RequestOfficeSpace/AllItems.aspx" target="_blank">
+              <i class="bi bi-clock-history"></i><span data-ar="طلبات سابقة" data-en="Previous Requests">طلبات سابقة</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fc" tabindex="0">
+      <div class="fi">
+        <div class="ff">
+          <i class="bi bi-hammer cicon"></i>
+          <div class="ctitle" data-ar="الصيانة العامة" data-en="General Maintenance">الصيانة العامة</div>
+          <div class="csub" data-ar="طلب خدمات الصيانة" data-en="Request maintenance services">طلب خدمات الصيانة</div>
+          <div class="ctag" data-ar="صيانة" data-en="Maintenance">صيانة</div>
+        </div>
+        <div class="fb">
+          <h3 data-ar="الصيانة العامة" data-en="General Maintenance">الصيانة العامة</h3>
+          <div class="bdiv"></div>
+          <div class="bbtns">
+            <a class="bbtn" href="http://edms.dpcoman.com/edms/Administration_Facilities/Lists/General_Maintenance/NewForm.aspx?PID=5220261044126c7a7&Section=Facility&ar=y" target="_blank">
+              <i class="bi bi-plus-circle"></i><span data-ar="طلب جديد" data-en="New Request">طلب جديد</span>
+            </a>
+            <a class="bbtn" href="http://edms.dpcoman.com/edms/Administration_Facilities/Lists/General_Maintenance/AllItems.aspx" target="_blank">
+              <i class="bi bi-clock-history"></i><span data-ar="طلبات سابقة" data-en="Previous Requests">طلبات سابقة</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fc" tabindex="0">
+      <div class="fi">
+        <div class="ff">
+          <i class="bi bi-box-seam cicon"></i>
+          <div class="ctitle" data-ar="الدعم اللوجستي" data-en="Logistical Support">الدعم اللوجستي</div>
+          <div class="csub" data-ar="إدارة النقل والتخزين" data-en="Transport & storage management">إدارة النقل والتخزين</div>
+          <div class="ctag" data-ar="لوجستي" data-en="Logistics">لوجستي</div>
+        </div>
+        <div class="fb">
+          <h3 data-ar="الدعم اللوجستي" data-en="Logistical Support">الدعم اللوجستي</h3>
+          <div class="bdiv"></div>
+          <div class="bbtns">
+            <a class="bbtn" href="http://edms.dpcoman.com/edms/Administration_Facilities/Lists/LogisticalSupport/NewForm.aspx?PID=52202610205928808&Section=Admin&ar=y" target="_blank">
+              <i class="bi bi-plus-circle"></i><span data-ar="طلب جديد" data-en="New Request">طلب جديد</span>
+            </a>
+            <a class="bbtn" href="http://edms.dpcoman.com/edms/Administration_Facilities/Lists/LogisticalSupport/AllItems.aspx" target="_blank">
+              <i class="bi bi-clock-history"></i><span data-ar="طلبات سابقة" data-en="Previous Requests">طلبات سابقة</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── Admin ── -->
+<div class="sc" id="sec-admin">
+  <div class="slabel">
+    <div class="sicon">  <i class="bi bi-clipboard2-check-fill cat-icon"></i></div>
+    <div class="stext">
+      <h2 data-ar="الخدمات الإدارية" data-en="Administrative Services">الخدمات الإدارية</h2>
+      <p data-ar="السفر والقرطاسيات والاتصالات والتموين" data-en="Travel, stationery, communications & catering">السفر والقرطاسيات والاتصالات والتموين</p>
+    </div>
+  </div>
+  <div class="cgrid">
+
+    <div class="fc" tabindex="0">
+      <div class="fi">
+        <div class="ff">
+          <div class="nbadge"></div>
+          <i class="bi bi-airplane cicon"></i>
+          <div class="ctitle" data-ar="الموافقة على السفر" data-en="Tar Request">الموافقة على السفر</div>
+          <div class="csub" data-ar="طلب تصريح السفر الرسمي" data-en="Official travel permit request">طلب تصريح السفر الرسمي</div>
+          <div class="ctag" data-ar="سفر" data-en="Travel">سفر</div>
+        </div>
+        <div class="fb">
+          <h3 data-ar="الموافقة على السفر" data-en="Tar Request">الموافقة على السفر</h3>
+          <div class="bdiv"></div>
+          <div class="bbtns">
+            <a class="bbtn" href="http://edms.dpcoman.com/edms/Administration_Facilities/Lists/Tar/NewForm.aspx?ar=y" target="_blank">
+              <i class="bi bi-plus-circle"></i><span data-ar="طلب جديد" data-en="New Request">طلب جديد</span>
+            </a>
+            <a class="bbtn" href="http://edms.dpcoman.com/edms/Administration_Facilities/Lists/Tar/My%20Requests.aspx" target="_blank">
+              <i class="bi bi-clock-history"></i><span data-ar="طلبات سابقة" data-en="Previous Requests">طلبات سابقة</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fc" tabindex="0">
+      <div class="fi">
+        <div class="ff">
+          <i class="bi bi-pencil-square cicon"></i>
+          <div class="ctitle" data-ar="طلب القرطاسيات" data-en="Ordering Stationery">طلب القرطاسيات</div>
+          <div class="csub" data-ar="أدوات مكتبية ومستلزمات" data-en="Office tools & supplies">أدوات مكتبية ومستلزمات</div>
+          <div class="ctag" data-ar="قرطاسيات" data-en="Stationery">قرطاسيات</div>
+        </div>
+        <div class="fb">
+          <h3 data-ar="طلب القرطاسيات" data-en="Ordering Stationery">طلب القرطاسيات</h3>
+          <div class="bdiv"></div>
+          <div class="bbtns">
+            <a class="bbtn" href="http://edms.dpcoman.com/edms/Administration_Facilities/Lists/OrderingStationery/NewForm.aspx?PID=82202610318113ffe&Section=Admin&ar=n" target="_blank">
+              <i class="bi bi-file-earmark-pdf"></i><span data-ar="طلب جديد" data-en="New Request">نموذج PDF</span>
+            </a>
+            <a class="bbtn" href="http://edms.dpcoman.com/edms/Administration_Facilities/Lists/OrderingStationery/AllItems.aspx" target="_blank">
+              <i class="bi bi-clock-history"></i><span data-ar="طلبات سابقة" data-en="Previous Requests">طلبات سابقة</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fc" tabindex="0">
+      <div class="fi">
+        <div class="ff">
+          <i class="bi bi-telephone cicon"></i>
+          <div class="ctitle" data-ar="الاتصالات" data-en="Telecommunications Services">الاتصالات</div>
+          <div class="csub" data-ar="إدارة خدمات الاتصال" data-en="Manage communication services">إدارة خدمات الاتصال</div>
+          <div class="ctag" data-ar="اتصالات" data-en="Comms">اتصالات</div>
+        </div>
+        <div class="fb">
+          <h3 data-ar="الاتصالات" data-en="Telecommunications">الاتصالات</h3>
+          <div class="bdiv"></div>
+          <div class="bbtns">
+            <a class="bbtn" href="http://edms.dpcoman.com/edms/Administration_Facilities/Lists/Telecommunication/NewForm.aspx?PID=5220261054218cb10&Section=Admin&ar=y" target="_blank">
+              <i class="bi bi-plus-circle"></i><span data-ar="طلب جديد" data-en="New Request">طلب جديد</span>
+            </a>
+            <a class="bbtn" href="http://edms.dpcoman.com/edms/Administration_Facilities/Lists/Telecommunication/AllItems.aspx" target="_blank">
+              <i class="bi bi-clock-history"></i><span data-ar="طلبات سابقة" data-en="Previous Requests">طلبات سابقة</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fc" tabindex="0">
+      <div class="fi">
+        <div class="ff">
+          <i class="bi bi-cup-hot cicon"></i>
+          <div class="ctitle" data-ar="التموين" data-en="Pantry">التموين</div>
+          <div class="csub" data-ar="خدمات التموين والضيافة" data-en="Catering & hospitality">خدمات التموين والضيافة</div>
+          <div class="ctag" data-ar="تموين" data-en="Catering">تموين</div>
+        </div>
+        <div class="fb">
+          <h3 data-ar="التموين" data-en="Pantry">التموين</h3>
+          <div class="bdiv"></div>
+          <div class="bbtns">
+            <a class="bbtn" href="http://edms.dpcoman.com/edms/Administration_Facilities/Lists/Pantry/NewForm.aspx?PID=8220261047502466f&Section=Admin&ar=n" target="_blank">
+              <i class="bi bi-file-earmark-pdf"></i><span data-ar="طلب جديد" data-en="New Request">نموذج PDF</span>
+            </a>
+            <a class="bbtn" href="http://edms.dpcoman.com/edms/Administration_Facilities/Lists/Pantry/AllItems.aspx" target="_blank">
+              <i class="bi bi-clock-history"></i><span data-ar="طلبات سابقة" data-en="Previous Requests">طلبات سابقة</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── IT ── -->
+<div class="sc" id="sec-it">
+  <div class="slabel">
+    <div class="sicon">  <i class="bi bi-laptop cat-icon"></i></div>
+    <div class="stext">
+      <h2 data-ar="تقنية المعلومات" data-en="IT Services">تقنية المعلومات</h2>
+      <p data-ar="الدعم الفني وخدمات تكنولوجيا المعلومات" data-en="Technical support & IT services">الدعم الفني وخدمات تكنولوجيا المعلومات</p>
+    </div>
+  </div>
+  <div class="cgrid">
+
+    <div class="fc" tabindex="0">
+      <div class="fi">
+        <div class="ff">
+          <i class="bi bi-laptop cicon"></i>
+          <div class="ctitle" data-ar="دعم تقنية المعلومات" data-en="IT Support">دعم تقنية المعلومات</div>
+          <div class="csub" data-ar="حل المشكلات التقنية" data-en="Resolve technical issues">حل المشكلات التقنية</div>
+          <div class="ctag" data-ar="تقنية" data-en="IT">تقنية</div>
+        </div>
+        <div class="fb">
+          <h3 data-ar="دعم تقنية المعلومات" data-en="IT Support">دعم تقنية المعلومات</h3>
+          <div class="bdiv"></div>
+          <div class="bbtns">
+            <a class="bbtn" href="http://intranet.dpcoman.com/Human_Resources/IT/Lists/IT%20Service%20Request%20Form/My%20Requests.aspx?lan=ar" target="_blank">
+              <i class="bi bi-box-arrow-up-left"></i><span data-ar="فتح بوابة IT" data-en="Open IT Portal">فتح بوابة IT</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── Feedback ── -->
+<div class="sc" id="sec-feedback">
+  <div class="slabel">
+    <div class="sicon">  <i class="bi bi-chat-left-quote cat-icon"></i></div>
+    <div class="stext">
+      <h2 data-ar="المقترحات والملاحظات" data-en="Feedback & Suggestions">المقترحات والملاحظات</h2>
+      <p data-ar="شارك آرائك لتحسين جودة الخدمات" data-en="Share your views to improve service quality">شارك آرائك لتحسين جودة الخدمات</p>
+    </div>
+  </div>
+  <div class="cgrid">
+
+    <div class="fc" tabindex="0">
+      <div class="fi">
+        <div class="ff">
+          <i class="bi bi-chat-left-quote cicon"></i>
+          <div class="ctitle" data-ar="المقترحات" data-en="Suggestions">المقترحات</div>
+          <div class="csub" data-ar="شاركنا أفكارك وآراءك" data-en="Share your ideas & opinions">شاركنا أفكارك وآراءك</div>
+          <div class="ctag" data-ar="تغذية راجعة" data-en="Feedback">تغذية راجعة</div>
+        </div>
+        <div class="fb">
+          <h3 data-ar="أرسل ملاحظتك" data-en="Send Feedback">أرسل ملاحظتك</h3>
+          <div class="bdiv"></div>
+          <div class="bbtns">
+            <a class="bbtn" href="http://edms.dpcoman.com/edms/Administration_Facilities/Lists/FeedbackForm/NewForm.aspx?PID=5220261035145246a&Section=Feedback&ar=y" target="_blank">
+              <i class="bi bi-pencil-square"></i><span data-ar="فتح النموذج" data-en="Open Form">فتح النموذج</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fc" tabindex="0">
+      <div class="fi">
+        <div class="ff">
+          <i class="bi bi-bar-chart-line cicon"></i>
+          <div class="ctitle" data-ar="التقارير" data-en="Reports">التقارير</div>
+          <div class="csub" data-ar="إرسال تقرير رسمي" data-en="Submit an official report">إرسال تقرير رسمي</div>
+          <div class="ctag" data-ar="تقارير" data-en="Reports">تقارير</div>
+        </div>
+        <div class="fb">
+          <h3 data-ar="إرسال تقرير" data-en="Submit Report">إرسال تقرير</h3>
+          <div class="bdiv"></div>
+          <div class="bbtns">
+            <a class="bbtn" href="http://edms.dpcoman.com/edms/Administration_Facilities/Pages/report_.aspx?&ar=y" target="_blank">
+              <i class="bi bi-file-earmark-pdf"></i><span data-ar="إرسال تقرير" data-en="Submit Report"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</main>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="fbg-orb fbg-orb1"></div>
+  <div class="fbg-orb fbg-orb2"></div>
+
+  <svg class="fwave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 52" preserveAspectRatio="none">
+    <path id="fwavePath" d="M0,0 C360,52 1080,0 1440,30 L1440,0 L0,0 Z" fill="#FAFAFA"/>
+  </svg>
+
+  <div class="finn">
+    <div class="footer-brand">
+      <img class="footer-logo" id="footerLogoImg" src="logo.png" alt="DAAM Logo" onerror="this.style.display='none'">
+      <div>
+        <div class="footer-brand-name" data-ar="منصة دعم" data-en="DAAM Portal">منصة دعم</div>
+        <div class="footer-brand-tagline" data-ar="منصة الخدمات الموحدة" data-en="Unified Services Platform">منصة الخدمات الموحدة</div>
+      </div>
+    </div>
+
+    <div class="fgrid">
+      <div class="fcard">
+        <div class="fcard-icon phone">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <rect x="5" y="1" width="14" height="22" rx="3" stroke="white" stroke-width="1.7" fill="none"/>
+            <circle cx="12" cy="19.5" r="1.1" fill="white"/>
+            <rect x="9" y="3.5" width="6" height="1" rx=".5" fill="rgba(255,255,255,0.5)"/>
+          </svg>
+        </div>
+        <div class="fcard-text">
+          <strong data-ar="الهاتف" data-en="Phone">الهاتف</strong>
+          <span dir="ltr">23232555</span>
+        </div>
+      </div>
+
+      <div class="fcard">
+        <div class="fcard-icon wa">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 1.89.527 3.656 1.438 5.167L2 22l4.962-1.418A9.956 9.956 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm-1.023 14.415c-1.023-.408-3.28-1.633-4.303-3.574-.613-1.174-.49-2.532.27-3.457.327-.401.776-.633 1.24-.633.164 0 .328.016.49.05.285.06.436.16.56.508l.714 1.96c.12.327.06.694-.164.98l-.42.52c-.163.204-.19.48-.06.705.45.774 1.38 1.642 2.3 2.092.22.107.48.08.666-.072l.49-.403c.27-.222.644-.277.966-.14l1.94.82c.348.148.47.31.54.6.04.165.057.33.057.497 0 .41-.196.8-.508 1.065-.776.663-1.856.913-2.778.482z" fill="#25D366"/>
+          </svg>
+        </div>
+        <div class="fcard-text">
+          <strong data-ar="واتس آب" data-en="WhatsApp">واتس آب</strong>
+          <span dir="ltr">72776555</span>
+        </div>
+      </div>
+
+      <div class="fcard">
+        <div class="fcard-icon mail">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <rect x="2" y="5" width="20" height="14" rx="2.5" stroke="#0078D4" stroke-width="1.7" fill="none"/>
+            <path d="M2 8l10 7 10-7" stroke="#0078D4" stroke-width="1.7" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="fcard-text">
+          <strong data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</strong>
+          <span dir="ltr" class="small">info@daam.om</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="fcopy" data-ar="© 2025 منصة دعم · جميع الحقوق محفوظة" data-en="© 2025 DAAM Portal · All Rights Reserved">© 2025 منصة دعم · جميع الحقوق محفوظة</p>
+      <span class="footer-made" data-ar="ظفار للخدمات" data-en="Dhofar Services">ظفار للخدمات</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script>
+// ══════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════
+let isDark = localStorage.getItem('daamTheme') === 'dark';
+let lang   = localStorage.getItem('daamLang') || 'ar';
+
+// ══════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  applyTheme(false);
+  applyLang(false);
+});
+
+// ══════════════════════════════════════════
+// THEME
+// ══════════════════════════════════════════
+function toggleTheme(){
+  isDark = !isDark;
+  localStorage.setItem('daamTheme', isDark ? 'dark' : 'light');
+  applyTheme(true);
+}
+
+function applyTheme(animated){
+  const root = document.documentElement;
+  const btn  = document.getElementById('themeBtn');
+  const ico  = document.getElementById('themeIcon');
+
+  if(isDark){
+    root.setAttribute('data-theme','dark');
+    ico.className = 'bi bi-sun-fill';
+    btn.classList.add('ton');
+  } else {
+    root.removeAttribute('data-theme');
+    ico.className = 'bi bi-moon-stars-fill';
+    btn.classList.remove('ton');
+  }
+  updateWaveColors();
+}
+
+// ══════════════════════════════════════════
+// LANGUAGE
+// ══════════════════════════════════════════
+function toggleLang(){
+  lang = lang === 'ar' ? 'en' : 'ar';
+  localStorage.setItem('daamLang', lang);
+  applyLang(true);
+}
+
+function applyLang(animated){
+  const isAr = lang === 'ar';
+  const html  = document.documentElement;
+  const lbl   = document.getElementById('langLabel');
+
+  html.lang = lang;
+  html.dir  = isAr ? 'rtl' : 'ltr';
+  lbl.textContent = isAr ? 'EN' : 'AR';
+
+  document.querySelectorAll('[data-ar]').forEach(el => {
+    const val = el.getAttribute(isAr ? 'data-ar' : 'data-en');
+    if(val !== null) el.textContent = val;
+  });
+
+  // Fix toast position
+  const tw = document.getElementById('toastWrap');
+  if(isAr){ tw.style.right='26px'; tw.style.left=''; }
+  else     { tw.style.left='26px';  tw.style.right=''; }
+
+  updateWaveColors();
+}
+
+function updateWaveColors(){
+  const bgColor = isDark ? '#160C1E' : '#FAFAFA';
+  const wp  = document.getElementById('wavePath');
+  const fwp = document.getElementById('fwavePath');
+  if(wp)  wp.setAttribute('fill', bgColor);
+  if(fwp) fwp.setAttribute('fill', bgColor);
+}
+
+// ══════════════════════════════════════════
+// CATEGORY NAV
+// ══════════════════════════════════════════
+const SECTIONS = ['sec-fleet','sec-facility','sec-admin','sec-it','sec-feedback'];
+let isManualScroll = false;
+
+function selectCat(btn){
+  document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  scrollToSection(btn.getAttribute('data-target'));
+}
+
+function scrollToSection(targetId){
+  const target = document.getElementById(targetId);
+  if(!target) return;
+  const catBar = document.getElementById('catBar');
+  const barH   = catBar ? catBar.offsetHeight : 0;
+  const top    = target.getBoundingClientRect().top + window.scrollY - barH - 24;
+  isManualScroll = true;
+  window.scrollTo({ top, behavior:'smooth' });
+  setTimeout(() => { isManualScroll = false; }, 900);
+}
+
+window.addEventListener('scroll', () => {
+  if(isManualScroll) return;
+  const catBar  = document.getElementById('catBar');
+  const barH    = catBar ? catBar.offsetHeight : 0;
+  const threshold = barH + 80;
+
+  let current = SECTIONS[0];
+  SECTIONS.forEach(id => {
+    const el = document.getElementById(id);
+    if(el && el.getBoundingClientRect().top <= threshold) current = id;
+  });
+
+  document.querySelectorAll('.cat-tab').forEach(t => {
+    t.classList.toggle('active', t.getAttribute('data-target') === current);
+  });
+
+  const catBarEl = document.getElementById('catBar');
+  if(catBarEl) catBarEl.classList.toggle('scrolled', window.scrollY > 10);
+}, { passive:true });
+
+// ══════════════════════════════════════════
+// TOAST
+// ══════════════════════════════════════════
+const TOAST_MSGS = {
+  new:  { ar:'جاري فتح نموذج الطلب الجديد…',  en:'Opening new request form…' },
+  prev: { ar:'جاري تحميل الطلبات السابقة…',    en:'Loading previous requests…' },
+  pdf:  { ar:'جاري تحميل نموذج PDF…',          en:'Loading PDF form…' },
+  form: { ar:'جاري فتح النموذج…',              en:'Opening form…' },
+};
+
+const TOAST_ICONS = {
+  new:'bi-plus-circle-fill',
+  prev:'bi-clock-history',
+  pdf:'bi-file-earmark-pdf-fill',
+  form:'bi-pencil-square',
+};
+
+function showToast(type){
+  const msg  = TOAST_MSGS[type] ? (TOAST_MSGS[type][lang] || TOAST_MSGS[type].ar) : type;
+  const icon = TOAST_ICONS[type] || 'bi-check-circle-fill';
+  const wrap = document.getElementById('toastWrap');
+  if(!wrap) return;
+
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.innerHTML = `<i class="bi ${icon}"></i> ${msg}`;
+  wrap.appendChild(el);
+
+  setTimeout(() => {
+    el.classList.add('out');
+    setTimeout(() => el.remove(), 300);
+  }, 2600);
+}
+
+// ── Mobile tap-to-flip ──
+document.querySelectorAll('.fc').forEach(card => {
+  card.addEventListener('click', function(e) {
+    // السماح بالضغط على الروابط والأزرار
+    const clickedLink = e.target.closest('a, button');
+    if (clickedLink && clickedLink.href) {
+      // اترك الرابط يعمل بشكل طبيعي
+      return;
+    }
+    
+    // منع التفليب إذا كان الضغط على محتوى داخل .fb
+    if (e.target.closest('.fb')) {
+      return;
+    }
+    
+    // Toggle flipped state للعناصر الأخرى
+    this.classList.toggle('flipped');
+  });
+});
+
+// ── تأكد من أن الأزرار تعمل بشكل صحيح ──
+document.querySelectorAll('.bbtn').forEach(btn => {
+  btn.addEventListener('click', function(e) {
+    // تأكد من أن الرابط يفتح
+    if (this.href && this.target === '_blank') {
+      window.open(this.href, '_blank');
+      e.preventDefault();
+    }
+  });
+});
+</script>
+
 </body>
 </html>
