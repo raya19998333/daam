@@ -2,685 +2,978 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8" />
-<title>Vehicle Request - Bootstrap Icons Style</title>
+<title>Vehicle Request</title>
 
-<!-- CSS Resources -->
+<!-- CSS Resources (Original) -->
 <link rel="stylesheet" href="/Style Library/customscripts/scripts/bootstrap.min.css">
 <link rel="stylesheet" href="/Style Library/customscripts/scripts/jquery-ui.css">
-<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="/Style Library/customscripts/scripts/jquery-ui-timepicker-addon.min.css">
+
+<!-- Bootstrap Icons + Google Fonts (Design) -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
 
-<!-- JS Resources -->
-<script src="https://code.jquery.com"></script>
+<!-- JS Resources (Original) -->
 <script src="/Style Library/customscripts/scripts/jquery-ui.js"></script>
+<script src="/Style Library/customscripts/scripts/bootstrap.min.js"></script>
+<script src="/Style Library/customscripts/scripts/jquery-ui-timepicker-addon.min.js"></script>
 
-<!-- SharePoint Scripts (Logic Stay) -->
+<!-- SharePoint Scripts (Original — untouched) -->
 <script src="/Style%20Library/ContentEditor/Administration/Scripts/common.js"></script>
 <script src="/Style%20Library/ContentEditor/Administration/Scripts/AttachDocs.js"></script>
+<script src="/Style%20Library/ContentEditor/Administration/Scripts/DeleteItems.js"></script>
+<script src="/Style%20Library/ContentEditor/Administration/Scripts/InsertCustomList.js"></script>
 <script src="/Style%20Library/ContentEditor/Administration/Scripts/CusValidation.js"></script>
+<script src="/Style%20Library/ContentEditor/Administration/Scripts/Fetch.js"></script>
+<script src="/Style%20Library/ContentEditor/Administration/Scripts/UpdateCustomList.js"></script>
 <script src="/Style%20Library/ContentEditor/Administration/Scripts/Arabic.js"></script>
 
 <style>
-    /* ===== متغيرات الألوان الموحّدة - وضع فاتح ===== */
-    :root {
-        --primary:        #7D468C;
-        --dark-purple:    #3D1A4F;
-        --medium-purple:  #6F5573;
-        --light-purple:   #A494A6;
-        --accent:         #9B5AAB;
-        --gold:           #B8860B;
-        --soft-bg:        #F4EFF8;
-        --card-bg:        #FFFFFF;
-        --border:         rgba(125, 70, 140, 0.14);
-        --text-main:      #2E1A3E;
-        --text-muted:     #7A5E88;
-    }
+/* ════════════════════════════════════════════
+   متغيرات الألوان الموحّدة
+════════════════════════════════════════════ */
+:root {
+    --primary:       #7D468C;
+    --dark-purple:   #3D1A4F;
+    --medium-purple: #6F5573;
+    --light-purple:  #A494A6;
+    --accent:        #9B5AAB;
+    --gold:          #B8860B;
+    --soft-bg:       #F4EFF8;
+    --card-bg:       #FFFFFF;
+    --border:        rgba(125, 70, 140, 0.14);
+    --text-main:     #2E1A3E;
+    --text-muted:    #7A5E88;
+}
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-    body {
-        background-color: var(--soft-bg);
-        font-family: 'Tajawal', 'Segoe UI', system-ui, sans-serif;
-        padding: 60px 20px;
-        min-height: 100vh;
-        overflow-x: hidden;
-    }
+body {
+    background-color: var(--soft-bg);
+    font-family: 'Tajawal', 'Segoe UI', system-ui, sans-serif;
+    padding: 50px 20px;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
 
-    /* ── خلفية فاتحة بدوائر ناعمة ── */
-    body::before {
-        content: '';
-        position: fixed;
-        inset: 0;
-        background:
-            radial-gradient(ellipse 70% 55% at 15% 10%,  rgba(125,70,140,0.09) 0%, transparent 60%),
-            radial-gradient(ellipse 55% 45% at 85% 85%,  rgba(212,168,67,0.07) 0%, transparent 55%),
-            radial-gradient(ellipse 45% 40% at 55% 30%,  rgba(155,90,171,0.06) 0%, transparent 50%);
-        pointer-events: none;
-        z-index: 0;
-    }
+/* ── خلفية فاتحة بدوائر ── */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 70% 55% at 15% 10%, rgba(125,70,140,0.09) 0%, transparent 60%),
+        radial-gradient(ellipse 55% 45% at 85% 85%, rgba(212,168,67,0.07) 0%, transparent 55%),
+        radial-gradient(ellipse 45% 40% at 55% 30%, rgba(155,90,171,0.06) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
 
-    /* ── نقاط زخرفية خفيفة ── */
-    body::after {
-        content: '';
-        position: fixed;
-        inset: 0;
-        background-image:
-            radial-gradient(1.5px 1.5px at 12% 18%, rgba(125,70,140,.18) 0%, transparent 100%),
-            radial-gradient(1.5px 1.5px at 42% 62%, rgba(184,134,11,.15)  0%, transparent 100%),
-            radial-gradient(1.5px 1.5px at 73% 14%, rgba(125,70,140,.14) 0%, transparent 100%),
-            radial-gradient(1.5px 1.5px at 88% 48%, rgba(184,134,11,.12)  0%, transparent 100%),
-            radial-gradient(2px   2px   at 28% 82%, rgba(125,70,140,.16) 0%, transparent 100%),
-            radial-gradient(1px   1px   at 58% 38%, rgba(155,90,171,.12) 0%, transparent 100%);
-        pointer-events: none;
-        z-index: 0;
-        animation: twinkle 5s ease-in-out infinite alternate;
-    }
+/* ── نقاط زخرفية ── */
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+        radial-gradient(1.5px 1.5px at 12% 18%, rgba(125,70,140,.18) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 42% 62%, rgba(184,134,11,.15)  0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 73% 14%, rgba(125,70,140,.14) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 88% 48%, rgba(184,134,11,.12)  0%, transparent 100%),
+        radial-gradient(2px   2px   at 28% 82%, rgba(125,70,140,.16) 0%, transparent 100%),
+        radial-gradient(1px   1px   at 58% 38%, rgba(155,90,171,.12) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+    animation: twinkle 5s ease-in-out infinite alternate;
+}
 
-    @keyframes twinkle {
-        from { opacity: .5; }
-        to   { opacity: 1;  }
-    }
+@keyframes twinkle {
+    from { opacity: .5; }
+    to   { opacity: 1;  }
+}
 
-    /* ── الحاوية الرئيسية ── */
-    #SPForm {
-        max-width: 920px;
-        margin: auto;
-        position: relative;
-        z-index: 1;
-        animation: slideUp .7s cubic-bezier(.16,1,.3,1) both;
-    }
+/* ════════════════════════════════════════════
+   الحاوية الرئيسية
+════════════════════════════════════════════ */
+.lang { position: relative; z-index: 1; }
 
-    @keyframes slideUp {
-        from { opacity: 0; transform: translateY(40px); }
-        to   { opacity: 1; transform: translateY(0);    }
-    }
+#SPForm {
+    max-width: 960px;
+    margin: auto;
+    position: relative;
+    z-index: 1;
+    animation: slideUp .7s cubic-bezier(.16,1,.3,1) both;
+}
 
-    /* ══════════════════════════════════════
-       بطاقة زجاجية
-    ══════════════════════════════════════ */
-    .form-card {
-        background:    var(--card-bg);
-        border-radius: 28px;
-        border:        1px solid var(--border);
-        overflow:      hidden;
-        position:      relative;
-        box-shadow:
-            0 0 0 1px rgba(125,70,140,.06),
-            0 20px 60px rgba(125,70,140,.10),
-            inset 0 1px 0 rgba(255,255,255,.80);
-    }
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0);    }
+}
 
-    /* بريق متحرك على البطاقة */
-    .form-card::after {
-        content: '';
-        position: absolute;
-        top: 0; right: -100%;
-        width: 60%; height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(125,70,140,.04), transparent);
-        animation: shimmer 7s ease-in-out infinite;
-        pointer-events: none;
-        z-index: 0;
-    }
+/* ════════════════════════════════════════════
+   البطاقة الزجاجية
+════════════════════════════════════════════ */
+.form-card {
+    background:    var(--card-bg);
+    border-radius: 28px;
+    border:        1px solid var(--border);
+    overflow:      hidden;
+    position:      relative;
+    box-shadow:
+        0 0 0 1px rgba(125,70,140,.06),
+        0 20px 60px rgba(125,70,140,.12),
+        inset 0 1px 0 rgba(255,255,255,.80);
+}
 
-    @keyframes shimmer {
-        0%   { right: -100%; }
-        50%  { right:  150%; }
-        100% { right:  150%; }
-    }
+.form-card::after {
+    content: '';
+    position: absolute;
+    top: 0; right: -100%;
+    width: 60%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(125,70,140,.035), transparent);
+    animation: shimmer 7s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+}
 
-    /* ══════════════════════════════════════
-       رأس النموذج — كلاسيك بنفسجي فاخر
-    ══════════════════════════════════════ */
-    .form-title-box {
-        background: linear-gradient(145deg,
-            #4A1A62 0%,
-            #7D468C 45%,
-            #5C2270 80%,
-            #3D1A4F 100%);
-        padding: 44px 50px 38px;
-        position: relative;
-        overflow: hidden;
-        border-bottom: none;
-        text-align: right;
-    }
+@keyframes shimmer {
+    0%   { right: -100%; }
+    50%  { right:  150%; }
+    100% { right:  150%; }
+}
 
-    /* دائرة زخرفية كبيرة — يسار */
-    .form-title-box::before {
-        content: '';
-        position: absolute;
-        top: -70px; left: -70px;
-        width: 280px; height: 280px;
-        border-radius: 50%;
-        border: 1px solid rgba(255,255,255,0.08);
-        background: rgba(255,255,255,0.04);
-        pointer-events: none;
-    }
+/* ════════════════════════════════════════════
+   رأس النموذج — كلاسيك بنفسجي فاخر
+════════════════════════════════════════════ */
+.form-title-box {
+    background: linear-gradient(145deg,
+        #4A1A62 0%,
+        #7D468C 45%,
+        #5C2270 80%,
+        #3D1A4F 100%);
+    padding: 44px 50px 38px;
+    position: relative;
+    overflow: hidden;
+    text-align: right;
+}
 
-    /* دائرة زخرفية صغيرة — يمين سفلي */
-    .form-title-box::after {
-        content: '';
-        position: absolute;
-        bottom: -90px; right: -60px;
-        width: 320px; height: 320px;
-        border-radius: 50%;
-        border: 1px solid rgba(255,255,255,0.05);
-        background: rgba(255,255,255,0.025);
-        pointer-events: none;
-    }
+/* دوائر زخرفية */
+.form-title-box::before {
+    content: '';
+    position: absolute;
+    top: -70px; left: -70px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.04);
+    pointer-events: none;
+}
 
-    /* خطوط قطرية ناعمة كخلفية نسيجية */
-    .header-ornament {
-        position: absolute;
-        inset: 0;
-        background-image: repeating-linear-gradient(
-            -45deg,
-            transparent 0px,
-            transparent 28px,
-            rgba(255,255,255,0.018) 28px,
-            rgba(255,255,255,0.018) 29px
-        );
-        pointer-events: none;
-        z-index: 0;
-    }
+.form-title-box::after {
+    content: '';
+    position: absolute;
+    bottom: -90px; right: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.05);
+    background: rgba(255,255,255,0.025);
+    pointer-events: none;
+}
 
-    /* شريط ذهبي سفلي فاصل */
-    .header-gold-line {
-        position: absolute;
-        bottom: 0; right: 0; left: 0;
-        height: 3px;
-        background: linear-gradient(to left,
-            transparent 0%,
-            rgba(212,168,67,0.5) 25%,
-            rgba(212,168,67,0.9) 50%,
-            rgba(212,168,67,0.5) 75%,
-            transparent 100%);
-        z-index: 2;
-    }
+/* نسيج قطري */
+.header-ornament {
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+        -45deg,
+        transparent 0px, transparent 28px,
+        rgba(255,255,255,0.018) 28px, rgba(255,255,255,0.018) 29px
+    );
+    pointer-events: none;
+    z-index: 0;
+}
 
-    @keyframes pulse {
-        0%,100% { transform: scale(1);   opacity: .5; }
-        50%      { transform: scale(1.1); opacity: 1;  }
-    }
+/* الشريط الذهبي السفلي */
+.header-gold-line {
+    position: absolute;
+    bottom: 0; right: 0; left: 0;
+    height: 3px;
+    background: linear-gradient(to left,
+        transparent 0%,
+        rgba(212,168,67,0.5) 25%,
+        rgba(212,168,67,0.9) 50%,
+        rgba(212,168,67,0.5) 75%,
+        transparent 100%);
+    z-index: 2;
+}
 
-    /* أيقونة عائمة — على خلفية داكنة تظهر بيضاء ناصعة */
-    .header-icon-wrap {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 72px; height: 72px;
-        border-radius: 20px;
-        background: rgba(255,255,255,0.12);
-        border: 1.5px solid rgba(255,255,255,0.22);
-        box-shadow:
-            0 8px 24px rgba(0,0,0,0.25),
-            inset 0 1px 0 rgba(255,255,255,0.18);
-        margin-bottom: 18px;
-        animation: iconFloat 3.5s ease-in-out infinite;
-        position: relative;
-        z-index: 1;
-        backdrop-filter: blur(4px);
-    }
+/* أيقونة عائمة */
+.header-icon-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px; height: 72px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.12);
+    border: 1.5px solid rgba(255,255,255,0.22);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.18);
+    margin-bottom: 18px;
+    animation: iconFloat 3.5s ease-in-out infinite;
+    position: relative;
+    z-index: 1;
+}
 
-    .header-icon-wrap i {
-        font-size: 2.1rem;
-        color: #fff;
-        filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
-    }
+.header-icon-wrap i {
+    font-size: 2.1rem;
+    color: #fff;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
+}
 
-    @keyframes iconFloat {
-        0%,100% { transform: translateY(0);   }
-        50%      { transform: translateY(-5px); }
-    }
+@keyframes iconFloat {
+    0%,100% { transform: translateY(0);   }
+    50%      { transform: translateY(-5px); }
+}
 
-    .form-title-box h4 {
-        color: #FFFFFF;
-        font-weight: 900;
-        font-size: 1.9rem;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 8px;
-        position: relative;
-        z-index: 1;
-        text-shadow: 0 2px 8px rgba(0,0,0,0.25);
-        letter-spacing: -0.3px;
-    }
+/* وصف الخدمة داخل الهيدر */
+.header-desc {
+    color: rgba(255,255,255,0.65);
+    font-size: .9rem;
+    font-weight: 400;
+    margin-top: 4px;
+    margin-bottom: 0;
+    position: relative;
+    z-index: 1;
+    max-width: 550px;
+    line-height: 1.6;
+}
 
-    /* إخفاء أيقونة العنوان الإضافية (موجودة في الـ wrap) */
-    .form-title-box h4 i { display: none; }
+.form-title-box h4 {
+    color: #FFFFFF;
+    font-weight: 900;
+    font-size: 1.9rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 6px;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    letter-spacing: -0.3px;
+}
 
-    .form-title-box p {
-        color: rgba(255,255,255,0.70);
-        font-size: .95rem;
-        font-weight: 400;
-        margin-top: 4px;
-        position: relative;
-        z-index: 1;
-        letter-spacing: 0.2px;
-    }
+/* شارة "النظام متاح" */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(212,168,67,0.15);
+    border: 1px solid rgba(212,168,67,0.45);
+    color: #E8C55A;
+    font-size: .76rem;
+    font-weight: 700;
+    padding: 5px 16px;
+    border-radius: 50px;
+    margin-top: 16px;
+    letter-spacing: .6px;
+    position: relative;
+    z-index: 1;
+}
 
-    /* شارة "النظام متاح" — ذهبية على الخلفية الداكنة */
-    .status-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        background: rgba(212,168,67,0.15);
-        border: 1px solid rgba(212,168,67,0.45);
-        color: #E8C55A;
-        font-size: .76rem;
-        font-weight: 700;
-        padding: 5px 16px;
-        border-radius: 50px;
-        margin-top: 16px;
-        letter-spacing: .6px;
-        position: relative;
-        z-index: 1;
-        backdrop-filter: blur(4px);
-    }
+.status-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #E8C55A;
+    animation: blink 1.5s ease-in-out infinite;
+    box-shadow: 0 0 6px rgba(232,197,90,0.7);
+}
 
-    .status-dot {
-        width: 6px; height: 6px;
-        border-radius: 50%;
-        background: #E8C55A;
-        animation: blink 1.5s ease-in-out infinite;
-        box-shadow: 0 0 6px rgba(232,197,90,0.7);
-    }
+@keyframes blink {
+    0%,100% { opacity: 1;  }
+    50%      { opacity: .3; }
+}
 
-    @keyframes blink {
-        0%,100% { opacity: 1;  }
-        50%      { opacity: .3; }
-    }
+/* ════════════════════════════════════════════
+   جسم النموذج
+════════════════════════════════════════════ */
+.form-body {
+    padding: 38px 50px 32px;
+    position: relative;
+    z-index: 1;
+}
 
-    /* ══════════════════════════════════════
-       جسم النموذج
-    ══════════════════════════════════════ */
-    .form-body {
-        padding: 38px 45px 30px;
-        position: relative;
-        z-index: 1;
-    }
+/* فاصل الأقسام */
+.section-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    margin-top: 6px;
+}
 
-    /* فاصل الأقسام */
-    .section-divider {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 26px;
-        margin-top: 8px;
-    }
+.section-divider span {
+    color: var(--accent);
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    white-space: nowrap;
+    text-transform: uppercase;
+}
 
-    .section-divider span {
-        color: var(--accent);
-        font-size: .76rem;
-        font-weight: 700;
-        letter-spacing: 2px;
-        white-space: nowrap;
-    }
+.section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to left, transparent, var(--border));
+}
 
-    .section-divider::after {
-        content: '';
-        flex: 1;
-        height: 1px;
-        background: linear-gradient(to left, transparent, var(--border));
-    }
+/* ════════════════════════════════════════════
+   مجموعات الحقول
+════════════════════════════════════════════ */
+.field-group {
+    margin-bottom: 22px;
+    padding: 0 10px;
+}
 
-    /* ══════════════════════════════════════
-       مجموعات الحقول
-    ══════════════════════════════════════ */
-    .field-group {
-        margin-bottom: 24px;
-    }
+.field-group label,
+#SPForm label {
+    color: var(--text-muted) !important;
+    font-weight: 600 !important;
+    font-size: .83rem !important;
+    margin-bottom: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 7px !important;
+    letter-spacing: .3px !important;
+    font-family: 'Tajawal', sans-serif !important;
+}
 
-    .field-group label {
-        color: var(--text-muted);
-        font-weight: 600;
-        font-size: .83rem;
-        margin-bottom: 9px;
-        display: flex;
-        align-items: center;
-        gap: 7px;
-        letter-spacing: .3px;
-    }
+.field-group label::before,
+#SPForm label::before {
+    content: '';
+    display: inline-block;
+    width: 3px; height: 14px;
+    background: linear-gradient(to bottom, var(--primary), var(--accent));
+    border-radius: 4px;
+    flex-shrink: 0;
+}
 
-    /* شريط ملوّن قبل كل تسمية */
-    .field-group label::before {
-        content: '';
-        display: inline-block;
-        width: 3px; height: 14px;
-        background: linear-gradient(to bottom, var(--primary), var(--accent));
-        border-radius: 4px;
-        flex-shrink: 0;
-    }
+/* ════════════════════════════════════════════
+   حقول الإدخال + الأيقونات
+════════════════════════════════════════════ */
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
 
-    /* ══════════════════════════════════════
-       حقول الإدخال مع الأيقونات
-    ══════════════════════════════════════ */
-    .input-with-icon {
-        position: relative;
-        display: flex;
-        align-items: center;
-    }
+.input-with-icon i,
+.input-with-icon .fa,
+.input-with-icon .fas,
+.input-with-icon .bi {
+    position: absolute;
+    right: 14px;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    transition: color .3s ease;
+    pointer-events: none;
+    z-index: 2;
+}
 
-    .input-with-icon i {
-        position: absolute;
-        right: 15px;
-        color: var(--text-muted);
-        font-size: 1.15rem;
-        transition: color .3s ease;
-        pointer-events: none;
-        z-index: 2;
-    }
+.input-with-icon:focus-within i,
+.input-with-icon:focus-within .fa,
+.input-with-icon:focus-within .fas,
+.input-with-icon:focus-within .bi {
+    color: var(--primary);
+}
 
-    .form-control {
-        width: 100%;
-        padding: 13px 46px 13px 15px !important;
-        border: 1.5px solid rgba(125,70,140,.15);
-        border-radius: 14px;
-        background: #FAFAFA;
-        color: var(--text-main) !important;
-        font-family: 'Tajawal', sans-serif;
-        font-size: .95rem;
-        transition: all .3s cubic-bezier(.16,1,.3,1);
-        position: relative;
-        z-index: 1;
-    }
+/* حقل الإدخال الأساسي */
+.form-control {
+    width: 100%;
+    padding: 12px 44px 12px 14px !important;
+    border: 1.5px solid rgba(125,70,140,.15) !important;
+    border-radius: 13px !important;
+    background: #FAFAFA !important;
+    color: var(--text-main) !important;
+    font-family: 'Tajawal', sans-serif !important;
+    font-size: .93rem !important;
+    transition: all .3s cubic-bezier(.16,1,.3,1) !important;
+    position: relative;
+    z-index: 1;
+}
 
-    .form-control::placeholder {
-        color: rgba(122,94,136,.45);
-        font-size: .88rem;
-    }
+.form-control::placeholder {
+    color: rgba(122,94,136,.45) !important;
+    font-size: .87rem;
+}
 
-    .form-control:focus {
-        background: #fff;
-        border-color: var(--primary);
-        box-shadow:
-            0 0 0 4px rgba(125,70,140,.10),
-            0 8px 25px rgba(125,70,140,.08);
-        outline: none;
-        color: var(--text-main) !important;
-    }
+.form-control:focus {
+    background: #fff !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 4px rgba(125,70,140,.10), 0 8px 22px rgba(125,70,140,.08) !important;
+    outline: none !important;
+}
 
-    .input-with-icon:focus-within i {
-        color: var(--primary);
-    }
+textarea.form-control {
+    min-height: 95px;
+    padding-top: 13px !important;
+    resize: vertical;
+    line-height: 1.7;
+}
 
-    textarea.form-control {
-        min-height: 100px;
-        padding-top: 15px !important;
-        resize: vertical;
-        line-height: 1.7;
-    }
+select.form-control {
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+}
 
-    select.form-control {
-        cursor: pointer;
-        appearance: none;
-        -webkit-appearance: none;
-    }
+select.form-control option {
+    background: #fff;
+    color: var(--text-main);
+}
 
-    select.form-control option {
-        background: #fff;
-        color: var(--text-main);
-    }
+/* ════════════════════════════════════════════
+   إخفاء زوائد SharePoint (الأصلية)
+════════════════════════════════════════════ */
+.ms-formtable, .ms-toolbar, .ui-dialog-titlebar-close { display: none !important; }
+.hide { display: none; }
 
-    /* ══════════════════════════════════════
-       إخفاء زوائد SharePoint
-    ══════════════════════════════════════ */
-    .ms-formtable, .ms-toolbar, .ui-dialog-titlebar-close, .hide { display: none !important; }
+/* رسائل التحقق */
+.SpanValidation {
+    color: #d93025;
+    font-size: 11px;
+    margin-top: 4px;
+    display: block;
+}
 
-    .SpanValidation {
-        color: #ff6b8a;
-        font-size: 11px;
-        margin-top: 4px;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
+/* ════════════════════════════════════════════
+   شبكة الأعمدة
+════════════════════════════════════════════ */
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+}
 
-    /* ══════════════════════════════════════
-       زر الإرسال
-    ══════════════════════════════════════ */
-    .custom-submit-btn {
-        background: linear-gradient(135deg, var(--primary) 0%, #9B3DB8 50%, var(--dark-purple) 100%);
-        color: white;
-        border: none;
-        padding: 14px 40px;
-        border-radius: 50px;
-        font-weight: 800;
-        font-family: 'Tajawal', sans-serif;
-        font-size: 1rem;
-        transition: all .3s cubic-bezier(.16,1,.3,1);
-        width: 100%;
-        margin-top: 20px;
-        cursor: pointer;
-        letter-spacing: .5px;
-        box-shadow:
-            0 0 0 1px rgba(232,160,255,.10),
-            0 10px 30px rgba(125,70,140,.30);
-        position: relative;
-        overflow: hidden;
-    }
+.col-md-3  { width: 25%;   padding: 0 10px; }
+.col-md-4  { width: 33.333%; padding: 0 10px; }
+.col-md-6  { width: 50%;   padding: 0 10px; }
+.col-md-8  { width: 66.666%; padding: 0 10px; }
+.col-md-12 { width: 100%;  padding: 0 10px; }
 
-    .custom-submit-btn::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(135deg, rgba(255,255,255,.10), transparent);
-        opacity: 0;
-        transition: opacity .3s;
-    }
+/* ════════════════════════════════════════════
+   زر الإرسال (btn-primary الأصلي + تصميم جديد)
+════════════════════════════════════════════ */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, #9B3DB8 50%, var(--dark-purple) 100%) !important;
+    border-color: transparent !important;
+    color: #fff !important;
+    border-radius: 50px !important;
+    font-family: 'Tajawal', sans-serif !important;
+    font-weight: 800 !important;
+    font-size: .97rem !important;
+    padding: 13px 38px !important;
+    transition: all .3s cubic-bezier(.16,1,.3,1) !important;
+    box-shadow: 0 8px 24px rgba(125,70,140,.28) !important;
+    letter-spacing: .4px !important;
+}
 
-    .custom-submit-btn:hover {
-        transform: translateY(-2px);
-        box-shadow:
-            0 0 0 1px rgba(232,160,255,.22),
-            0 20px 50px rgba(125,70,140,.45);
-    }
+.btn-primary:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 16px 40px rgba(125,70,140,.38) !important;
+}
 
-    .custom-submit-btn:hover::before { opacity: 1; }
+/* ════════════════════════════════════════════
+   التذييل
+════════════════════════════════════════════ */
+.form-footer {
+    padding: 18px 50px 26px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    position: relative;
+    z-index: 1;
+}
 
-    /* ══════════════════════════════════════
-       تذييل النموذج
-    ══════════════════════════════════════ */
-    .form-footer {
-        padding: 18px 45px 26px;
-        border-top: 1px solid var(--border);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        position: relative;
-        z-index: 1;
-    }
+.form-footer span {
+    color: var(--text-muted);
+    font-size: .79rem;
+    font-family: 'Tajawal', sans-serif;
+}
 
-    .form-footer span {
-        color: var(--text-muted);
-        font-size: .79rem;
-    }
+.footer-dot {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: rgba(125,70,140,.25);
+}
 
-    .footer-dot {
-        width: 4px; height: 4px;
-        border-radius: 50%;
-        background: var(--border);
-    }
-
-    /* ══════════════════════════════════════
-       شبكة الأعمدة (Bootstrap-like)
-    ══════════════════════════════════════ */
-    .row {
-        display: flex;
-        flex-wrap: wrap;
-        margin: 0 -10px;
-    }
-
-    [class*="col-"] { padding: 0 10px; }
-
-    .col-md-4  { width: 33.333%; }
-    .col-md-6  { width: 50%;     }
-    .col-md-12 { width: 100%;    }
-
-    @media (max-width: 768px) {
-        .col-md-4,
-        .col-md-6      { width: 100%; }
-        .form-title-box,
-        .form-body,
-        .form-footer   { padding-left: 22px; padding-right: 22px; }
-        .form-title-box h4 { font-size: 1.45rem; }
-    }
+@media (max-width: 768px) {
+    .col-md-3, .col-md-4, .col-md-6, .col-md-8 { width: 100%; }
+    .form-title-box, .form-body, .form-footer { padding-left: 22px; padding-right: 22px; }
+    .form-title-box h4 { font-size: 1.45rem; }
+}
 </style>
 </head>
 
 <body>
+<div class="lang">
 
-<div id="SPForm">
-    <div class="form-card">
 
-        <!-- ═══ رأس النموذج ═══ -->
-        <div class="form-title-box">
-            <div class="header-ornament"></div>
-            <div class="header-gold-line"></div>
+<div id="dialog-confirm" title="Are you sure to delete?">
+  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span></p>
+</div>
 
-            <div class="header-icon-wrap">
-                <i class="bi bi-car-front-fill"></i>
-            </div>
+<div id="Popup" title="Fleet Managment Policy">
+  <p>
+    <span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
+    <div>
+      <object data="http://spwebapp02:47115/Style Library/ContentEditor/Administration/Vehicle_Request/pdf/FleetManagmentpolicy.pdf#toolbar=0&navpanes=0&scrollbar=0&zoom=90" type="application/pdf" width="800" height="600">
+        alt : <a href="http://spwebapp02:47115/Style Library/ContentEditor/Administration/Vehicle_Request/pdf/FleetManagmentpolicy.pdf">Fleet Managment Policy</a>
+      </object>
+    </div>
+  </p>
+</div>
 
-            <h4><i class="bi bi-car-front-fill"></i> طلب مركبة جديدة</h4>
-            <p>يرجى إدخال تفاصيل المهمة لتخصيص المركبة المناسبة</p>
+<input type="hidden" id="DeleteDocID">
 
-            <div class="status-badge">
-                <span class="status-dot"></span>
-                النظام متاح الآن
-            </div>
+<!-- ════ البطاقة الرئيسية ════ -->
+<div class="form-card" style="max-width:960px; margin:auto;">
+
+    <!-- ═══ رأس النموذج الكلاسيك ═══ -->
+    <div class="form-title-box">
+        <div class="header-ornament"></div>
+        <div class="header-gold-line"></div>
+
+        <div class="header-icon-wrap">
+            <i class="bi bi-car-front-fill"></i>
         </div>
 
-        <!-- ═══ جسم النموذج ═══ -->
-        <div class="form-body">
+        <h4 ar="طلـب مركبــة">طلب مركبة &nbsp;<span style="opacity:.55;font-weight:400;font-size:1.1rem;">Vehicle Request</span></h4>
+        <p class="header-desc" ar="•	خدمة طلب مركبة لإنجاز الاعمال المكلفة من قِبل الشركة">
+            خدمة طلب مركبة لإنجاز الأعمال المكلّفة من قِبل الشركة
+        </p>
+        <div class="status-badge">
+            <span class="status-dot"></span>
+            النظام متاح الآن
+        </div>
+    </div>
 
-            <!-- فاصل: بيانات التواصل والطلب -->
-            <div class="section-divider">
-                <span>بيانات التواصل والطلب</span>
+
+    <div class="form-body">
+
+
+        <div class="form-row" id="SPForm">
+
+            <div class="col-md-12">
+                <div class="section-divider"><span>بيانات التواصل والطلب</span></div>
             </div>
 
-            <div class="row">
-
-                <!-- Phone -->
-                <div class="col-md-4 field-group">
-                    <label>رقم التواصل</label>
-                    <div class="input-with-icon">
-                        <input type="text" class="form-control insert MobileNumber" id="MobileNumber" placeholder="رقم الهاتف" />
-                        <i class="bi bi-telephone-fill"></i>
-                    </div>
+            <!-- Mobile Number -->
+            <div class="col-md-3 field-group">
+                <label ar="رقم الهاتف" for="MobileNumber">رقم الهاتف</label>
+                <div class="input-with-icon">
+                    <input ar="رقم الهاتف" type="text" isRequired="yes" message="Mobile Number is Required"
+                           class="form-control insert MobileNumber" id="MobileNumber"
+                           placeholder="Mobile Number" autocomplete="off" />
+                    <i class="bi bi-telephone-fill"></i>
                 </div>
-
-                <!-- Vehicle Request Type -->
-                <div class="col-md-4 field-group">
-                    <label>نوع الطلب</label>
-                    <div class="input-with-icon">
-                        <select class="form-control VehicleRequest_s">
-                            <option value="">اختر...</option>
-                            <option value="24/7">خدمة 24/7</option>
-                            <option value="Pool">تجمع (Pool)</option>
-                            <option value="زيارة الموقع">زيارة الموقع</option>
-                        </select>
-                        <i class="bi bi-layers-half"></i>
-                    </div>
-                    <input type="hidden" class="insert VehicleRequest" id="VehicleRequest" />
-                </div>
-
-                <!-- Location -->
-                <div class="col-md-4 field-group">
-                    <label>الوجهة</label>
-                    <div class="input-with-icon">
-                        <select id="Location_s" class="form-control">
-                            <option value="">حدد الموقع...</option>
-                            <option value="Outside">خارج صلالة</option>
-                            <option value="Inside">داخل صلالة</option>
-                        </select>
-                        <i class="bi bi-geo-alt-fill"></i>
-                    </div>
-                    <input type="hidden" class="insert Location" id="Location"/>
-                </div>
-
             </div>
 
-            <!-- فاصل: الجدول الزمني -->
-            <div class="section-divider">
-                <span>الجدول الزمني</span>
+            <!-- Vehicle Request -->
+            <div class="col-md-3 field-group">
+                <label ar="طلب مركبة" for="VehicleRequest">نوع الطلب</label>
+                <div class="input-with-icon">
+                    <select class="form-control VehicleRequest_s">
+                        <option ar="اختار" value="Select">Select</option>
+                        <option ar="دائمة" value="24/7">24/7</option>
+                        <option ar="مشتركة" value="Pool">Pool</option>
+                        <option ar="زيارة موقع" value="Site visit ">Site visit</option>
+                    </select>
+                    <i class="bi bi-layers-half"></i>
+                </div>
+                <input type="text" isRequired="yes" message="Vehicle request is Required"
+                       class="form-control hide insert VehicleRequest" id="VehicleRequest" />
             </div>
 
-            <div class="row">
-
-                <!-- Start Date -->
-                <div class="col-md-6 field-group">
-                    <label>تاريخ البدء</label>
-                    <div class="input-with-icon">
-                        <input type="text" class="form-control insert From_Date" id="From_Date" placeholder="يوم/شهر/سنة" readonly />
-                        <i class="bi bi-calendar-event"></i>
-                    </div>
+            <!-- From Date -->
+            <div class="col-md-3 field-group">
+                <label ar=" من التاريخ" for="From_Date">من التاريخ</label>
+                <div class="input-with-icon">
+                    <input ar=" من التاريخ" type="text" isRequired="yes" message="From Date is Required"
+                           class="form-control insert From_Date" id="From_Date"
+                           placeholder="Choose From Date and Time" autocomplete="off" />
+                    <i class="bi bi-calendar-event"></i>
                 </div>
+            </div>
 
-                <!-- End Date -->
-                <div class="col-md-6 field-group">
-                    <label>تاريخ الانتهاء</label>
-                    <div class="input-with-icon">
-                        <input type="text" class="form-control insert To_Date" id="To_Date" placeholder="يوم/شهر/سنة" readonly />
-                        <i class="bi bi-calendar-check-fill"></i>
-                    </div>
+            <!-- To Date -->
+            <div class="col-md-3 field-group">
+                <label ar="الى التاريخ" for="To_Date">إلى التاريخ</label>
+                <div class="input-with-icon">
+                    <input ar="الى التاريخ" type="text" isRequired="yes" message="To Date is Required"
+                           class="form-control insert To_Date" id="To_Date"
+                           placeholder="Choose To Date and Time" autocomplete="off" />
+                    <i class="bi bi-calendar-check-fill"></i>
                 </div>
+            </div>
 
+            <!-- فاصل: الموقع -->
+            <div class="col-md-12">
+                <div class="section-divider"><span>الموقع والوجهة</span></div>
+            </div>
+
+            <!-- Location -->
+            <div class="col-md-3 field-group">
+                <label ar="موقع (طالب الخدمة)">الموقع (طالب الخدمة)</label>
+                <div class="input-with-icon">
+                    <select id="Location_s" class="form-control Location_s">
+                        <option ar="اختار" value="">Select</option>
+                        <option ar="خارج صلالة" value="Outside Salalah">Outside Salalah</option>
+                        <option ar="صلالة" value="Salalah">Salalah</option>
+                    </select>
+                    <i class="bi bi-geo-alt-fill"></i>
+                </div>
+                <input ar="الموقع" type="text" isRequired="yes" message="This field is Required"
+                       class="form-control hide insert Location" id="Location" placeholder="Location" />
+            </div>
+
+            <!-- Outside Salalah -->
+            <div class="col-md-3 field-group">
+                <label ar="خارج صلالة">خارج صلالة</label>
+                <div class="input-with-icon">
+                    <select id="OutsideSalalah_s" class="form-control OutsideSalalah_s">
+                        <option ar="اختار" value="">Select</option>
+                        <option ar="طاقة"  value="Taqah">Taqah</option>
+                        <option ar="ثمريت" value="Thamrait">Thamrait</option>
+                        <option ar=" مرباط" value="Mirbat">Mirbat</option>
+                        <option ar="سدح"   value="Sudh">Sudh</option>
+                        <option ar="ضلكوت" value="Dhaluqut">Dhaluqut</option>
+                        <option ar="شهب أصعيب" value="Shahb Asayab">Shahb Asayab</option>
+                        <option ar="مقشن"  value="Muqshan">Muqshan</option>
+                        <option ar="المزيونة" value="Almazyouna">Almazyouna</option>
+                        <option ar="شليم والحلانيات" value="Shalim & Alhallaniyat">Shalim & Alhallaniyat</option>
+                    </select>
+                    <i class="bi bi-map-fill"></i>
+                </div>
+                <input ar="خارج صلالة" type="text" isRequired="yes" message="This field is Required"
+                       class="form-control hide insert OutsideSalalah" id="OutsideSalalah" placeholder="Outside Salalah" />
+            </div>
+
+            <!-- Inside Salalah -->
+            <div class="col-md-3 field-group">
+                <label ar="صلالة">صلالة</label>
+                <div class="input-with-icon">
+                    <select id="InsideSalalah_s" class="form-control InsideSalalah_s">
+                        <option ar="اختار" value="">Select</option>
+                        <option ar="المبنى الرئيسي" value="(HQ) Main Building">(HQ) Main Building</option>
+                        <option ar="خدمة العملاء ( تنوير سابقاً )" value="Customer Service (Tanweer Before)">Customer Service (Tanweer Before)</option>
+                        <option ar="مخزن" value="Stores">Stores</option>
+                        <option ar=" المبنى الفني (مبنى مياه الصرف الصحي سابقاً)" value="Technical Building (Waste Water Before)">Technical Building (Waste Water Before)</option>
+                        <option ar="WRP مياه الصرف الصحي (ريسوت) " value="WRP Waste Water (Raysut)">WRP Waste Water (Raysut)</option>
+                        <option ar="مديرية المياه (السوق المركزي)" value="Water Directorate (Central Market)">Water Directorate (Central Market)</option>
+                        <option ar="مبنى المياه(الحصيلة)" value="Water NO.5">Water NO.5</option>
+                        <option ar="سكن عمال المياه" value="Water Labor Camp">Water Labor Camp</option>
+                    </select>
+                    <i class="bi bi-building-fill"></i>
+                </div>
+                <input ar="صلالة" type="text" isRequired="yes" message="This field is Required"
+                       class="form-control hide insert InsideSalalah" id="InsideSalalah" placeholder="Inside Salalah" />
+            </div>
+
+            <!-- SubLocation -->
+            <div class="col-md-3 field-group">
+                <label>SubLocation</label>
+                <div class="input-with-icon">
+                    <select id="SubLocation_s" class="form-control SubLocation_s">
+                        <option ar="اختار" value="Select">Select</option>
+                    </select>
+                    <i class="bi bi-pin-map-fill"></i>
+                </div>
+                <input ar="الموقع الفرعي" type="text" isRequired="yes" message="This field is Required"
+                       class="form-control hide insert SubLocation" id="SubLocation" placeholder="SubLocation" />
             </div>
 
             <!-- فاصل: تفاصيل المهمة -->
-            <div class="section-divider">
-                <span>تفاصيل المهمة</span>
+            <div class="col-md-12">
+                <div class="section-divider"><span>تفاصيل المهمة</span></div>
             </div>
 
-            <div class="row">
-
-                <!-- Justification -->
-                <div class="col-md-12 field-group">
-                    <label>مبررات الطلب</label>
-                    <div class="input-with-icon">
-                        <textarea class="form-control insert Justification" id="Justification" placeholder="لماذا تحتاج المركبة؟"></textarea>
-                        <i class="bi bi-chat-left-dots-fill" style="top: 15px;"></i>
-                    </div>
+            <!-- Justification -->
+            <div class="col-md-8 field-group">
+                <label ar="المبررات">المبررات — Justification</label>
+                <div class="input-with-icon">
+                    <textarea ar="المبررات" required isRequired="yes" message="Justification is Required"
+                              rows="2" class="form-control insert Justification" id="Justification"
+                              placeholder="Justification"></textarea>
+                    <i class="bi bi-chat-left-dots-fill" style="top:14px;"></i>
                 </div>
-
-                <!-- Description -->
-                <div class="col-md-12 field-group">
-                    <label>الوصف الإضافي</label>
-                    <div class="input-with-icon">
-                        <textarea class="form-control insert Description" id="Description" placeholder="تفاصيل أخرى للمهمة..."></textarea>
-                        <i class="bi bi-info-circle-fill" style="top: 15px;"></i>
-                    </div>
-                </div>
-
             </div>
-        </div><!-- /form-body -->
 
-        <!-- ═══ تذييل النموذج ═══ -->
-     
+            <!-- Description -->
+            <div class="col-md-8 field-group">
+                <label ar="الوصف">الوصف — Description</label>
+                <div class="input-with-icon">
+                    <textarea ar="المبررات" required isRequired="No" message="Justification is Required"
+                              rows="2" class="form-control insert Description" id="Description"
+                              placeholder="Description"></textarea>
+                    <i class="bi bi-info-circle-fill" style="top:14px;"></i>
+                </div>
+            </div>
 
-    </div><!-- /form-card -->
-</div><!-- /SPForm -->
+            <!-- Hidden Fields (الأصلية) -->
+            <div class="col-md-3" style="display:none">
+                <label>PID</label>
+                <input type="text" class="form-control insert PID" id="PID" />
+            </div>
+
+            <div class="col-md-3" style="display:none">
+                <label>Section</label>
+                <input type="text" class="form-control insert Section" id="Section" />
+            </div>
+
+        </div><!-- /SPForm -->
+    </div><!-- /form-body -->
+
+    <!-- ═══ تذييل النموذج ═══ -->
+    <div class="form-footer">
+        <span>جميع البيانات محمية وآمنة</span>
+        <div class="footer-dot"></div>
+        <span>إدارة المركبات</span>
+        <div class="footer-dot"></div>
+        <span>صلالة</span>
+    </div>
+
+</div><!-- /form-card -->
+</div><!-- /lang -->
 
 <script>
-$(document).ready(function(){
-    // DatePicker Logic
-    $("#From_Date, #To_Date").datepicker({
-        dateFormat:'dd/mm/yy',
-        minDate: 0
-    });
+function ClearUploading() {
+    $("#FileName_DISC").val("");
+    $("#inputTypeFiles_DISC").val("");
+    $("#DialogProgressBar").dialog("close");
+}
 
-    // Hidden Inputs Update
-    $(".VehicleRequest_s").change(function(){
-        $("#VehicleRequest").val($(this).val());
-    });
+function hidevalidation(selector) {
+    $(selector).removeAttr("isRequired");
+    $(selector).removeAttr("message");
+}
+
+function Enablevalidation(selector) {
+    $(selector).attr("isRequired","yes");
+    $(selector).attr("message","This field is required");
+}
+
+$("#FileName_DISC").attr("mandatory","no");
+
+var ListName = window.location.href.split("Lists/")[1].split("/")[0];
+var ID = getParameterByName("ID", window.location.href);
+
+var obj_Fetch = [];
+$(document).ready(function() {
 
     $("#Location_s").change(function(){
+        $("#OutsideSalalah_s").val("");
+        $("#InsideSalalah_s").val("");
         $("#Location").val($(this).val());
+
+        if($(this).val()=="Outside Salalah") {
+            hidevalidation("InsideSalalah");
+            Enablevalidation("OutsideSalalah");
+            $("#SubLocation_s").empty();
+            $("#InsideSalalah_s").closest("div").hide();
+            $("#InsideSalalah").closest("div").hide();
+            $("#InsideSalalah").val("-");
+            $("#OutsideSalalah_s").closest("div").show();
+            $("#OutsideSalalah").closest("div").show();
+        } else if($(this).val()=="Salalah") {
+            hidevalidation("OutsideSalalah");
+            Enablevalidation("InsideSalalah");
+            $("#SubLocation_s").empty();
+            $("#InsideSalalah_s").closest("div").show();
+            $("#InsideSalalah").closest("div").show();
+            $("#OutsideSalalah_s").closest("div").hide();
+            $("#OutsideSalalah").closest("div").hide();
+            $("#OutsideSalalah").val("-");
+        }
     });
+
+    $("#OutsideSalalah_s").change(function(){
+        $("#SubLocation_s").closest("div").show();
+        $("#SubLocation_s").empty();
+        $("#SubLocation_s").append($('<option ar="اختار"></option>').val("").html("Select"));
+        $("#OutsideSalalah").val($(this).val());
+
+        if($(this).val()=="Taqah") {
+            Enablevalidation("SubLocation");
+            $("#SubLocation_s").append($('<option></option>').val("Customer Services").html("Customer Services"));
+            $("#SubLocation_s").append($('<option></option>').val("Water").html("Water"));
+        } else if($(this).val()=="Thamrait") {
+            Enablevalidation("SubLocation");
+            $("#SubLocation_s").append($('<option></option>').val("Electricity").html("Electricity"));
+            $("#SubLocation_s").append($('<option></option>').val("Water").html("Water"));
+        } else if($(this).val()=="Mirbat") {
+            Enablevalidation("SubLocation");
+            $("#SubLocation_s").append($('<option></option>').val("Customer Services").html("Customer Services"));
+            $("#SubLocation_s").append($('<option></option>').val("Water").html("Water"));
+        } else {
+            $("#SubLocation_s").closest("div").hide();
+            hidevalidation("SubLocation");
+            $("#SubLocation").val("-");
+        }
+        GetAllElementsTextAr("option");
+        GetAllElementsText("option");
+    });
+
+    $("#InsideSalalah_s").change(function(){
+        $("#SubLocation_s").closest("div").show();
+        $("#SubLocation_s").empty();
+        $("#SubLocation_s").append($('<option ar="اختار"></option>').val("").html("Select"));
+        $("#InsideSalalah").val($(this).val());
+
+        if($(this).val()=="Customer Service (Tanweer Before)") {
+            Enablevalidation("SubLocation");
+            $("#SubLocation_s").append($('<option></option>').val("Building 1(New)").html("Building 1(New)"));
+            $("#SubLocation_s").append($('<option></option>').val("Building 2(Old)").html("Building 2(Old)"));
+        } else if($(this).val()=="Stores") {
+            Enablevalidation("SubLocation");
+            $("#SubLocation_s").append($('<option></option>').val("Electricity").html("Electricity"));
+            $("#SubLocation_s").append($('<option></option>').val("Water").html("Water"));
+            $("#SubLocation_s").append($('<option></option>').val("Wastewater").html("Wastewater"));
+        } else {
+            $("#SubLocation_s").closest("div").hide();
+            $("#SubLocation").val("-");
+            hidevalidation("SubLocation");
+        }
+        GetAllElementsTextAr("option");
+        GetAllElementsText("option");
+    });
+
+    $("#SubLocation_s").change(function(){
+        $("#SubLocation").val($(this).val());
+        GetAllElementsTextAr("option");
+        GetAllElementsText("option");
+    });
+
+    var URL_ = window.location.href;
+
+    if (URL_.indexOf("DispForm.aspx") > 0) {
+        $("#SubLocation_s").hide();
+        $("#SubLocation").removeAttr("class");
+        $("#SubLocation").attr("class","form-control insert SubLocation");
+    }
+
+    var Section = getParameterByName("Section", window.location.href);
+    $("#Section").val(Section);
+
+    if (URL_.indexOf("NewForm.aspx") > 0) {
+        $("#PID").val(getParameterByName("PID", window.location.href));
+    }
+
+    InitSpan("#SPForm");
+    SelectInput(".VehicleRequest_s", "#VehicleRequest", "yes", "24/7");
+
+    $("#DialogProgressBar").dialog({ modal: true, autoOpen: false });
+
+    $("#Popup").dialog({
+        modal: true,
+        resizable: false,
+        height: "600",
+        width: 800,
+        autoOpen: false,
+        buttons: {
+            "Ok": function(event) { $(this).dialog("close"); }
+        }
+    });
+
+    var startDate;
+    $("#From_Date").datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+        minDate: 0,
+        onClose: function(dp, $input) {
+            startDate = $("#From_Date").val();
+            $("#To_Date").datepicker("option", "minDate", startDate);
+        }
+    });
+
+    $("#To_Date").datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true
+    });
+
+    $("#SaveRecord_DISC").click(function() {
+        if (URL_.indexOf("DispForm.aspx") > 0) {
+            window.location.href = _spPageContextInfo.webAbsoluteUrl + "/Lists/"+ListName+"/AllItems.aspx";
+        }
+
+        $("input").blur(function() { ValiadtionFun(this); });
+        $("select").blur(function() { ValiadtionFun(this); });
+
+        var validationCount = 0;
+        $("#SPForm").find('input').each(function() { ValiadtionFun(this); });
+        $("#SPForm").find('textarea').each(function() { ValiadtionFun(this); });
+
+        $("#SPForm").find('input').each(function() {
+            if ($(this).attr("isRequired") == "yes") {
+                if ($(this).next("span").html() != "") { validationCount = validationCount + 1; }
+            }
+        });
+
+        $("#SPForm").find('textarea').each(function() {
+            if ($(this).attr("isRequired") == "yes") {
+                if ($(this).next("span").html() != "") { validationCount = validationCount + 1; }
+            }
+        });
+
+        if (validationCount == 0) {
+            itrateItemsCount($("#PID").val(), function(data) {
+                var obj = [];
+                item = {};
+                var getElements = document.getElementsByClassName('insert');
+                var strItem = "";
+                var temp = getElements.length;
+                for (temp = 0; temp <= getElements.length - 1; temp++) {
+                    if (getElements[temp].className.split("insert")[1].indexOf("hasDatepicker") == -1) {
+                        strItem = (getElements[temp].className.split("insert")[1].replace(" hasDatepicker","")).replace(" ","");
+                        item[strItem] = $("."+strItem).val();
+                    } else {
+                        strItem = (getElements[temp].className.split("insert")[1].replace(" hasDatepicker","")).replace(" ","");
+                        item[strItem] = MMDDYYYFormate($("."+strItem).val());
+                    }
+                    obj.push(item);
+                }
+                obj.push(item);
+                if (URL_.indexOf("NewForm.aspx") > 0) {
+                    createListItem(ListName, obj, _spPageContextInfo.webAbsoluteUrl + "/Lists/"+ListName+"/AllItems.aspx");
+                } else if (URL_.indexOf("EditForm.aspx") > 0) {
+                    UpdateListItem(ListName, getParameterByName("ID"), obj, _spPageContextInfo.webAbsoluteUrl + "/Lists/"+ListName+"/AllItems.aspx");
+                }
+            });
+        }
+    });
+
+    if (URL_.indexOf("EditForm.aspx") > 0 || URL_.indexOf("DispForm.aspx") > 0) {
+        if (URL_.indexOf("DispForm.aspx") > 0) {
+            $("#SaveRecord_DISC").html("Cancel");
+            $('#SPForm').find('input').each(function(i, box) { $(box).attr('readonly','readonly'); });
+            $('#SPForm').find('select').each(function(i, box) { $(box).attr('readonly','readonly'); });
+            $('#SPForm').find('textarea').each(function(i, box) { $(box).attr('readonly','readonly'); });
+        }
+        var item = {};
+        var getElements = document.getElementsByClassName('insert');
+        var temp = getElements.length;
+        for (temp = 0; temp <= getElements.length - 1; temp++) {
+            tempSplit = getElements[temp].className.split("insert")[1];
+            obj_Fetch.push(tempSplit);
+        }
+        SP.SOD.executeFunc('sp.js', 'SP.ClientContext', getListitem);
+    }
 });
+
+setTimeout(function() { $(".img-fluid").removeAttr("style"); }, 500);
 </script>
 
 </body>
