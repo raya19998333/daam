@@ -30,401 +30,535 @@
       <!--  <script src="http://spwebapp02:47115/Style Library/customscripts/restApi/UpdateCustomList.js"></script>-->
 
 <style>
-/* ===========================
-   CSS VARIABLES & RESET
-=========================== */
-:root {
-  --primary:       #744379;
-  --primary-dark:  #5a3360;
-  --primary-light: #9b5ea2;
-  --accent:        #c084cc;
-  --bg-page:       #f5f0f6;
-  --bg-card:       #ffffff;
-  --bg-header:     linear-gradient(135deg, #2d1b33 0%, #4a2454 50%, #744379 100%);
-  --text-main:     #1e293b;
-  --text-muted:    #64748b;
-  --text-light:    #94a3b8;
-  --border:        #e2d9e8;
-  --border-focus:  #744379;
-  --shadow-sm:     0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
-  --shadow-md:     0 4px 16px rgba(116,67,121,.15);
-  --shadow-lg:     0 10px 40px rgba(116,67,121,.18);
-  --radius:        12px;
-  --radius-sm:     8px;
-  --font-en:       'Sora', sans-serif;
-  --font-ar:       'Tajawal', sans-serif;
-  --transition:    all 0.25s cubic-bezier(.4,0,.2,1);
-}
+/* ============================================================
+   SHAREPOINT ISOLATION STRATEGY
+   كل الستايلات محاطة بـ #vrf-root لمنع أي تعارض مع SP
+   ============================================================ */
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* --- CSS Variables scoped to root --- */
+#vrf-root {
+  --vp:        #744379;
+  --vp-dk:     #5a3360;
+  --vp-lt:     #9b5ea2;
+  --vp-acc:    #c084cc;
+  --vp-bg:     #f5f0f6;
+  --vp-card:   #ffffff;
+  --vp-hdr:    linear-gradient(135deg, #2d1b33 0%, #4a2454 50%, #744379 100%);
+  --vp-txt:    #1e293b;
+  --vp-muted:  #64748b;
+  --vp-light:  #94a3b8;
+  --vp-border: #e2d9e8;
+  --vp-sha:    0 10px 40px rgba(116,67,121,.18);
+  --vp-r:      12px;
+  --vp-rs:     8px;
+  --vp-fn:     'Sora', sans-serif;
+  --vp-far:    'Tajawal', sans-serif;
+  --vp-tr:     all 0.25s cubic-bezier(.4,0,.2,1);
 
-body {
-  font-family: var(--font-en);
-  background: var(--bg-page);
-  color: var(--text-main);
-  min-height: 100vh;
-  padding: 0;
+  /* --- Hard reset everything inside --- */
+  all: initial;
+  display: block;
+  box-sizing: border-box !important;
+  font-family: var(--vp-fn) !important;
+  color: var(--vp-txt) !important;
+  background: var(--vp-bg) !important;
   background-image:
     radial-gradient(circle at 20% 20%, rgba(116,67,121,.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(74,36,84,.08) 0%, transparent 50%);
+    radial-gradient(circle at 80% 80%, rgba(74,36,84,.08) 0%, transparent 50%) !important;
 }
 
-/* ===========================
-   HIDE SP DEFAULTS
-=========================== */
+/* Reset all children inside our root */
+#vrf-root *, #vrf-root *::before, #vrf-root *::after {
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  font-size: 100% !important;
+  font: inherit !important;
+  vertical-align: baseline !important;
+  line-height: normal !important;
+}
+
+/* SP hide rules - keep these global */
 .ms-formtable, .ms-toolbar, .ui-dialog-titlebar-close { display: none !important; }
-.hide { display: none; }
-.SpanValidation { color: var(--primary); font-size: .75rem; margin-top: 4px; display: block; font-weight: 500; }
 
-/* ===========================
-   PAGE WRAPPER
-=========================== */
-.lang {
-  max-width: 960px;
-  margin: 36px auto;
-  padding: 0 20px 60px;
+/* Force hide class always hidden — SP-proof */
+#vrf-root .hide,
+#vrf-root input.hide,
+#vrf-root select.hide,
+#vrf-root textarea.hide { display: none !important; }
+
+/* --- Hide helper --- */
+#vrf-root .vrf-hide { display: none !important; }
+
+/* =====================
+   WRAPPER
+===================== */
+#vrf-root .vrf-wrap {
+  max-width: 960px !important;
+  margin: 36px auto !important;
+  padding: 0 20px 60px !important;
+  display: block !important;
 }
 
-/* ===========================
+/* =====================
    CARD
-=========================== */
-#SPForm {
-  background: var(--bg-card);
-  border-radius: 20px;
-  box-shadow: var(--shadow-lg);
-  overflow: hidden;
-  padding: 0;
+===================== */
+#vrf-root #SPForm {
+  background: #ffffff !important;
+  border-radius: 20px !important;
+  box-shadow: 0 10px 40px rgba(116,67,121,.18) !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  display: block !important;
+  width: 100% !important;
 }
 
-/* ===========================
-   HEADER BANNER
-=========================== */
-.form-header {
-  background: var(--bg-header);
-  padding: 0;
-  position: relative;
-  overflow: hidden;
+/* =====================
+   HEADER
+===================== */
+#vrf-root .form-header {
+  background: linear-gradient(135deg, #2d1b33 0%, #4a2454 50%, #744379 100%) !important;
+  padding: 0 !important;
+  position: relative !important;
+  overflow: hidden !important;
+  display: block !important;
+  width: 100% !important;
 }
-
-/* geometric background pattern */
-.form-header::before {
-  content: '';
-  position: absolute; inset: 0;
+#vrf-root .form-header::before {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
   background-image:
     radial-gradient(circle at 10% 50%, rgba(255,255,255,.06) 0%, transparent 40%),
     radial-gradient(circle at 90% 20%, rgba(192,132,204,.2) 0%, transparent 40%),
-    radial-gradient(circle at 60% 90%, rgba(116,67,121,.3) 0%, transparent 35%);
-  pointer-events: none;
+    radial-gradient(circle at 60% 90%, rgba(116,67,121,.3) 0%, transparent 35%) !important;
+  pointer-events: none !important;
+  border: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
-
-/* grid lines overlay */
-.form-header::after {
-  content: '';
-  position: absolute; inset: 0;
+#vrf-root .form-header::after {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
   background-image:
     linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
-  background-size: 40px 40px;
-  pointer-events: none;
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px) !important;
+  background-size: 40px 40px !important;
+  pointer-events: none !important;
+  border: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+#vrf-root .form-header-inner {
+  position: relative !important;
+  z-index: 2 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  padding: 40px 40px 36px !important;
+  text-align: center !important;
+}
+#vrf-root .form-header-topbar {
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  margin-bottom: 28px !important;
+  padding: 0 !important;
+}
+#vrf-root .form-logo {
+  height: 52px !important;
+  width: auto !important;
+  object-fit: contain !important;
+  filter: brightness(0) invert(1) !important;
+  opacity: .95 !important;
+  display: block !important;
+  border: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+#vrf-root .form-header-badge {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  background: rgba(255,255,255,.12) !important;
+  border: 1px solid rgba(255,255,255,.18) !important;
+  border-radius: 100px !important;
+  padding: 5px 14px 5px 8px !important;
+  font-size: .72rem !important;
+  font-family: 'Sora', sans-serif !important;
+  font-weight: 600 !important;
+  color: rgba(255,255,255,.85) !important;
+  letter-spacing: .05em !important;
+  text-transform: uppercase !important;
+  backdrop-filter: blur(6px) !important;
+  line-height: 1.4 !important;
+}
+#vrf-root .form-header-badge i {
+  color: #c084cc !important;
+  font-size: .75rem !important;
+  font-style: normal !important;
+  display: inline-block !important;
+  font-family: 'Font Awesome 6 Free' !important;
+  font-weight: 900 !important;
+}
+#vrf-root .form-header-icon-wrap {
+  position: relative !important;
+  margin-bottom: 18px !important;
+  display: block !important;
+}
+#vrf-root .form-header-icon-ring {
+  width: 72px !important;
+  height: 72px !important;
+  border-radius: 50% !important;
+  background: rgba(255,255,255,.08) !important;
+  border: 1.5px solid rgba(255,255,255,.15) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  backdrop-filter: blur(4px) !important;
+}
+#vrf-root .form-header-icon-inner {
+  width: 52px !important;
+  height: 52px !important;
+  background: linear-gradient(135deg, #9b5ea2, #5a3360) !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 20px !important;
+  color: #fff !important;
+  box-shadow: 0 4px 20px rgba(116,67,121,.6), 0 0 0 6px rgba(116,67,121,.2) !important;
+  border: 0 !important;
+}
+#vrf-root .form-header-icon-inner i {
+  font-size: 20px !important;
+  color: #fff !important;
+  display: inline-block !important;
+  font-family: 'Font Awesome 6 Free' !important;
+  font-weight: 900 !important;
+  font-style: normal !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+#vrf-root .form-header h4 {
+  font-family: 'Sora', sans-serif !important;
+  font-size: 1.75rem !important;
+  font-weight: 700 !important;
+  color: #fff !important;
+  letter-spacing: -.02em !important;
+  margin-bottom: 10px !important;
+  text-shadow: 0 2px 12px rgba(0,0,0,.2) !important;
+  display: block !important;
+  line-height: 1.2 !important;
+}
+#vrf-root .form-header h4 u { text-decoration: none !important; }
+#vrf-root .form-header .subtitle {
+  font-family: 'Sora', sans-serif !important;
+  font-size: .88rem !important;
+  color: rgba(255,255,255,.6) !important;
+  font-weight: 300 !important;
+  max-width: 460px !important;
+  line-height: 1.7 !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+#vrf-root .form-header-wave {
+  display: block !important;
+  width: 100% !important;
+  line-height: 0 !important;
+  position: relative !important;
+  z-index: 2 !important;
+  margin-top: -2px !important;
+  font-size: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+#vrf-root .form-header-wave svg {
+  display: block !important;
+  width: 100% !important;
+  border: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
-.form-header-inner {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 40px 40px 36px;
-  text-align: center;
-}
-
-/* top bar: logo left + badge right */
-.form-header-topbar {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 28px;
-}
-
-.form-logo {
-  height: 52px;
-  width: auto;
-  object-fit: contain;
-  filter: brightness(0) invert(1);
-  opacity: .95;
-  display: block;
-}
-
-.form-header-badge {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(255,255,255,.12);
-  border: 1px solid rgba(255,255,255,.18);
-  border-radius: 100px;
-  padding: 5px 14px 5px 8px;
-  font-size: .72rem;
-  font-weight: 600;
-  color: rgba(255,255,255,.85);
-  letter-spacing: .05em;
-  text-transform: uppercase;
-  backdrop-filter: blur(6px);
-}
-.form-header-badge i {
-  color: var(--accent);
-  font-size: .75rem;
-}
-
-/* center icon */
-.form-header-icon-wrap {
-  position: relative;
-  margin-bottom: 18px;
-}
-.form-header-icon-ring {
-  width: 72px; height: 72px;
-  border-radius: 50%;
-  background: rgba(255,255,255,.08);
-  border: 1.5px solid rgba(255,255,255,.15);
-  display: flex; align-items: center; justify-content: center;
-  backdrop-filter: blur(4px);
-}
-.form-header-icon-inner {
-  width: 52px; height: 52px;
-  background: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 20px; color: #fff;
-  box-shadow: 0 4px 20px rgba(116,67,121,.6), 0 0 0 6px rgba(116,67,121,.2);
-}
-
-.form-header h4 {
-  font-family: var(--font-en);
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: -.02em;
-  margin-bottom: 10px;
-  text-shadow: 0 2px 12px rgba(0,0,0,.2);
-}
-.form-header h4 u { text-decoration: none; }
-
-.form-header .subtitle {
-  font-size: .88rem;
-  color: rgba(255,255,255,.6);
-  font-weight: 300;
-  max-width: 460px;
-  line-height: 1.7;
-}
-
-/* bottom wave divider */
-.form-header-wave {
-  display: block;
-  width: 100%;
-  line-height: 0;
-  position: relative;
-  z-index: 2;
-  margin-top: -2px;
-}
-.form-header-wave svg { display: block; width: 100%; }
-
-/* ===========================
+/* =====================
    FORM BODY
-=========================== */
-.form-body {
-  padding: 36px 40px 40px;
+===================== */
+#vrf-root .form-body {
+  padding: 36px 40px 40px !important;
+  display: block !important;
 }
 
-/* ===========================
-   SECTION DIVIDER
-=========================== */
-.section-label {
-  font-size: .7rem;
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--primary);
-  border-bottom: 2px solid var(--border);
-  padding-bottom: 8px;
-  margin: 32px 0 20px;
-}
-.section-label:first-child { margin-top: 0; }
-
-/* ===========================
-   GRID
-=========================== */
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 20px 24px;
-}
-.form-row .col-md-3 { grid-column: span 1; }
-.form-row .col-md-8 { grid-column: span 3; }
-.form-row .col-md-12 { grid-column: span 3; }
-
-/* ===========================
-   FIELD GROUP
-=========================== */
-.col-md-3, .col-md-8, .col-md-12 {
-  display: flex;
-  flex-direction: column;
+/* =====================
+   SECTION LABEL
+===================== */
+#vrf-root .section-label {
+  font-family: 'Sora', sans-serif !important;
+  font-size: .7rem !important;
+  font-weight: 700 !important;
+  letter-spacing: .12em !important;
+  text-transform: uppercase !important;
+  color: #744379 !important;
+  border-bottom: 2px solid #e2d9e8 !important;
+  padding-bottom: 8px !important;
+  margin: 32px 0 20px !important;
+  display: block !important;
+  width: 100% !important;
+  line-height: 1.4 !important;
 }
 
-label {
-  font-size: .78rem;
-  font-weight: 600;
-  color: var(--text-main);
-  margin-bottom: 7px;
-  letter-spacing: .01em;
+/* =====================
+   GRID — the key fix
+===================== */
+#vrf-root .form-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr !important;
+  gap: 20px 24px !important;
+  width: 100% !important;
+  align-items: start !important;
+}
+#vrf-root .form-grid .col-md-3  { grid-column: span 1 !important; }
+#vrf-root .form-grid .col-md-8  { grid-column: span 3 !important; }
+#vrf-root .form-grid .col-md-12 { grid-column: span 3 !important; }
+
+#vrf-root .col-md-3,
+#vrf-root .col-md-8,
+#vrf-root .col-md-12 {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  width: 100% !important;
 }
 
-/* ===========================
-   INPUTS / SELECTS / TEXTAREA
-=========================== */
-.form-control {
-  font-family: var(--font-en);
-  font-size: .875rem;
-  color: var(--text-main);
-  background: #f8fafc;
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 10px 14px;
-  height: auto;
-  line-height: 1.5;
-  width: 100%;
-  transition: var(--transition);
-  -webkit-appearance: none;
-  appearance: none;
-  outline: none;
-}
-.form-control:focus {
-  border-color: var(--border-focus);
-  background: #fff;
-  box-shadow: 0 0 0 3px rgba(116,67,121,.15);
-}
-.form-control::placeholder { color: var(--text-light); }
-.form-control[readonly] { background: #f1f5f9; cursor: default; color: var(--text-muted); }
-
-select.form-control {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2364748b' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  padding-right: 36px;
-  cursor: pointer;
+/* =====================
+   LABEL
+===================== */
+#vrf-root label {
+  font-family: 'Sora', sans-serif !important;
+  font-size: .78rem !important;
+  font-weight: 600 !important;
+  color: #1e293b !important;
+  margin-bottom: 7px !important;
+  letter-spacing: .01em !important;
+  display: block !important;
+  line-height: 1.4 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
 }
 
-textarea.form-control {
-  resize: vertical;
-  min-height: 80px;
+/* =====================
+   FORM CONTROLS
+===================== */
+#vrf-root .form-control {
+  font-family: 'Sora', sans-serif !important;
+  font-size: .875rem !important;
+  color: #1e293b !important;
+  background: #f8fafc !important;
+  border: 1.5px solid #e2d9e8 !important;
+  border-radius: 8px !important;
+  padding: 10px 14px !important;
+  height: auto !important;
+  line-height: 1.5 !important;
+  width: 100% !important;
+  display: block !important;
+  transition: border-color .25s, box-shadow .25s !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  min-height: 0 !important;
+}
+#vrf-root .form-control:focus {
+  border-color: #744379 !important;
+  background: #fff !important;
+  box-shadow: 0 0 0 3px rgba(116,67,121,.15) !important;
+  outline: none !important;
+}
+#vrf-root .form-control::placeholder { color: #94a3b8 !important; opacity: 1 !important; }
+#vrf-root .form-control[readonly] {
+  background: #f1f5f9 !important;
+  cursor: default !important;
+  color: #64748b !important;
 }
 
-/* ===========================
-   SAVE BUTTON
-=========================== */
-.btn-primary {
-  font-family: var(--font-en);
-  font-weight: 600;
-  font-size: .875rem;
-  letter-spacing: .03em;
-  color: #fff;
-  background: var(--primary);
-  border: none;
-  border-radius: var(--radius-sm);
-  padding: 11px 32px;
-  cursor: pointer;
-  transition: var(--transition);
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  box-shadow: 0 4px 14px rgba(116,67,121,.35);
+#vrf-root select.form-control {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2364748b' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 12px center !important;
+  padding-right: 36px !important;
+  cursor: pointer !important;
 }
-.btn-primary:hover {
-  background: var(--primary-dark);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(116,67,121,.50);
-}
-.btn-primary:active { transform: translateY(0); }
-
-/* ===========================
-   FOOTER ACTION ROW
-=========================== */
-.form-actions {
-  padding: 20px 40px 32px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  border-top: 1px solid var(--border);
-  background: #fafbfc;
+#vrf-root textarea.form-control {
+  resize: vertical !important;
+  min-height: 80px !important;
 }
 
-/* ===========================
-   INPUT WITH ICON
-=========================== */
-.input-icon-wrap {
-  position: relative;
-  display: flex;
-  align-items: center;
+/* =====================
+   INPUT + ICON WRAPPER
+===================== */
+#vrf-root .input-icon-wrap {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
 }
-.input-icon-wrap .field-icon {
-  position: absolute;
-  left: 13px;
-  color: var(--primary);
-  font-size: .82rem;
-  pointer-events: none;
-  z-index: 1;
-  opacity: .75;
-}
-.input-icon-wrap .form-control {
-  padding-left: 36px;
-}
-.input-icon-wrap select.form-control {
-  padding-left: 36px;
-}
-
-
-.ui-datepicker {
-  font-family: var(--font-en) !important;
+#vrf-root .input-icon-wrap .field-icon {
+  position: absolute !important;
+  left: 13px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  color: #744379 !important;
   font-size: .82rem !important;
-  border-radius: var(--radius) !important;
-  border: 1px solid var(--border) !important;
-  box-shadow: var(--shadow-lg) !important;
+  pointer-events: none !important;
+  z-index: 3 !important;
+  opacity: .75 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  display: inline-block !important;
+  font-family: 'Font Awesome 6 Free' !important;
+  font-weight: 900 !important;
+  font-style: normal !important;
+  line-height: 1 !important;
+  width: auto !important;
+  height: auto !important;
+}
+#vrf-root .input-icon-wrap .form-control {
+  padding-left: 36px !important;
+}
+
+/* textarea icon — fixed top */
+#vrf-root .input-icon-wrap.ta-wrap {
+  align-items: flex-start !important;
+}
+#vrf-root .input-icon-wrap.ta-wrap .field-icon {
+  top: 11px !important;
+  transform: none !important;
+}
+
+/* =====================
+   BUTTON
+===================== */
+#vrf-root .btn-primary {
+  font-family: 'Sora', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: .875rem !important;
+  letter-spacing: .03em !important;
+  color: #fff !important;
+  background: #744379 !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 11px 32px !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  box-shadow: 0 4px 14px rgba(116,67,121,.35) !important;
+  transition: background .25s, box-shadow .25s, transform .15s !important;
+  line-height: 1.5 !important;
+}
+#vrf-root .btn-primary:hover {
+  background: #5a3360 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 20px rgba(116,67,121,.50) !important;
+}
+#vrf-root .btn-primary i {
+  font-family: 'Font Awesome 6 Free' !important;
+  font-weight: 900 !important;
+  font-style: normal !important;
+  display: inline-block !important;
+  color: #fff !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  font-size: .875rem !important;
+  line-height: 1 !important;
+}
+
+/* =====================
+   FORM ACTIONS
+===================== */
+#vrf-root .form-actions {
+  padding: 20px 40px 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  border-top: 2px solid #e2d9e8 !important;
+  background: #fafbfc !important;
+}
+
+/* =====================
+   VALIDATION SPAN
+===================== */
+#vrf-root .SpanValidation {
+  color: #744379 !important;
+  font-size: .72rem !important;
+  margin-top: 4px !important;
+  display: block !important;
+  font-weight: 500 !important;
+  font-family: 'Sora', sans-serif !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  line-height: 1.4 !important;
+}
+
+/* =====================
+   DATEPICKER OVERRIDES (global needed)
+===================== */
+.ui-datepicker {
+  font-family: 'Sora', sans-serif !important;
+  font-size: .82rem !important;
+  border-radius: 12px !important;
+  border: 1px solid #e2d9e8 !important;
+  box-shadow: 0 10px 40px rgba(116,67,121,.18) !important;
+  z-index: 9999 !important;
 }
 .ui-datepicker .ui-datepicker-header {
-  background: var(--primary) !important;
-  border-color: var(--primary-dark) !important;
-  border-radius: var(--radius) var(--radius) 0 0 !important;
+  background: #744379 !important;
+  border-color: #5a3360 !important;
+  border-radius: 12px 12px 0 0 !important;
   color: #fff !important;
 }
 .ui-datepicker td span.ui-state-active,
 .ui-datepicker td a.ui-state-active {
-  background: var(--primary) !important;
-  border-color: var(--primary-dark) !important;
+  background: #744379 !important;
+  border-color: #5a3360 !important;
   color: #fff !important;
 }
 .ui-datepicker td a:hover {
   background: #f3e8f5 !important;
-  color: var(--primary) !important;
+  color: #744379 !important;
 }
 
-/* ===========================
-   DIALOG OVERRIDES
-=========================== */
+/* =====================
+   DIALOG OVERRIDES (global)
+===================== */
 .ui-dialog {
-  border-radius: var(--radius) !important;
-  font-family: var(--font-en) !important;
-  box-shadow: var(--shadow-lg) !important;
+  border-radius: 12px !important;
+  font-family: 'Sora', sans-serif !important;
+  box-shadow: 0 10px 40px rgba(116,67,121,.18) !important;
   border: none !important;
 }
 .ui-dialog .ui-dialog-titlebar {
-  background: var(--primary) !important;
+  background: #744379 !important;
   color: #fff !important;
-  border-radius: var(--radius) var(--radius) 0 0 !important;
+  border-radius: 12px 12px 0 0 !important;
   font-weight: 600 !important;
   padding: 14px 20px !important;
 }
 .ui-dialog .ui-dialog-content { padding: 20px !important; }
 .ui-dialog .ui-dialog-buttonset .ui-button {
-  background: var(--primary) !important;
+  background: #744379 !important;
   color: #fff !important;
   border: none !important;
   border-radius: 6px !important;
@@ -433,35 +567,39 @@ textarea.form-control {
   cursor: pointer !important;
 }
 
-/* ===========================
+/* =====================
    RESPONSIVE
-=========================== */
+===================== */
 @media (max-width: 768px) {
-  .form-row { grid-template-columns: 1fr 1fr; gap: 16px; }
-  .form-row .col-md-8 { grid-column: span 2; }
-  .form-row .col-md-12 { grid-column: span 2; }
-  .form-header, .form-body, .form-actions { padding-left: 20px; padding-right: 20px; }
+  #vrf-root .form-grid { grid-template-columns: 1fr 1fr !important; }
+  #vrf-root .form-grid .col-md-8  { grid-column: span 2 !important; }
+  #vrf-root .form-grid .col-md-12 { grid-column: span 2 !important; }
+  #vrf-root .form-header-inner,
+  #vrf-root .form-body,
+  #vrf-root .form-actions { padding-left: 20px !important; padding-right: 20px !important; }
 }
 @media (max-width: 520px) {
-  .form-row { grid-template-columns: 1fr; }
-  .form-row .col-md-3,
-  .form-row .col-md-8,
-  .form-row .col-md-12 { grid-column: span 1; }
-  .lang { padding: 0 10px 40px; margin-top: 16px; }
+  #vrf-root .form-grid { grid-template-columns: 1fr !important; }
+  #vrf-root .form-grid .col-md-3,
+  #vrf-root .form-grid .col-md-8,
+  #vrf-root .form-grid .col-md-12 { grid-column: span 1 !important; }
+  #vrf-root .vrf-wrap { padding: 0 10px 40px !important; margin-top: 16px !important; }
 }
 
-/* ===========================
+/* =====================
    ANIMATION
-=========================== */
-@keyframes fadeUp {
+===================== */
+@keyframes vrfFadeUp {
   from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-#SPForm { animation: fadeUp .45s ease both; }
+#vrf-root #SPForm { animation: vrfFadeUp .45s ease both; }
 </style>
 </head>  
 <body>
-<div class="lang">
+<div id="vrf-root">
+<div class="vrf-wrap">
+
 <div id="dialog-confirm" title="Are you sure to delete?">
   <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span></p>
 </div>
@@ -523,7 +661,7 @@ textarea.form-control {
     <!-- SECTION: Basic Info -->
     <div class="section-label">Request Details</div>
 
-    <div class="form-row">
+    <div class="form-grid">
 
       <div class="col-md-3">
         <label ar="رقم الهاتف" for="MobileNumber">Mobile Number</label>
@@ -544,7 +682,7 @@ textarea.form-control {
             <option ar="زيارة موقع" value="Site visit ">Site visit</option>
           </select>
         </div>
-        <input type="text" isRequired="yes" message="Vehicle request is Required" class="form-control hide insert VehicleRequest" id="VehicleRequest" />
+        <input type="text" isRequired="yes" message="Vehicle request is Required" class="form-control hide insert VehicleRequest" id="VehicleRequest" style="display:none!important" />
       </div>
 
       <div class="col-md-3">
@@ -578,7 +716,7 @@ textarea.form-control {
             <option ar="صلالة" value="Salalah">Salalah</option>
           </select>
         </div>
-        <input ar="الموقع" type="text" isRequired="yes" message="This field is Required" class="form-control hide insert Location" id="Location" placeholder="Location" />
+        <input ar="الموقع" type="text" isRequired="yes" message="This field is Required" class="form-control hide insert Location" id="Location" placeholder="Location" style="display:none!important" />
       </div>
 
       <div class="col-md-3">
@@ -598,7 +736,7 @@ textarea.form-control {
             <option ar="شليم والحلانيات" value="Shalim & Alhallaniyat">Shalim &amp; Alhallaniyat</option>
           </select>
         </div>
-        <input ar="خارج صلالة" type="text" isRequired="yes" message="This field is Required" class="form-control hide insert OutsideSalalah" id="OutsideSalalah" placeholder="Outside Salalah" />
+        <input ar="خارج صلالة" type="text" isRequired="yes" message="This field is Required" class="form-control hide insert OutsideSalalah" id="OutsideSalalah" placeholder="Outside Salalah" style="display:none!important" />
       </div>
 
       <div class="col-md-3">
@@ -617,7 +755,7 @@ textarea.form-control {
             <option ar="سكن عمال المياه" value="Water Labor Camp">Water Labor Camp</option>
           </select>
         </div>
-        <input ar="صلالة" type="text" isRequired="yes" message="This field is Required" class="form-control hide insert InsideSalalah" id="InsideSalalah" placeholder="Inside Salalah" />
+        <input ar="صلالة" type="text" isRequired="yes" message="This field is Required" class="form-control hide insert InsideSalalah" id="InsideSalalah" placeholder="Inside Salalah" style="display:none!important" />
       </div>
 
       <div class="col-md-3">
@@ -628,7 +766,7 @@ textarea.form-control {
             <option ar="اختار" value="Select">Select</option>
           </select>
         </div>
-        <input ar="الموقع الفرعي" type="text" isRequired="yes" message="This field is Required" class="form-control hide insert SubLocation" id="SubLocation" placeholder="SubLocation" />
+        <input ar="الموقع الفرعي" type="text" isRequired="yes" message="This field is Required" class="form-control hide insert SubLocation" id="SubLocation" placeholder="SubLocation" style="display:none!important" />
       </div>
 
       <!-- SECTION: Notes -->
@@ -638,8 +776,8 @@ textarea.form-control {
 
       <div class="col-md-8">
         <label ar="المبررات">Justification</label>
-        <div class="input-icon-wrap" style="align-items:flex-start">
-          <i class="fas fa-file-alt field-icon" style="top:11px; position:absolute"></i>
+        <div class="input-icon-wrap ta-wrap">
+          <i class="fas fa-file-alt field-icon"></i>
           <textarea ar="المبررات" required isRequired="yes" message="Justification is Required" rows="2" class="form-control insert Justification" id="Justification" placeholder="Justification" style="padding-left:36px"></textarea>
         </div>
       </div>
@@ -647,8 +785,8 @@ textarea.form-control {
       <!-- New update -->
       <div class="col-md-8">
         <label ar="الوصف">Description</label>
-        <div class="input-icon-wrap" style="align-items:flex-start">
-          <i class="fas fa-align-left field-icon" style="top:11px; position:absolute"></i>
+        <div class="input-icon-wrap ta-wrap">
+          <i class="fas fa-align-left field-icon"></i>
           <textarea ar="الوصف" required isRequired="No" message="Justification is Required" rows="2" class="form-control insert Description" id="Description" placeholder="Description" style="padding-left:36px"></textarea>
         </div>
       </div>
@@ -664,7 +802,7 @@ textarea.form-control {
         <input type="text" class="form-control insert Section" id="Section" />
       </div>
 
-    </div><!-- /.form-row -->
+    </div><!-- /.form-grid -->
   </div><!-- /.form-body -->
 
   <!-- ACTIONS -->
@@ -675,7 +813,8 @@ textarea.form-control {
   </div>
 
 </div><!-- /#SPForm -->
-</div><!-- /.lang -->
+</div><!-- /.vrf-wrap -->
+</div><!-- /#vrf-root -->
 
  <script>
  function ClearUploading() {
@@ -858,7 +997,7 @@ GetAllElementsTextAr("option");
       if (URL_.indexOf("NewForm.aspx") > 0) {
             $("#PID").val(getParameterByName("PID", window.location.href));
       }
-      InitSpan("#SPForm");
+      InitSpan("#vrf-root");
       SelectInput(".VehicleRequest_s", "#VehicleRequest", "yes", "24/7");
       $("#DialogProgressBar").dialog({
             modal: true,
