@@ -1,0 +1,1192 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <title></title>  
+    <meta charset="utf-8" />  
+<link rel="stylesheet" href="/edms/Administration_Facilities/Style Library/customscripts/scripts/bootstrap.min.css">
+
+ 
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css">
+ <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<!--  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>-->
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+  <script src="/edms/Administration_Facilities/Style Library/customscripts/scripts/bootstrap.min.js"></script>  
+ 
+   <script src="/edms/Administration_Facilities/Style Library/customscripts/scripts/jquery-ui-timepicker-addon.min.js"></script>
+      <script src="/edms/Administration_Facilities/Style Library/ContentEditor/Administration/Scripts/common.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+         <script src="/edms/Administration_Facilities/Style Library/ContentEditor/Administration/Scripts/AttachDocs.js"></script>
+         <script src="/edms/Administration_Facilities/Style Library/ContentEditor/Administration/Scripts/DeleteItems.js"></script>
+      <script src="/edms/Administration_Facilities/Style Library/ContentEditor/Administration/Scripts/InsertCustomList.js"></script>
+        <script src="/edms/Administration_Facilities/Style Library/ContentEditor/Administration/Scripts/CusValidation.js"></script>
+              <script src="/edms/Administration_Facilities/Style Library/ContentEditor/Administration/Scripts/Fetch.js"></script>
+               <script src="/edms/Administration_Facilities/Style Library/ContentEditor/Administration/Scripts/UpdateCustomList.js"></script>
+               
+            <script src="/edms/Administration_Facilities/Style Library/ContentEditor/Administration/Scripts/Arabic.js"></script>
+
+             
+      <!--  <script src="http://spwebapp02:47115/Style Library/customscripts/restApi/UpdateCustomList.js"></script>-->
+
+<style>
+/* ============================================================
+   SHAREPOINT ISOLATION STRATEGY
+   كل الستايلات محاطة بـ #vrf-root لمنع أي تعارض مع SP
+   ============================================================ */
+
+/* --- CSS Variables scoped to root --- */
+#vrf-root {
+  --vp:        #744379;
+  --vp-dk:     #5a3360;
+  --vp-lt:     #9b5ea2;
+  --vp-acc:    #c084cc;
+  --vp-bg:     #f5f0f6;
+  --vp-card:   #ffffff;
+  --vp-hdr:    linear-gradient(135deg, #2d1b33 0%, #4a2454 50%, #744379 100%);
+  --vp-txt:    #1e293b;
+  --vp-muted:  #64748b;
+  --vp-light:  #94a3b8;
+  --vp-border: #e2d9e8;
+  --vp-sha:    0 10px 40px rgba(116,67,121,.18);
+  --vp-r:      12px;
+  --vp-rs:     8px;
+  --vp-fn:     'Sora', sans-serif;
+  --vp-far:    'Tajawal', sans-serif;
+  --vp-tr:     all 0.25s cubic-bezier(.4,0,.2,1);
+
+  /* --- Hard reset everything inside --- */
+  display: block;
+  box-sizing: border-box !important;
+  font-family: 'Sora', sans-serif !important;
+  color: #1e293b !important;
+}
+
+/* Neutralize Bootstrap row clearfix inside our grid */
+#vrf-root .form-grid::before,
+#vrf-root .form-grid::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Targeted resets only for layout elements */
+#vrf-root div,
+#vrf-root p,
+#vrf-root span:not(.ui-icon):not(.SpanValidation),
+#vrf-root h4,
+#vrf-root label,
+#vrf-root button {
+  box-sizing: border-box !important;
+}
+
+/* SP hide rules - keep these global */
+.ms-formtable, .ms-toolbar, .ui-dialog-titlebar-close { display: none !important; }
+
+/* Force hide class always hidden — SP-proof */
+#vrf-root .hide,
+#vrf-root input.hide,
+#vrf-root select.hide,
+#vrf-root textarea.hide { display: none !important; }
+
+/* --- Hide helper --- */
+#vrf-root .vrf-hide { display: none !important; }
+
+/* =====================
+   WRAPPER
+===================== */
+#vrf-root .vrf-wrap {
+  max-width: 960px !important;
+  margin: 36px auto !important;
+  padding: 0 20px 60px !important;
+  display: block !important;
+}
+
+/* =====================
+   CARD
+===================== */
+#vrf-root #SPForm {
+  background: #ffffff !important;
+  border-radius: 20px !important;
+  box-shadow: 0 10px 40px rgba(116,67,121,.18) !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  display: block !important;
+  width: 100% !important;
+}
+
+/* =====================
+   HEADER
+===================== */
+#vrf-root .form-header {
+  background: linear-gradient(135deg, #2d1b33 0%, #4a2454 50%, #744379 100%) !important;
+  padding: 0 !important;
+  position: relative !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+}
+#vrf-root .form-header::before {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background-image:
+    radial-gradient(circle at 10% 50%, rgba(255,255,255,.06) 0%, transparent 40%),
+    radial-gradient(circle at 90% 20%, rgba(192,132,204,.2) 0%, transparent 40%),
+    radial-gradient(circle at 60% 90%, rgba(116,67,121,.3) 0%, transparent 35%) !important;
+  pointer-events: none !important;
+  border: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+#vrf-root .form-header::after {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px) !important;
+  background-size: 40px 40px !important;
+  pointer-events: none !important;
+  border: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* topbar: logo + badge — real row at the top */
+#vrf-root .form-header-topbar {
+  position: relative !important;
+  z-index: 3 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 24px 40px 0 !important;
+  width: 100% !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* inner: purely centered, no topbar interference */
+#vrf-root .form-header-inner {
+  position: relative !important;
+  z-index: 2 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 20px 40px 28px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+#vrf-root .form-logo {
+  height: 52px !important;
+  width: auto !important;
+  object-fit: contain !important;
+  filter: brightness(0) invert(1) !important;
+  opacity: .95 !important;
+  display: block !important;
+  border: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+#vrf-root .form-header-badge {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  background: rgba(255,255,255,.12) !important;
+  border: 1px solid rgba(255,255,255,.18) !important;
+  border-radius: 100px !important;
+  padding: 5px 14px 5px 8px !important;
+  font-size: .72rem !important;
+  font-family: 'Sora', sans-serif !important;
+  font-weight: 600 !important;
+  color: rgba(255,255,255,.85) !important;
+  letter-spacing: .05em !important;
+  text-transform: uppercase !important;
+  backdrop-filter: blur(6px) !important;
+  line-height: 1.4 !important;
+}
+#vrf-root .form-header-badge i {
+  color: #c084cc !important;
+  font-size: .75rem !important;
+  font-style: normal !important;
+  display: inline-block !important;
+  font-family: 'Font Awesome 6 Free' !important;
+  font-weight: 900 !important;
+}
+#vrf-root .form-header-icon-wrap {
+  position: relative !important;
+  margin-bottom: 12px !important;
+  display: block !important;
+}
+#vrf-root .form-header-icon-ring {
+  width: 72px !important;
+  height: 72px !important;
+  border-radius: 50% !important;
+  background: rgba(255,255,255,.08) !important;
+  border: 1.5px solid rgba(255,255,255,.15) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  backdrop-filter: blur(4px) !important;
+}
+#vrf-root .form-header-icon-inner {
+  width: 52px !important;
+  height: 52px !important;
+  background: linear-gradient(135deg, #9b5ea2, #5a3360) !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 20px !important;
+  color: #fff !important;
+  box-shadow: 0 4px 20px rgba(116,67,121,.6), 0 0 0 6px rgba(116,67,121,.2) !important;
+  border: 0 !important;
+}
+#vrf-root .form-header-icon-inner i {
+  font-size: 20px !important;
+  color: #fff !important;
+  display: inline-block !important;
+  font-family: 'Font Awesome 6 Free' !important;
+  font-weight: 900 !important;
+  font-style: normal !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+#vrf-root .form-header h4 {
+  font-family: 'Sora', sans-serif !important;
+  font-size: 1.75rem !important;
+  font-weight: 700 !important;
+  color: #fff !important;
+  letter-spacing: -.02em !important;
+  margin-bottom: 6px !important;
+  text-shadow: 0 2px 12px rgba(0,0,0,.2) !important;
+  display: block !important;
+  line-height: 1.2 !important;
+}
+#vrf-root .form-header h4 u { text-decoration: none !important; }
+#vrf-root .form-header .subtitle {
+  font-family: 'Sora', sans-serif !important;
+  font-size: .88rem !important;
+  color: rgba(255,255,255,.6) !important;
+  font-weight: 300 !important;
+  max-width: 460px !important;
+  line-height: 1.7 !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+#vrf-root .form-header-wave {
+  display: block !important;
+  width: 100% !important;
+  line-height: 0 !important;
+  position: relative !important;
+  z-index: 2 !important;
+  margin-top: -2px !important;
+  font-size: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+#vrf-root .form-header-wave svg {
+  display: block !important;
+  width: 100% !important;
+  border: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* =====================
+   FORM BODY
+===================== */
+#vrf-root .form-body {
+  padding: 36px 40px 40px !important;
+  display: block !important;
+}
+
+/* =====================
+   SECTION LABEL
+===================== */
+#vrf-root .section-label {
+  font-family: 'Sora', sans-serif !important;
+  font-size: .7rem !important;
+  font-weight: 700 !important;
+  letter-spacing: .12em !important;
+  text-transform: uppercase !important;
+  color: #744379 !important;
+  border-bottom: 2px solid #e2d9e8 !important;
+  padding-bottom: 8px !important;
+  margin: 32px 0 20px !important;
+  display: block !important;
+  width: 100% !important;
+  line-height: 1.4 !important;
+}
+
+/* =====================
+   GRID — ultra SP-proof
+===================== */
+#vrf-root .form-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 20px 24px !important;
+  width: 100% !important;
+  align-items: start !important;
+  float: none !important;
+  clear: both !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+/* Override Bootstrap col-* floats & widths inside our grid */
+#vrf-root .form-grid > [class*="col-"] {
+  float: none !important;
+  clear: none !important;
+  position: static !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  min-height: 0 !important;
+  width: auto !important;
+  max-width: none !important;
+  flex: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+}
+#vrf-root .form-grid .col-md-3  { grid-column: span 1 !important; }
+#vrf-root .form-grid .col-md-8  { grid-column: span 3 !important; }
+#vrf-root .form-grid .col-md-12 { grid-column: span 3 !important; }
+
+/* =====================
+   LABEL
+===================== */
+#vrf-root label {
+  font-family: 'Sora', sans-serif !important;
+  font-size: .78rem !important;
+  font-weight: 600 !important;
+  color: #1e293b !important;
+  margin-bottom: 7px !important;
+  letter-spacing: .01em !important;
+  display: block !important;
+  line-height: 1.4 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+/* =====================
+   FORM CONTROLS — fully SP-proof
+===================== */
+#vrf-root .form-control,
+#vrf-root input.form-control,
+#vrf-root select.form-control,
+#vrf-root textarea.form-control {
+  font-family: 'Sora', sans-serif !important;
+  font-size: .875rem !important;
+  color: #1e293b !important;
+  background: #f8fafc !important;
+  background-color: #f8fafc !important;
+  border: 1.5px solid #e2d9e8 !important;
+  border-radius: 8px !important;
+  padding: 10px 14px !important;
+  height: auto !important;
+  min-height: 0 !important;
+  line-height: 1.5 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  display: block !important;
+  box-shadow: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  outline: none !important;
+  box-sizing: border-box !important;
+  float: none !important;
+  margin: 0 !important;
+  vertical-align: top !important;
+}
+#vrf-root .form-control:focus,
+#vrf-root input.form-control:focus,
+#vrf-root select.form-control:focus,
+#vrf-root textarea.form-control:focus {
+  border-color: #744379 !important;
+  background: #fff !important;
+  background-color: #fff !important;
+  box-shadow: 0 0 0 3px rgba(116,67,121,.15) !important;
+  outline: none !important;
+}
+#vrf-root .form-control::placeholder { color: #94a3b8 !important; opacity: 1 !important; }
+#vrf-root .form-control[readonly] {
+  background: #f1f5f9 !important;
+  background-color: #f1f5f9 !important;
+  cursor: default !important;
+  color: #64748b !important;
+}
+
+#vrf-root select.form-control {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2364748b' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 12px center !important;
+  padding-right: 36px !important;
+  cursor: pointer !important;
+}
+#vrf-root textarea.form-control {
+  resize: vertical !important;
+  min-height: 80px !important;
+  height: auto !important;
+}
+
+/* =====================
+   INPUT + ICON WRAPPER
+===================== */
+#vrf-root .input-icon-wrap {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+#vrf-root .input-icon-wrap .field-icon {
+  position: absolute !important;
+  left: 13px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  color: #744379 !important;
+  font-size: .82rem !important;
+  pointer-events: none !important;
+  z-index: 3 !important;
+  opacity: .75 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  display: inline-block !important;
+  font-family: 'Font Awesome 6 Free' !important;
+  font-weight: 900 !important;
+  font-style: normal !important;
+  line-height: 1 !important;
+  width: auto !important;
+  height: auto !important;
+}
+#vrf-root .input-icon-wrap .form-control {
+  padding-left: 36px !important;
+}
+
+/* textarea icon — fixed top */
+#vrf-root .input-icon-wrap.ta-wrap {
+  align-items: flex-start !important;
+}
+#vrf-root .input-icon-wrap.ta-wrap .field-icon {
+  top: 11px !important;
+  transform: none !important;
+}
+
+/* =====================
+   BUTTON
+===================== */
+#vrf-root .btn-primary {
+  font-family: 'Sora', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: .875rem !important;
+  letter-spacing: .03em !important;
+  color: #fff !important;
+  background: #744379 !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 11px 32px !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  box-shadow: 0 4px 14px rgba(116,67,121,.35) !important;
+  transition: background .25s, box-shadow .25s, transform .15s !important;
+  line-height: 1.5 !important;
+}
+#vrf-root .btn-primary:hover {
+  background: #5a3360 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 20px rgba(116,67,121,.50) !important;
+}
+#vrf-root .btn-primary i {
+  font-family: 'Font Awesome 6 Free' !important;
+  font-weight: 900 !important;
+  font-style: normal !important;
+  display: inline-block !important;
+  color: #fff !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  font-size: .875rem !important;
+  line-height: 1 !important;
+}
+
+/* =====================
+   FORM ACTIONS
+===================== */
+#vrf-root .form-actions {
+  padding: 20px 40px 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  border-top: 2px solid #e2d9e8 !important;
+  background: #fafbfc !important;
+}
+
+/* =====================
+   VALIDATION SPAN
+===================== */
+#vrf-root .SpanValidation {
+  color: #744379 !important;
+  font-size: .72rem !important;
+  margin-top: 4px !important;
+  display: block !important;
+  font-weight: 500 !important;
+  font-family: 'Sora', sans-serif !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  line-height: 1.4 !important;
+}
+
+/* =====================
+   DATEPICKER OVERRIDES (global needed)
+===================== */
+.ui-datepicker {
+  font-family: 'Sora', sans-serif !important;
+  font-size: .82rem !important;
+  border-radius: 12px !important;
+  border: 1px solid #e2d9e8 !important;
+  box-shadow: 0 10px 40px rgba(116,67,121,.18) !important;
+  z-index: 9999 !important;
+}
+.ui-datepicker .ui-datepicker-header {
+  background: #744379 !important;
+  border-color: #5a3360 !important;
+  border-radius: 12px 12px 0 0 !important;
+  color: #fff !important;
+}
+.ui-datepicker td span.ui-state-active,
+.ui-datepicker td a.ui-state-active {
+  background: #744379 !important;
+  border-color: #5a3360 !important;
+  color: #fff !important;
+}
+.ui-datepicker td a:hover {
+  background: #f3e8f5 !important;
+  color: #744379 !important;
+}
+
+/* =====================
+   DIALOG OVERRIDES (global)
+===================== */
+.ui-dialog {
+  border-radius: 12px !important;
+  font-family: 'Sora', sans-serif !important;
+  box-shadow: 0 10px 40px rgba(116,67,121,.18) !important;
+  border: none !important;
+}
+.ui-dialog .ui-dialog-titlebar {
+  background: #744379 !important;
+  color: #fff !important;
+  border-radius: 12px 12px 0 0 !important;
+  font-weight: 600 !important;
+  padding: 14px 20px !important;
+}
+.ui-dialog .ui-dialog-content { padding: 20px !important; }
+.ui-dialog .ui-dialog-buttonset .ui-button {
+  background: #744379 !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  padding: 8px 20px !important;
+  cursor: pointer !important;
+}
+
+/* =====================
+   RESPONSIVE
+===================== */
+@media (max-width: 768px) {
+  #vrf-root .form-grid { grid-template-columns: 1fr 1fr !important; }
+  #vrf-root .form-grid .col-md-8  { grid-column: span 2 !important; }
+  #vrf-root .form-grid .col-md-12 { grid-column: span 2 !important; }
+  #vrf-root .form-header-inner,
+  #vrf-root .form-body,
+  #vrf-root .form-actions { padding-left: 20px !important; padding-right: 20px !important; }
+}
+@media (max-width: 520px) {
+  #vrf-root .form-grid { grid-template-columns: 1fr !important; }
+  #vrf-root .form-grid .col-md-3,
+  #vrf-root .form-grid .col-md-8,
+  #vrf-root .form-grid .col-md-12 { grid-column: span 1 !important; }
+  #vrf-root .vrf-wrap { padding: 0 10px 40px !important; margin-top: 16px !important; }
+}
+
+/* =====================
+   ANIMATION
+===================== */
+@keyframes vrfFadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+#vrf-root #SPForm { animation: vrfFadeUp .45s ease both; }
+</style>
+</head>  
+<body>
+<div id="vrf-root">
+<div class="vrf-wrap">
+
+<div id="dialog-confirm" title="Are you sure to delete?">
+  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span></p>
+</div>
+
+  <div id="Popup" title="Fleet Managment Policy">
+  <p>
+    <span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
+     <div>
+    <object data="http://sp2019wfedev:90/edms/Administration_Facilities/Style%20Library/ContentEditor/Administration/Vehicle_Request/pdf/FleetManagmentpolicy.pdf#toolbar=0&amp;navpanes=0&amp;scrollbar=0&amp;zoom=90" type="application/pdf" width="800" height="600">
+        alt : <a href="http://sp2019wfedev:90/edms/Administration_Facilities/Style%20Library/ContentEditor/Administration/Vehicle_Request/pdf/FleetManagmentpolicy.pdf">Fleet Managment Policy</a>
+    </object>
+</div>
+  </p>
+  </div>
+
+<input type="hidden" id="DeleteDocID">
+
+
+<div id="SPForm">
+
+  <!-- HEADER BANNER -->
+  <div class="form-header">
+
+    <!-- top bar sits directly in form-header, NOT inside inner -->
+    <div class="form-header-topbar">
+      <img src="https://i.postimg.cc/R0CFhBb6/logo.png" alt="Logo" class="form-logo" onerror="this.style.display='none'" />
+      <div class="form-header-badge">
+        <i class="fas fa-circle-check"></i>
+        Fleet Portal
+      </div>
+    </div>
+
+    <!-- centered content -->
+    <div class="form-header-inner">
+
+      <!-- center icon -->
+      <div class="form-header-icon-wrap">
+        <div class="form-header-icon-ring">
+          <div class="form-header-icon-inner">
+            <i class="fas fa-car-side"></i>
+          </div>
+        </div>
+      </div>
+
+      <h4><u ar="طلـب مركبــة">Vehicle Request</u></h4>
+      <p class="subtitle" ar="•  خدمة طلب مركبة لإنجاز الاعمال المكلفة من قِبل الشركة">A service to request a vehicle to complete work assigned by the company.</p>
+
+    </div>
+
+    <!-- wave bottom -->
+    <div class="form-header-wave">
+      <svg viewBox="0 0 1200 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" height="48">
+        <path d="M0,30 C200,60 400,0 600,30 C800,60 1000,0 1200,30 L1200,60 L0,60 Z" fill="#ffffff"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- FORM BODY -->
+  <div class="form-body">
+
+    <!-- SECTION: Basic Info -->
+    <div class="section-label">Request Details</div>
+
+    <div class="form-grid">
+
+      <div class="col-md-3">
+        <label ar="رقم الهاتف" for="MobileNumber">Mobile Number</label>
+        <div class="input-icon-wrap">
+          <i class="fas fa-mobile-alt field-icon"></i>
+          <input ar="رقم الهاتف" type="text" isRequired="yes" message="Mobile Number is Required" class="form-control insert MobileNumber" id="MobileNumber" placeholder="Mobile Number" autocomplete="off" />
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <label ar="طلب مركبة" for="VehicleRequest">Vehicle request</label>
+        <div class="input-icon-wrap">
+          <i class="fas fa-car field-icon"></i>
+          <select class="form-control VehicleRequest_s">
+            <option ar="اختار" value="Select">Select</option>
+            <option ar="دائمة" value="24/7">24/7</option>
+            <option ar="مشتركة" value="Pool">Pool</option>
+            <option ar="زيارة موقع" value="Site visit ">Site visit</option>
+          </select>
+        </div>
+        <input type="text" isRequired="yes" message="Vehicle request is Required" class="form-control hide insert VehicleRequest" id="VehicleRequest" style="display:none!important" />
+      </div>
+
+      <div class="col-md-3">
+        <label ar=" من التاريخ" for="From_Date">From Date</label>
+        <div class="input-icon-wrap">
+          <i class="fas fa-calendar-day field-icon"></i>
+          <input ar=" من التاريخ" type="text" isRequired="yes" message="From Date is Required" class="form-control insert From_Date" id="From_Date" placeholder="Choose From Date and Time" autocomplete="off" />
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <label ar="الى التاريخ" for="To_Date">To Date</label>
+        <div class="input-icon-wrap">
+          <i class="fas fa-calendar-check field-icon"></i>
+          <input ar="الى التاريخ" type="text" isRequired="yes" message="To Date is Required" class="form-control insert To_Date" id="To_Date" placeholder="Choose To Date and Time" autocomplete="off" />
+        </div>
+      </div>
+
+      <!-- SECTION: Location -->
+      <div class="col-md-12">
+        <div class="section-label" style="margin-top:8px">Location</div>
+      </div>
+
+      <div class="col-md-3">
+        <label ar="موقع (طالب الخدمة)">Location (Service Requestor)</label>
+        <div class="input-icon-wrap">
+          <i class="fas fa-map-marker-alt field-icon"></i>
+          <select id="Location_s" class="form-control Location_s">
+            <option ar="اختار" value="">Select</option>
+            <option ar="خارج صلالة" value="Outside Salalah">Outside Salalah</option>
+            <option ar="صلالة" value="Salalah">Salalah</option>
+          </select>
+        </div>
+        <input ar="الموقع" type="text" isRequired="yes" message="This field is Required" class="form-control hide insert Location" id="Location" placeholder="Location" style="display:none!important" />
+      </div>
+
+      <div class="col-md-3">
+        <label ar="خارج صلالة">Outside Salalah</label>
+        <div class="input-icon-wrap">
+          <i class="fas fa-road field-icon"></i>
+          <select id="OutsideSalalah_s" class="form-control OutsideSalalah_s">
+            <option ar="اختار" value="">Select</option>
+            <option ar="طاقة" value="Taqah">Taqah</option>
+            <option ar="ثمريت" value="Thamrait">Thamrait</option>
+            <option ar=" مرباط" value="Mirbat">Mirbat</option>
+            <option ar="سدح" value="Sudh">Sudh</option>
+            <option ar="ضلكوت" value="Dhaluqut">Dhaluqut</option>
+            <option ar="شهب أصعيب" value="Shahb Asayab">Shahb Asayab</option>
+            <option ar="مقشن" value="Muqshan">Muqshan</option>
+            <option ar="المزيونة" value="Almazyouna">Almazyouna</option>
+            <option ar="شليم والحلانيات" value="Shalim & Alhallaniyat">Shalim &amp; Alhallaniyat</option>
+          </select>
+        </div>
+        <input ar="خارج صلالة" type="text" isRequired="yes" message="This field is Required" class="form-control hide insert OutsideSalalah" id="OutsideSalalah" placeholder="Outside Salalah" style="display:none!important" />
+      </div>
+
+      <div class="col-md-3">
+        <label ar="صلالة">Salalah</label>
+        <div class="input-icon-wrap">
+          <i class="fas fa-city field-icon"></i>
+          <select id="InsideSalalah_s" class="form-control InsideSalalah_s">
+            <option ar="اختار" value="">Select</option>
+            <option ar="المبنى الرئيسي" value="(HQ) Main Building">(HQ) Main Building</option>
+            <option ar="خدمة العملاء ( تنوير سابقاً )" value="Customer Service (Tanweer Before)">Customer Service (Tanweer Before)</option>
+            <option ar="مخزن" value="Stores">Stores</option>
+            <option ar=" المبنى الفني (مبنى مياه الصرف الصحي سابقاً)" value="Technical Building (Waste Water Before)">Technical Building (Waste Water Before)</option>
+            <option ar="WRP مياه الصرف الصحي (ريسوت) " value="WRP Waste Water (Raysut)">WRP Waste Water (Raysut)</option>
+            <option ar="مديرية المياه (السوق المركزي)" value="Water Directorate (Central Market)">Water Directorate (Central Market)</option>
+            <option ar="مبنى المياه(الحصيلة)" value="Water NO.5">Water NO.5</option>
+            <option ar="سكن عمال المياه" value="Water Labor Camp">Water Labor Camp</option>
+          </select>
+        </div>
+        <input ar="صلالة" type="text" isRequired="yes" message="This field is Required" class="form-control hide insert InsideSalalah" id="InsideSalalah" placeholder="Inside Salalah" style="display:none!important" />
+      </div>
+
+      <div class="col-md-3">
+        <label>SubLocation</label>
+        <div class="input-icon-wrap">
+          <i class="fas fa-layer-group field-icon"></i>
+          <select id="SubLocation_s" class="form-control SubLocation_s">
+            <option ar="اختار" value="Select">Select</option>
+          </select>
+        </div>
+        <input ar="الموقع الفرعي" type="text" isRequired="yes" message="This field is Required" class="form-control hide insert SubLocation" id="SubLocation" placeholder="SubLocation" style="display:none!important" />
+      </div>
+
+      <!-- SECTION: Notes -->
+      <div class="col-md-12">
+        <div class="section-label" style="margin-top:8px">Additional Information</div>
+      </div>
+
+      <div class="col-md-8">
+        <label ar="المبررات">Justification</label>
+        <div class="input-icon-wrap ta-wrap">
+          <i class="fas fa-file-alt field-icon"></i>
+          <textarea ar="المبررات" required isRequired="yes" message="Justification is Required" rows="2" class="form-control insert Justification" id="Justification" placeholder="Justification" style="padding-left:36px"></textarea>
+        </div>
+      </div>
+
+      <!-- New update -->
+      <div class="col-md-8">
+        <label ar="الوصف">Description</label>
+        <div class="input-icon-wrap ta-wrap">
+          <i class="fas fa-align-left field-icon"></i>
+          <textarea ar="الوصف" required isRequired="No" message="Justification is Required" rows="2" class="form-control insert Description" id="Description" placeholder="Description" style="padding-left:36px"></textarea>
+        </div>
+      </div>
+      <!-- end -->
+
+    </div><!-- /.form-grid -->
+  </div><!-- /.form-body -->
+
+  <!-- PID & Section as TRUE hidden inputs - outside grid, SP cannot show them -->
+  <input type="hidden" class="insert PID" id="PID" />
+  <input type="hidden" class="insert Section" id="Section" />
+
+  <!-- ACTIONS -->
+  <div class="form-actions">
+    <button id="SaveRecord_DISC" class="btn btn-primary">
+      <i class="fas fa-save"></i> Save Request
+    </button>
+  </div>
+
+</div><!-- /#SPForm -->
+</div><!-- /.vrf-wrap -->
+</div><!-- /#vrf-root -->
+
+ <script>
+ function ClearUploading() {
+      $("#FileName_DISC").val("");
+      $("#inputTypeFiles_DISC").val("");
+      $("#DialogProgressBar").dialog("close");
+}
+
+ function hidevalidation(selector)
+ {
+      $(selector).removeAttr("isRequired");
+            $(selector).removeAttr("message");
+ }
+ 
+  function Enablevalidation(selector)
+ {
+      $(selector).attr("isRequired","yes");
+            $(selector).attr("message","This field is required");
+ }
+
+ $("#FileName_DISC").attr("mandatory","no");
+ 
+var ListName = window.location.href.split("Lists/")[1].split("/")[0];
+var ID = getParameterByName("ID", window.location.href);
+
+
+var obj_Fetch = [];
+$(document).ready(function() {
+
+ 
+
+
+ var startDate;
+      $("#From_Date").datepicker({
+            dateFormat: 'dd/mm/yy',
+            changeMonth: true,
+            changeYear: true,
+            minDate: 0,
+            onClose: function(dp, $input) {
+                  startDate = $("#From_Date").val();
+                  $("#To_Date").datepicker("option", "minDate", startDate);
+            }
+      });
+      $("#To_Date").datepicker({
+            dateFormat: 'dd/mm/yy',
+            changeMonth: true,
+            changeYear: true
+            //minDate:0
+      });
+ 
+ 
+  $("#Location_s").change(function(){
+ 
+ 
+
+$("#OutsideSalalah_s").val("");
+$("#InsideSalalah_s").val("");
+
+$("#Location").val($(this).val())
+
+if($(this).val()=="Outside Salalah")
+{
+hidevalidation("InsideSalalah");
+Enablevalidation("OutsideSalalah");
+$("#SubLocation_s").empty();
+
+$("#InsideSalalah_s").closest("div").hide();
+$("#InsideSalalah").closest("div").hide();
+$("#InsideSalalah").val("-");
+$("#OutsideSalalah_s").closest("div").show();
+$("#OutsideSalalah").closest("div").show();
+}else  if($(this).val()=="Salalah")
+{
+hidevalidation("OutsideSalalah");
+Enablevalidation("InsideSalalah");
+$("#SubLocation_s").empty();
+
+$("#InsideSalalah_s").closest("div").show();
+$("#InsideSalalah").closest("div").show();
+$("#OutsideSalalah_s").closest("div").hide();
+$("#OutsideSalalah").closest("div").hide();
+$("#OutsideSalalah").val("-");
+}
+
+});
+
+$("#OutsideSalalah_s").change(function(){
+$("#SubLocation_s").closest("div").show();
+$("#SubLocation_s").empty();
+$("#SubLocation_s").append($('<option ar="اختار"></option>').val("").html("Select"));
+$("#OutsideSalalah").val($(this).val());
+//alert($(this).val());
+if($(this).val()=="Taqah")
+{
+Enablevalidation("SubLocation");
+//Enablevalidation("InsideSalalah");
+
+$("#SubLocation_s").append($('<option></option>').val("Customer Services").html("Customer Services"));
+$("#SubLocation_s").append($('<option></option>').val("Water").html("Water"));
+
+
+
+}else if($(this).val()=="Thamrait")
+{
+Enablevalidation("SubLocation");
+$("#SubLocation_s").append($('<option></option>').val("Electricity").html("Electricity"));
+$("#SubLocation_s").append($('<option></option>').val("Water").html("Water"));
+}else if($(this).val()=="Mirbat")
+{
+Enablevalidation("SubLocation");
+$("#SubLocation_s").append($('<option></option>').val("Customer Services").html("Customer Services"));
+$("#SubLocation_s").append($('<option></option>').val("Water").html("Water"));
+}else
+{
+$("#SubLocation_s").closest("div").hide();
+hidevalidation("SubLocation");
+$("#SubLocation").val("-");
+
+}
+
+GetAllElementsTextAr("option");
+  GetAllElementsText("option");
+
+});
+
+
+$("#InsideSalalah_s").change(function(){
+
+$("#SubLocation_s").closest("div").show();
+$("#SubLocation_s").empty();
+$("#SubLocation_s").append($('<option ar="اختار"></option>').val("").html("Select"));
+$("#InsideSalalah").val($(this).val());
+//alert($(this).val());
+if($(this).val()=="Customer Service (Tanweer Before)")
+{
+Enablevalidation("SubLocation");
+$("#SubLocation_s").append($('<option></option>').val("Building 1(New)").html("Building 1(New)"));
+$("#SubLocation_s").append($('<option></option>').val("Building 2(Old)").html("Building 2(Old)"));
+ 
+
+}else if($(this).val()=="Stores")
+{
+Enablevalidation("SubLocation");
+$("#SubLocation_s").append($('<option></option>').val("Electricity").html("Electricity"));
+$("#SubLocation_s").append($('<option></option>').val("Water").html("Water"));
+$("#SubLocation_s").append($('<option></option>').val("Wastewater").html("Wastewater"));
+}else
+{
+$("#SubLocation_s").closest("div").hide();
+$("#SubLocation").val("-");
+hidevalidation("SubLocation");
+}
+
+GetAllElementsTextAr("option");
+  GetAllElementsText("option");
+
+});
+
+ 
+ $("#SubLocation_s").change(function(){
+$("#SubLocation").val($(this).val())
+GetAllElementsTextAr("option");
+  GetAllElementsText("option");
+
+
+});
+
+      var URL_ = window.location.href;
+      
+      if (URL_.indexOf("DispForm.aspx") > 0) {
+            
+            $("#SubLocation_s").hide();
+            $("#SubLocation").removeAttr("class");
+            $("#SubLocation").attr("class","form-control insert SubLocation");
+}
+      
+      var Section = getParameterByName("Section", window.location.href);
+      $("#Section").val(Section);
+      
+      if (URL_.indexOf("NewForm.aspx") > 0) {
+            $("#PID").val(getParameterByName("PID", window.location.href));
+      }
+      InitSpan("#vrf-root");
+      SelectInput(".VehicleRequest_s", "#VehicleRequest", "yes", "24/7");
+      $("#DialogProgressBar").dialog({
+            modal: true,
+            autoOpen: false
+      });
+      $("#Popup").dialog({
+            modal: true,
+            resizable: false,
+            height: "600",
+            width: 800,
+            modal: true,
+            autoOpen: false,
+            buttons: {
+                  "Ok": function(event) {
+                        $(this).dialog("close");
+                  }
+            }
+      });
+      // FetchRestApi();
+      
+      $("#SaveRecord_DISC").click(function() {
+            if (URL_.indexOf("DispForm.aspx") > 0) {
+            
+            
+
+                  window.location.href = _spPageContextInfo.webAbsoluteUrl + "/Lists/"+ListName+"/AllItems.aspx";
+            }
+            $("input").blur(function() {
+                  ValiadtionFun(this);
+            });
+            $("select").blur(function() {
+                  ValiadtionFun(this);
+            });
+            var validationCount = 0;
+            $("#SPForm").find('input').each(function() {
+                  ValiadtionFun(this);
+            });
+            $("#SPForm").find('textarea').each(function() {
+                  ValiadtionFun(this);
+            });
+            
+            $("#SPForm").find('input').each(function() {
+                  if ($(this).attr("isRequired") == "yes") {
+                        if ($(this).next("span").html() != "") {
+                              validationCount = validationCount + 1;
+                        }
+                  }
+            });
+            
+            $("#SPForm").find('textarea').each(function() {
+                  if ($(this).attr("isRequired") == "yes") {
+                        if ($(this).next("span").html() != "") {
+                              validationCount = validationCount + 1;
+                        }
+                  }
+            });
+
+
+            if (validationCount == 0) {
+                  itrateItemsCount($("#PID").val(), function(data) {
+                        //if (data != "") {
+                              var obj = [];
+                              // var ListName = "Vehicle_Request";
+                              item = {}
+                              var getElements = document.getElementsByClassName('insert');
+                              var strItem = "";
+                              var Selector = "";
+                              var temp = getElements.length;
+                              for (temp = 0; temp <= getElements.length - 1; temp++) {
+                                    if (getElements[temp].className.split("insert")[1].indexOf("hasDatepicker") == -1) {
+                                          strItem = (getElements[temp].className.split("insert")[1].replace(" hasDatepicker", "")).replace(" ", "");
+                                          item[strItem] = $("." + strItem).val();
+                                    } else {
+                                          strItem = (getElements[temp].className.split("insert")[1].replace(" hasDatepicker", "")).replace(" ", "");
+                                          item[strItem] = MMDDYYYFormate($("." + strItem).val());
+                                    }
+                                    obj.push(item);
+                              }
+                              //  item["PID"]=getParameterByName("PID");
+                              obj.push(item);
+                              if (URL_.indexOf("NewForm.aspx") > 0) {
+                                    createListItem(ListName, obj, _spPageContextInfo.webAbsoluteUrl + "/Lists/"+ListName +"/AllItems.aspx");
+                              } else if (URL_.indexOf("EditForm.aspx") > 0) {
+                                    UpdateListItem(ListName, getParameterByName("ID"), obj, _spPageContextInfo.webAbsoluteUrl + "/Lists/"+ListName +"/AllItems.aspx");
+                              }
+                        //}
+                        
+                        /*else {
+                              alert("please attach Document");
+                        }*/
+                  });
+            }
+      });
+      if (URL_.indexOf("EditForm.aspx") > 0 || URL_.indexOf("DispForm.aspx") > 0) {
+            if (URL_.indexOf("DispForm.aspx") > 0) {
+                  $("#SaveRecord_DISC").html("Cancel");
+                  $('#SPForm').find('input').each(function(i, box) {
+                        $(box).attr('readonly', 'readonly');
+                  });
+                  $('#SPForm').find('select').each(function(i, box) {
+                        $(box).attr('readonly', 'readonly');
+                  });
+                  $('#SPForm').find('textarea').each(function(i, box) {
+                        $(box).attr('readonly', 'readonly');
+                  });
+            }
+            var item = {}
+            var getElements = document.getElementsByClassName('insert');
+            var temp = getElements.length;
+            var temp1 = "";
+            for (temp = 0; temp <= getElements.length - 1; temp++) {
+                  tempSplit = getElements[temp].className.split("insert")[1]; //.replace(" hasDatepicker", "").replace(" ", "");
+                  obj_Fetch.push(tempSplit);
+            }
+            SP.SOD.executeFunc('sp.js', 'SP.ClientContext', getListitem);
+            
+      }
+});
+ setTimeout(function() {
+ $(".img-fluid").removeAttr("style");
+}, 500);
+
+/* ── SP-proof JS enforcement ─────────────────────────────
+   Re-apply critical styles after SP finishes its own JS   */
+function vrfEnforce() {
+  // Force grid container
+  var grid = document.querySelector('#vrf-root .form-grid');
+  if (grid) {
+    grid.style.cssText += ';display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:20px 24px!important;width:100%!important;float:none!important;';
+  }
+  // Force all inputs/selects full width
+  document.querySelectorAll('#vrf-root .form-control').forEach(function(el) {
+    el.style.cssText += ';width:100%!important;max-width:100%!important;box-sizing:border-box!important;float:none!important;';
+  });
+  // Force PID/Section hidden always
+  ['PID','Section'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) {
+      el.type = 'hidden';
+      el.style.cssText = 'display:none!important;visibility:hidden!important;position:absolute!important;';
+      // also hide parent label if any
+      if (el.previousElementSibling && el.previousElementSibling.tagName === 'LABEL') {
+        el.previousElementSibling.style.cssText = 'display:none!important;';
+      }
+    }
+  });
+  // Force hide class elements
+  document.querySelectorAll('#vrf-root .hide').forEach(function(el) {
+    el.style.cssText += ';display:none!important;visibility:hidden!important;height:0!important;overflow:hidden!important;';
+  });
+}
+// Run immediately, after DOM ready, and after a delay to catch SP late renders
+vrfEnforce();
+$(document).ready(function() { vrfEnforce(); });
+setTimeout(vrfEnforce, 300);
+setTimeout(vrfEnforce, 800);
+setTimeout(vrfEnforce, 1500);
+ </script>
+
+</body>
+</html>
