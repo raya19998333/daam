@@ -1,0 +1,237 @@
+<style>
+:root{
+  --primary:#744379;
+  --primary-contrast:#ffffff;
+  --muted:#6b6b6b;
+  --bg:#faf7fb;
+  --card:#ffffff;
+  --danger:#d9534f;
+  --success:#28a745;
+  --radius:8px;
+  --shadow: 0 6px 18px rgba(116,67,121,0.12);
+  --transition: 180ms ease;
+  --max-width:1100px;
+  --container-padding:18px;
+}
+
+/* Base reset */
+*{box-sizing:border-box}
+body{font-family: "Segoe UI", Tahoma, Arial, sans-serif;background:var(--bg);color:#222;margin:0;padding:20px;}
+
+/* Container */
+.lang{max-width:var(--max-width);margin:18px auto;background:linear-gradient(180deg,#fff, #fbf7fb);border-radius:12px;padding:var(--container-padding);box-shadow:var(--shadow);}
+
+/* Header / logo */
+#logo_{max-width:220px;display:block;margin: -70px auto 10px;border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,0.06);}
+
+/* Form layout */
+.form-row{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-start;}
+.form-row .col-md-4{flex:1 1 300px;min-width:240px;}
+label{display:block;font-weight:600;color:var(--muted);margin-bottom:6px;}
+input[type="text"], input[type="file"], .form-control{width:100%;padding:10px 12px;border-radius:8px;border:1px solid #e6dff0;background:transparent;transition:all var(--transition);outline:none;}
+input[type="text"]:focus, input[type="file"]:focus, .form-control:focus{border-color:var(--primary);box-shadow:0 6px 18px rgba(116,67,121,0.08);}
+
+/* File input custom */
+.attachment input[type="file"]{padding:6px;}
+.btn{display:inline-block;padding:10px 16px;border-radius:10px;border:none;background:var(--primary);color:var(--primary-contrast);cursor:pointer;font-weight:700;transition:transform var(--transition), box-shadow var(--transition);}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(116,67,121,0.14);}
+.btn.secondary{background:transparent;color:var(--primary);border:1px solid rgba(116,67,121,0.12);font-weight:600;}
+.btn:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
+
+/* Table */
+.table{width:100%;border-collapse:collapse;background:transparent;margin-top:6px;}
+.table thead th{background:transparent;color:var(--muted);text-align:left;padding:8px 6px;font-weight:700;}
+.table tbody tr{background:var(--card);border-radius:8px;margin-bottom:8px;box-shadow:0 4px 12px rgba(0,0,0,0.03);}
+.table tbody td{padding:10px 8px;border-bottom:1px solid #f3eef6;}
+.table tbody tr:last-child td{border-bottom:none;}
+.fa-trash{color:var(--danger);cursor:pointer;font-size:18px;}
+.file-name{font-weight:600;color:#333;}
+.file-meta{color:var(--muted);font-size:13px;}
+
+/* Dialog progress */
+#DialogProgressBar{display:none;padding:18px;border-radius:10px;background:linear-gradient(180deg,#fff,#fbf7fb);box-shadow:var(--shadow);color:#333;}
+.ui-icon-circle-check{background:var(--primary);color:var(--primary-contrast);padding:8px;border-radius:50%;}
+
+/* Input error */
+.input-error{border-color:#e07aa6 !important;box-shadow:0 6px 18px rgba(224,122,166,0.08);}
+
+/* Responsive */
+@media (max-width:720px){
+  .form-row{flex-direction:column;}
+  #logo_{max-width:160px;margin-top:-40px;}
+}
+
+/* RTL support when .rtl class present */
+.rtl{direction:rtl;}
+.rtl label{text-align:right;}
+.rtl .form-row{gap:12px;}
+.rtl .btn{direction:ltr;}
+</style>
+
+<script>
+/* Helper: read query param */
+function getParameterByName(name, url) {
+  if (!url) url = window.location.href;
+  name = name.replace(/[\\[\\]]/g, "\\$&");
+  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+      results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\\+/g, " "));
+}
+
+/* Apply RTL and logo based on ar param */
+document.addEventListener("DOMContentLoaded", function(){
+  var isAr = getParameterByName("ar") === "y";
+  if(isAr){
+    document.querySelector('.lang').classList.add('rtl');
+    var logo = document.getElementById('logo_');
+    if(logo) logo.src = "/edms/Administration_Facilities/Style Library/ContentEditor/Administration/Images/LogoAr.jpg";
+  } else {
+    var logo = document.getElementById('logo_');
+    if(logo) logo.src = "/edms/Administration_Facilities/Style Library/ContentEditor/Administration/Images/LogoEng.jpg";
+  }
+
+  // Hide edit ribbon if present
+  var edit = document.getElementById("Ribbon.ListForm.Display.Manage.EditItem-Large");
+  if(edit) edit.style.display = "none";
+
+  // Attach file size validation
+  var fileInput = document.getElementById("inputTypeFiles_DISC");
+  if(fileInput){
+    fileInput.addEventListener("change", function () {
+      if (fileInput.files.length > 0) {
+        const fileSize = fileInput.files.item(0).size;
+        const fileMb = fileSize / 1024 ** 2;
+        if (fileMb >= 8) {
+          if(isAr) alert("اختار ملف حجمة اقل من ٨ ميجابيت");
+          else alert("Please select a file less than 8 MB.");
+          fileInput.value = "";
+        }
+      }
+    });
+  }
+
+  // Wire upload button
+  var uploadBtn = document.getElementById("btnUploadFiles_DISC");
+  if(uploadBtn){
+    uploadBtn.addEventListener("click", function(){
+      var name = document.getElementById("FileName_DISC").value.trim();
+      var file = document.getElementById("inputTypeFiles_DISC").value;
+      if(!name){
+        if(isAr) alert("مطلوب إرفاق اسم الملف");
+        else alert("Attachment File Name is Required");
+        return;
+      }
+      if(!file){
+        if(isAr) alert("رجاءا ارفق الملف");
+        else alert("Please attach the file");
+        return;
+      }
+      // Open progress dialog if using jQuery UI
+      if(window.jQuery && jQuery("#DialogProgressBar").dialog){
+        jQuery("#DialogProgressBar").dialog("open");
+      } else {
+        // fallback visual feedback
+        uploadBtn.disabled = true;
+        uploadBtn.textContent = isAr ? "جاري الرفع..." : "Uploading...";
+        setTimeout(function(){ uploadBtn.disabled = false; uploadBtn.textContent = isAr ? "إرفاق الملف" : "Upload File"; }, 1500);
+      }
+      // Call your FileUpload(FolderName_) function here
+      // FileUpload(FolderName_);
+    });
+  }
+});
+
+/* inputFilter plugin preserved */
+(function($) {
+  $.fn.inputFilter = function(callback, errMsg) {
+    return this.on("input keydown keyup mousedown mouseup select contextmenu drop focusout", function(e) {
+      if (callback(this.value)) {
+        if (["keydown","mousedown","focusout"].indexOf(e.type) >= 0){
+          $(this).removeClass("input-error");
+          this.setCustomValidity("");
+        }
+        this.oldValue = this.value;
+        this.oldSelectionStart = this.selectionStart;
+        this.oldSelectionEnd = this.selectionEnd;
+      } else if (this.hasOwnProperty("oldValue")) {
+        $(this).addClass("input-error");
+        this.setCustomValidity(errMsg);
+        this.reportValidity();
+        this.value = this.oldValue;
+        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+      } else {
+        this.value = "";
+      }
+    });
+  };
+}(jQuery));
+
+/* Apply numeric filter to .MobileNumber */
+document.addEventListener("DOMContentLoaded", function(){
+  var isAr = getParameterByName("ar") === "y";
+  if(window.jQuery){
+    $(".MobileNumber").inputFilter(function(value) {
+      return /^\d*$/.test(value) && (value === "" || parseInt(value) <= 99999999);
+    }, isAr ? "غير صالح" : "Invalid");
+  }
+});
+</script>
+
+<!-- HTML body (structure preserved, classes updated) -->
+<div class="lang">
+  <div id="DialogProgressBar" title="">
+    <p ar="جاري الإرفاق">
+      <span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 12px 0 0;"></span>
+      <span id="progressText">Uploading...</span>
+    </p>
+  </div>
+
+  <div style="text-align:center">
+    <img id="logo_" class="img-fluid" src="" alt="logo" />
+  </div>
+
+  <div class="form-row" style="margin-top:8px">
+    <div class="col-md-4">
+      <label ar="اسم الملف المرفق" for="FileName_DISC">Attachment File Name</label>
+      <input ar="اسم الملف المرفق" type="text" class="form-control" id="FileName_DISC" placeholder="Attachment File Name" />
+    </div>
+
+    <div class="col-md-4 attachment">
+      <label ar="مرفق" for="inputTypeFiles_DISC">Attachment</label>
+      <input type="file" id="inputTypeFiles_DISC" class="form-control" accept=".docx,.doc,.pdf,.jpg,.jpeg,.png,.xls,.xlsx" />
+    </div>
+
+    <div class="col-md-4" style="display:flex;align-items:flex-end;justify-content:flex-start">
+      <div>
+        <button ar="إرفق الملف" type="button" id="btnUploadFiles_DISC" class="btn">Upload File</button>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:18px">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col" ar="الملفات المرفقة">Attached Files</th>
+          <th scope="col" ar="حذف">Delete</th>
+        </tr>
+      </thead>
+      <tbody id="AttachedFilesDiv">
+        <!-- Example row template -->
+        <!--
+        <tr>
+          <td>
+            <div class="file-name">Document Name.pdf</div>
+            <div class="file-meta">Uploaded by RAYA • 2 MB</div>
+          </td>
+          <td style="width:80px;text-align:center">
+            <span class="fa-trash" title="Delete" onclick="confirmDelete(123)">&times;</span>
+          </td>
+        </tr>
+        -->
+      </tbody>
+    </table>
+  </div>
+</div>
