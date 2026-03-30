@@ -1,0 +1,319 @@
+<style>
+.fa-trash
+{
+	cursor:pointer;
+}
+.ms-rtestate-field h4, h4.ms-rteElement-H4
+{
+	color:black;
+}
+.h6
+{
+	color:gray
+}
+</style>
+
+ 
+
+<script>
+
+ function hideEdit() {  
+        var edit = document.getElementById("Ribbon.ListForm.Display.Manage.EditItem-Large");
+        edit.style.display = "none";
+    }       
+    _spBodyOnLoadFunctionNames.push("hideEdit");
+    
+$( document ).ready(function() {
+ 
+ 
+/*$(".MobileNumber").attr("type","number");
+$(".MobileNumber").attr("oninput","javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"); 
+$(".MobileNumber").attr("maxlength","8"); 
+ myvar = '<div> <center> <img id="logo_" style="margin-top:-85px" class="img-fluid" logo src="/edms/Administration_Facilities/Style Library/ContentEditor/Administration/Images/LogoEng.jpg"/></center> </div><br/><br/>';
+ }
+$("#btnSearch").closest("div").remove();*/
+
+$(".search").hide();
+var myvar="";if(getParameterByName("ar")=="y")
+
+{ 
+
+myvar = '<div> <center> <img id="logo_" style="margin-top:-85px" class="img-fluid" logo src="/edms/Administration_Facilities/Style Library/ContentEditor/Administration/Images/LogoAr.jpg"/></center> </div><br/><br/>';
+ }else
+ {
+ $("#SPForm").closest(".lang").prepend(myvar );
+
+});
+
+(function($) {
+  $.fn.inputFilter = function(callback, errMsg) {
+    return this.on("input keydown keyup mousedown mouseup select contextmenu drop focusout", function(e) {
+      if (callback(this.value)) {
+        // Accepted value
+        if (["keydown","mousedown","focusout"].indexOf(e.type) >= 0){
+          $(this).removeClass("input-error");
+          this.setCustomValidity("");
+        }
+        this.oldValue = this.value;
+        this.oldSelectionStart = this.selectionStart;
+        this.oldSelectionEnd = this.selectionEnd;
+      } else if (this.hasOwnProperty("oldValue")) {
+        // Rejected value - restore the previous one
+        $(this).addClass("input-error");
+        this.setCustomValidity(errMsg);
+        this.reportValidity();
+        this.value = this.oldValue;
+        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+      } else {
+        // Rejected value - nothing to restore
+        this.value = "";
+      }
+    });
+  };
+}(jQuery));
+
+if(getParameterByName("ar")=="y")
+{ 
+  
+  $(".MobileNumber").inputFilter(function(value) {
+  return /^\d*$/.test(value) && (value === "" || parseInt(value) <= 99999999); }, "غير صالح");
+
+}
+else
+{
+  
+    $(".MobileNumber").inputFilter(function(value) {
+  return /^\d*$/.test(value) && (value === "" || parseInt(value) <= 99999999); }, "Invalid");
+
+}
+
+
+/*$("#intTextBox").inputFilter(function(value) {
+  return /^-?\d*$/.test(value); }, "Must be an integer");
+$("#uintTextBox").inputFilter(function(value) {alert
+
+  return /^\d*$/.test(value); }, "Must be an unsigned integer");
+$("#intLimitTextBox").inputFilter(function(value) {
+  return /^\d*$/.test(value) && (value === "" || parseInt(value) <= 500); }, "Must be between 0 and 500");
+$("#floatTextBox").inputFilter(function(value) {
+  return /^-?\d*[.,]?\d*$/.test(value); }, "Must be a floating (real) number");
+$("#currencyTextBox").inputFilter(function(value) {
+  return /^-?\d*[.,]?\d{0,2}$/.test(value); }, "Must be a currency value");
+$("#latinTextBox").inputFilter(function(value) {
+  return /^[a-z]*$/i.test(value); }, "Must use alphabetic latin characters");
+$("#hexTextBox").inputFilter(function(value) {
+  return /^[0-9a-f]*$/i.test(value); }, "Must use hexadecimal characters");*/
+
+</script>
+
+<div style="display:none" id="browser" > <h5 style="color:#9C1D20"> Old browser will not support for DAAM Portal. Please use Latest Browser like Chrome or Lastest EDGE </h5> </div>
+
+<div class="lang">
+<div id="DialogProgressBar" title="">
+  <p ar="جاري الإرفاق">
+    <span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
+    Uploading...
+  </p>
+  </div>
+  
+<div class="form-row"> 
+<div class="col-md-4">
+  <label ar="اسم الملف المرفق" for="validationServer01">Attachment File Name</label>
+ <input ar="اسم الملف المرفق" type="text" class="form-control" id="FileName_DISC"    placeholder="Attachment File Name" /></div> 
+<div class="col-md-4 attachment">
+<label ar="مرفق"  for="validationServer01">Attachment</label>
+
+ <input type="File" id="inputTypeFiles_DISC"  class="form-control" accept=".docx,.doc,.pdf,.jpg,.jpeg,.png,.xls,.xlsx" />        
+       
+</div>
+ <div class="col-md-4">
+  <br/><label for="validationServer01"> <br><br><br><br></label> 
+ <button ar="إرفق الملف" type="button" id="btnUploadFiles_DISC" class="btn btn-primary" >Upload File</button></div>
+ <div class="col-md-4">
+ 
+ <table class="table">
+
+  <thead>
+    <tr>
+      <th scope="col" ar="الملفات المرفقة" >Attached Files </th>
+       <th scope="col" ar="حذف" >Delete </th>
+
+      </tr></thead>
+        <tbody id="AttachedFilesDiv">
+    
+      </tbody> 
+ </table> 
+
+ </div>
+ </div>
+ </div>
+  <script>
+ /*alert(navigator.userAgent);
+    if(navigator.userAgent.indexOf("MSIE 10.0")>0)
+ {
+ alert(0);
+ }*/
+
+  
+  inputTypeFiles_DISC.addEventListener("change", function () {
+  if (inputTypeFiles_DISC.files.length > 0) {
+    const fileSize = inputTypeFiles_DISC.files.item(0).size;
+    const fileMb = fileSize / 1024 ** 2;
+    if (fileMb >= 8) {
+    
+       if(getParameterByName("ar")=="y")  
+		{ 
+		    alert("اختار ملف حجمة اقل من ٨ ميجابيت");
+		}else
+		{
+	      alert("Please select a file less than 8 MB.");
+		}
+
+
+
+
+    //  fileResult.innerHTML = "Please select a file less than 2MB.";
+     // fileSubmit.disabled = true;
+    } else {
+      //  alert("Success, your file is " + fileMb.toFixed(1) + "MB.");
+     // fileResult.innerHTML = "Success, your file is " + fileMb.toFixed(1) + "MB.";
+     // fileSubmit.disabled = true;
+    }
+  }
+});
+
+
+    var PID="";
+   $( document ).ready(function() {
+   
+      $(".browser").hide();
+      
+
+
+   
+   if(getParameterByName("ar")=="y")  
+		{ 
+		// alert("مطلوب إرفاق اسم الملف");
+		}else
+		{
+	   $("#btnUploadFiles_DISC").attr("style","margin-top:-48px !important");
+		}
+
+   
+   var URL = window.location.href;
+   var FolderName_= URL.split("Lists/")[1].split("/")[0];
+   
+   
+   // alert(0);
+	if(URL.indexOf("DispForm.aspx")>0)
+	{
+	
+	$("#FileName_DISC").closest("div").hide();
+		$("#btnUploadFiles_DISC").closest("div").hide();
+			$(".attachment").hide();
+	
+	
+	}
+  
+   
+   if(URL.indexOf("NewForm.aspx")>0)
+	 {
+	 PID = getParameterByName("PID");
+	 itrateItems(getParameterByName("PID"));
+	} else  if(URL.indexOf("EditForm.aspx")>0 || URL.indexOf("DispForm.aspx")>0)
+	 {
+	 setTimeout(function() {
+	  PID = $("#PID").val();
+	  itrateItems($("#PID").val());	   
+	 }, 1000);
+	 
+	}
+   
+  
+   
+    
+    
+    
+    
+    $( "#dialog-confirm" ).dialog({
+	 modal: true ,
+      resizable: false,
+      height: "auto",
+      width: 400,
+      modal: true,
+       autoOpen: false,
+      buttons: {
+        "Delete": function(event) {
+        // event.preventDefault();
+         // $( this ).dialog( "close" );
+         //alert($("#DeleteDocID").val());
+         DeleteCustomList("FleetDoc",$("#DeleteDocID").val());
+        // alert($("#DeleteDocID").val());
+        },
+        Cancel: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    }); 
+
+   $("#btnUploadFiles_DISC").click(function(){ 
+   
+   
+ /*  if($("#FileName_DISC").attr("mandatory")=="yes"))
+   {
+   	 if($("#FileName_DISC").val()=="")
+  	 {
+  	  alert("Attachment File Name is Required");
+  	 }
+   }*/
+   
+   
+ 
+   if($("#FileName_DISC").val()!="")
+   { 
+	   if($("#inputTypeFiles_DISC").val()!="")
+	   {
+	    $( "#DialogProgressBar" ).dialog( "open" );
+	 	FileUpload(FolderName_);
+	   }else
+	   {
+	   if(getParameterByName("ar")=="y")  
+		{ 
+		 alert("رجاءا ارفق الملف");
+		}else
+		{
+		 alert("Please attach the file");
+		}
+	  
+	   } 
+   }else
+   {
+   if(getParameterByName("ar")=="y")  
+		{ 
+		 alert("مطلوب إرفاق اسم الملف");
+		}else
+		{
+	   alert("Attachment File Name is Required");
+		}
+
+
+   }
+ 
+});
+
+
+   });
+   
+   
+    function MetaData(file) {
+	updateObject = {
+		__metadata: {
+			type: file.ListItemAllFields.__metadata.type
+		},
+		Title: $("#FileName_DISC").val(),
+		PID: $("#PID").val() //getParameterByName("PID")
+	};
+	return updateObject;
+}
+
+  </script>
