@@ -1,826 +1,547 @@
 <style>
+    /* ==================== GOOGLE FONTS ==================== */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
     /* ==================== ROOT VARIABLES ==================== */
     :root {
-        --primary-purple: #744379;
-        --primary-dark: #5a3560;
-        --primary-light: #8b5fa3;
-        --white: #ffffff;
-        --text-dark: #2c3e50;
-        --text-gray: #7f8c8d;
-        --border-light: #e8e8f0;
-        --bg-hover: #f8f7fb;
-        --success-color: #27ae60;
-        --danger-color: #e74c3c;
-        --warning-color: #f39c12;
-        --info-color: #3498db;
-        --shadow-sm: 0 2px 8px rgba(116, 67, 121, 0.12);
-        --shadow-md: 0 4px 12px rgba(116, 67, 121, 0.15);
-        --shadow-lg: 0 8px 20px rgba(116, 67, 121, 0.2);
-        --shadow-xl: 0 12px 28px rgba(116, 67, 121, 0.25);
+        --primary-purple: #744379 !important;
+        --primary-dark: #5a3560 !important;
+        --primary-light: #a878b8 !important;
+        --primary-pastel: #d4b5dd !important;
+        --white: #ffffff !important;
+        --text-dark: #1a1a2e !important;
+        --text-gray: #6b7280 !important;
+        --shadow-lg: 0 10px 25px -5px rgba(116, 67, 121, 0.2) !important;
     }
 
     * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
     }
 
-    /* ==================== SHAREPOINT CSS RESET & OVERRIDE ==================== */
-    /* Override SharePoint default styles without affecting original code */
-    .ms-core-form-textbox,
-    .ms-input,
-    .ms-inputBox,
-    .ms-TextField,
-    .ms-rte-field-content,
-    .ms-rtestate-field {
-        all: revert !important;
-    }
-
-    /* Force !important on critical elements */
-    body {
-        background: linear-gradient(135deg, #744379 0%, #5a3560 100%) !important;
-    }
-
-    .form-control {
-        background-color: var(--white) !important;
-        color: var(--text-dark) !important;
-        border: 2px solid var(--white) !important;
-    }
-
-    .btn-primary {
-        background: var(--primary-purple) !important;
-        color: var(--white) !important;
-        border-color: var(--primary-purple) !important;
-    }
-
-    .card {
-        background: var(--white) !important;
-        box-shadow: var(--shadow-lg) !important;
-    }
-
-    .table thead {
-        background: linear-gradient(135deg, #744379 0%, #5a3560 100%) !important;
-        color: var(--white) !important;
-    }
-
-    /* ==================== KEYFRAME ANIMATIONS ==================== */
-    @keyframes slideDown {
-        from {
-            opacity: 0;
-            transform: translateY(-30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    @keyframes slideUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    @keyframes slideInRight {
-        from {
-            opacity: 0;
-            transform: translateX(50px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-
-    @keyframes slideInLeft {
-        from {
-            opacity: 0;
-            transform: translateX(-50px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-
+    /* ==================== SMOOTH ANIMATIONS ==================== */
     @keyframes fadeIn {
         from {
-            opacity: 0;
+            opacity: 0 !important;
         }
         to {
-            opacity: 1;
-        }
-    }
-
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    @keyframes scaleIn {
-        from {
-            opacity: 0;
-            transform: scale(0.95);
-        }
-        to {
-            opacity: 1;
-            transform: scale(1);
-        }
-    }
-
-    @keyframes bounceIn {
-        0% {
-            opacity: 0;
-            transform: scale(0.3);
-        }
-        50% {
-            opacity: 1;
-            transform: scale(1.05);
-        }
-        100% {
-            opacity: 1;
-            transform: scale(1);
-        }
-    }
-
-    @keyframes pulse {
-        0%, 100% {
-            transform: scale(1);
-        }
-        50% {
-            transform: scale(1.05);
-        }
-    }
-
-    @keyframes floatIcon {
-        0%, 100% {
-            transform: translateY(0px);
-        }
-        50% {
-            transform: translateY(-12px);
-        }
-    }
-
-    @keyframes rotate360 {
-        from {
-            transform: rotate(0deg);
-        }
-        to {
-            transform: rotate(360deg);
-        }
-    }
-
-    @keyframes glow {
-        0%, 100% {
-            box-shadow: 0 0 0 0 rgba(116, 67, 121, 0.4);
-        }
-        50% {
-            box-shadow: 0 0 0 12px rgba(116, 67, 121, 0);
-        }
-    }
-
-    @keyframes ripple {
-        0% {
-            transform: scale(0);
-            opacity: 1;
-        }
-        100% {
-            transform: scale(4);
-            opacity: 0;
-        }
-    }
-
-    @keyframes shake {
-        0%, 100% {
-            transform: translateX(0);
-        }
-        25% {
-            transform: translateX(-5px);
-        }
-        75% {
-            transform: translateX(5px);
+            opacity: 1 !important;
         }
     }
 
     @keyframes slideInDown {
         from {
-            opacity: 0;
-            transform: translateY(-20px);
+            opacity: 0 !important;
+            transform: translateY(-20px) !important;
         }
         to {
-            opacity: 1;
-            transform: translateY(0);
+            opacity: 1 !important;
+            transform: translateY(0) !important;
         }
+    }
+
+    @keyframes slideInUp {
+        from {
+            opacity: 0 !important;
+            transform: translateY(20px) !important;
+        }
+        to {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+    }
+
+    @keyframes scaleIn {
+        from {
+            opacity: 0 !important;
+            transform: scale(0.95) !important;
+        }
+        to {
+            opacity: 1 !important;
+            transform: scale(1) !important;
+        }
+    }
+
+    @keyframes floatSoft {
+        0%, 100% {
+            transform: translateY(0px) !important;
+        }
+        50% {
+            transform: translateY(-8px) !important;
+        }
+    }
+
+    /* ==================== SHAREPOINT CSS RESET ==================== */
+    .ms-core-form-textbox,
+    .ms-input,
+    .ms-inputBox,
+    .ms-TextField {
+        all: revert !important;
     }
 
     /* ==================== MAIN CONTAINER ==================== */
     .lang {
-        max-width: 1100px;
-        margin: 0 auto;
-        position: relative;
-        z-index: 1;
+        max-width: 1200px !important;
+        margin: 0 auto !important;
+        position: relative !important;
+        z-index: 1 !important;
+        padding: 40px 20px !important;
+        font-family: 'Poppins', 'Inter', sans-serif !important;
     }
 
     /* ==================== HEADER SECTION ==================== */
     .page-header {
-        text-align: center;
-        color: var(--white);
-        margin-bottom: 40px;
-        animation: slideDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        text-align: center !important;
+        color: var(--white) !important;
+        margin-bottom: 50px !important;
+        animation: fadeIn 0.6s ease-out !important;
     }
 
     .page-header h1 {
-        font-size: 2.5rem;
-        font-weight: 700;
-        margin-bottom: 10px;
-        letter-spacing: -0.5px;
-        animation: slideDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s backwards;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 15px;
+        font-size: 3rem !important;
+        font-weight: 800 !important;
+        margin-bottom: 15px !important;
+        animation: slideInDown 0.7s ease-out !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 16px !important;
     }
 
     .page-header h1 i {
-        animation: floatIcon 3s ease-in-out infinite;
+        font-size: 3rem !important;
+        animation: floatSoft 3s ease-in-out infinite !important;
     }
 
     .page-header p {
-        font-size: 1.1rem;
-        opacity: 0.95;
-        font-weight: 300;
-        animation: slideDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s backwards;
-    }
-
-    /* ==================== FORM ROW & COLUMNS ==================== */
-    .form-row {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 20px;
-        margin-bottom: 30px;
-    }
-
-    .col-md-4 {
-        padding: 0;
-        animation: slideUp 0.6s ease-out backwards;
-    }
-
-    .col-md-4:nth-child(1) {
-        animation-delay: 0.1s;
-    }
-
-    .col-md-4:nth-child(2) {
-        animation-delay: 0.2s;
-    }
-
-    .col-md-4:nth-child(3) {
-        animation-delay: 0.3s;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-    }
-
-    .col-md-4:nth-child(4) {
-        grid-column: 1 / -1;
-        width: 100%;
-        animation-delay: 0.4s;
-    }
-
-    /* ==================== LABELS ==================== */
-    label {
-        display: block;
-        margin-bottom: 10px;
-        font-weight: 600;
-        color: var(--white);
-        font-size: 0.95rem;
-        text-transform: uppercase;
-        letter-spacing: 0.8px;
-        transition: all 0.3s ease;
-    }
-
-    label i {
-        margin-right: 8px;
-        opacity: 0.9;
-        animation: floatIcon 3s ease-in-out infinite;
-        display: inline-block;
-    }
-
-    label:hover {
-        opacity: 0.95;
-        transform: translateX(5px);
-        text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-    }
-
-    /* ==================== FORM CONTROL WRAPPER ==================== */
-    .form-control-wrapper {
-        position: relative;
-    }
-
-    /* ==================== FORM CONTROLS ==================== */
-    .form-control {
-        width: 100%;
-        padding: 13px 16px;
-        border: 2px solid var(--white);
-        border-radius: 10px;
-        font-size: 0.95rem;
-        font-family: inherit;
-        background-color: var(--white);
-        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        box-shadow: var(--shadow-sm);
-        color: var(--text-dark);
-        position: relative;
-    }
-
-    .form-control::placeholder {
-        color: var(--text-gray);
-        transition: color 0.3s ease;
-    }
-
-    .form-control:focus {
-        outline: none;
-        border-color: var(--white);
-        background-color: var(--bg-hover);
-        box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2), var(--shadow-md);
-        transform: translateY(-4px);
-    }
-
-    .form-control:hover {
-        border-color: var(--white);
-        box-shadow: var(--shadow-md);
-        transform: translateY(-2px);
-    }
-
-    .form-control.input-error {
-        border-color: var(--danger-color);
-        background-color: rgba(231, 76, 60, 0.08);
-        animation: shake 0.4s ease-in-out;
-    }
-
-    /* ==================== FILE INPUT STYLING ==================== */
-    input[type="file"].form-control {
-        cursor: pointer;
-        padding: 10px 14px;
-    }
-
-    input[type="file"].form-control::file-selector-button {
-        background: var(--primary-purple);
-        color: var(--white);
-        border: none;
-        padding: 8px 16px;
-        border-radius: 6px;
-        cursor: pointer;
-        font-weight: 600;
-        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        margin-right: 12px;
-    }
-
-    input[type="file"].form-control::file-selector-button:hover {
-        background: var(--primary-dark);
-        transform: translateY(-3px);
-        box-shadow: var(--shadow-md);
-    }
-
-    input[type="file"].form-control::file-selector-button:active {
-        transform: translateY(-1px);
-    }
-
-    /* ==================== BUTTONS ==================== */
-    .btn {
-        padding: 13px 28px;
-        border: none;
-        border-radius: 10px;
-        font-size: 0.95rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        text-transform: uppercase;
-        letter-spacing: 0.8px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        box-shadow: var(--shadow-md);
-        width: 100%;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .btn::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 0;
-        height: 0;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.3);
-        transform: translate(-50%, -50%);
-    }
-
-    .btn:active::before {
-        animation: ripple 0.6s ease-out;
-    }
-
-    .btn:hover:not(:disabled) {
-        transform: translateY(-4px);
-        box-shadow: var(--shadow-lg);
-    }
-
-    .btn:active:not(:disabled) {
-        transform: translateY(-2px);
-    }
-
-    .btn-primary {
-        background: var(--primary-purple);
-        color: var(--white);
-        border: 2px solid var(--primary-purple);
-    }
-
-    /* SHAREPOINT FIX: Force button colors */
-    .btn.btn-primary,
-    .btn.btn-primary:hover,
-    .btn.btn-primary:active,
-    .btn.btn-primary:focus {
-        background: var(--primary-purple) !important;
-        color: var(--white) !important;
-        border: 2px solid var(--primary-purple) !important;
-    }
-
-    .btn.btn-secondary,
-    .btn.btn-secondary:hover,
-    .btn.btn-secondary:active,
-    .btn.btn-secondary:focus {
-        background: var(--white) !important;
-        color: var(--primary-purple) !important;
-        border: 2px solid var(--white) !important;
-    }
-
-    .btn:hover:not(:disabled) {
-        transform: translateY(-4px);
-        box-shadow: var(--shadow-lg);
-    }
-
-    .btn:active:not(:disabled) {
-        transform: translateY(-2px);
-    }
-
-    .btn-primary {
-        background: var(--primary-purple);
-        color: var(--white);
-        border: 2px solid var(--primary-purple);
-    }
-
-    .btn-primary:hover:not(:disabled) {
-        background: var(--primary-dark);
-        border-color: var(--primary-dark);
-        color: var(--white);
-    }
-
-    .btn-primary i {
-        transition: transform 0.3s ease;
-    }
-
-    .btn-primary:hover i {
-        transform: translateY(-3px) scale(1.2);
-    }
-
-    .btn-primary:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-        transform: none;
-    }
-
-    .btn-secondary {
-        background: var(--white);
-        color: var(--primary-purple);
-        border: 2px solid var(--white);
-        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .btn-secondary:hover:not(:disabled) {
-        background: var(--bg-hover);
-        border-color: var(--white);
-        transform: translateY(-4px);
+        font-size: 1.1rem !important;
+        font-weight: 300 !important;
+        animation: fadeIn 0.8s ease-out 0.3s backwards !important;
+        letter-spacing: 0.5px !important;
     }
 
     /* ==================== CARD STYLING ==================== */
     .card {
-        background: var(--white);
-        border-radius: 12px;
-        box-shadow: var(--shadow-lg);
-        overflow: hidden;
-        animation: fadeInUp 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+        background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-dark) 100%) !important;
+        border-radius: 16px !important;
+        box-shadow: var(--shadow-lg) !important;
+        overflow: hidden !important;
+        animation: scaleIn 0.6s ease-out !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
     }
 
     .card-section {
-        padding: 30px;
-        animation: fadeIn 0.8s ease-out 0.3s backwards;
+        padding: 40px !important;
+        animation: fadeIn 0.7s ease-out 0.2s backwards !important;
+    }
+
+    .card-section::before {
+        content: '' !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        height: 3px !important;
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0.3), transparent) !important;
     }
 
     .card-section-title {
-        font-size: 1.2rem;
-        font-weight: 700;
-        color: var(--primary-purple);
-        margin-bottom: 25px;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        border-bottom: 2px solid var(--border-light);
-        padding-bottom: 15px;
-        animation: slideInLeft 0.6s ease-out;
+        font-size: 1.3rem !important;
+        font-weight: 800 !important;
+        color: var(--white) !important;
+        margin-bottom: 30px !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 12px !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+        padding-bottom: 15px !important;
+        animation: slideInDown 0.6s ease-out !important;
     }
 
     .card-section-title i {
-        font-size: 1.4rem;
-        animation: floatIcon 3s ease-in-out infinite;
+        font-size: 1.5rem !important;
+        animation: floatSoft 3s ease-in-out infinite !important;
     }
 
-    /* ==================== FORM GROUP ==================== */
+    /* ==================== FORM STYLING ==================== */
     .form-group {
-        margin-bottom: 22px;
-        animation: fadeInUp 0.6s ease-out backwards;
+        margin-bottom: 24px !important;
+        animation: slideInUp 0.6s ease-out backwards !important;
     }
 
     .form-group:nth-child(1) {
-        animation-delay: 0s;
+        animation-delay: 0.1s !important;
     }
 
     .form-group:nth-child(2) {
-        animation-delay: 0.1s;
+        animation-delay: 0.2s !important;
     }
 
     .form-group:nth-child(3) {
-        animation-delay: 0.2s;
+        animation-delay: 0.3s !important;
     }
 
-    .form-group:last-child {
-        margin-bottom: 0;
+    label {
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        margin-bottom: 10px !important;
+        font-weight: 600 !important;
+        color: var(--white) !important;
+        font-size: 0.9rem !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.8px !important;
+        transition: color 0.3s ease !important;
+    }
+
+    label i {
+        font-size: 1rem !important;
+        animation: floatSoft 3s ease-in-out infinite !important;
+    }
+
+    label:hover {
+        color: rgba(255, 255, 255, 0.9) !important;
+    }
+
+    /* ==================== FORM CONTROLS ==================== */
+    .form-control {
+        width: 100% !important;
+        padding: 13px 16px !important;
+        border: 2px solid var(--white) !important;
+        border-radius: 10px !important;
+        font-size: 0.95rem !important;
+        font-family: 'Inter', sans-serif !important;
+        background-color: var(--white) !important;
+        transition: all 0.4s ease !important;
+        box-shadow: 0 2px 8px rgba(116, 67, 121, 0.1) !important;
+        color: var(--text-dark) !important;
+    }
+
+    .form-control::placeholder {
+        color: #d0d0d0 !important;
+    }
+
+    .form-control:focus {
+        outline: none !important;
+        border-color: var(--primary-light) !important;
+        box-shadow: 0 0 0 3px rgba(168, 120, 184, 0.1), 0 4px 12px rgba(116, 67, 121, 0.15) !important;
+        transform: translateY(-2px) !important;
+    }
+
+    .form-control:hover {
+        border-color: var(--primary-light) !important;
+        box-shadow: 0 4px 12px rgba(116, 67, 121, 0.12) !important;
+    }
+
+    /* ==================== FILE INPUT ==================== */
+    input[type="file"].form-control::file-selector-button {
+        background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-pastel) 100%) !important;
+        color: var(--text-dark) !important;
+        border: none !important;
+        padding: 8px 16px !important;
+        border-radius: 8px !important;
+        cursor: pointer !important;
+        font-weight: 600 !important;
+        transition: all 0.3s ease !important;
+        margin-right: 10px !important;
+        font-size: 0.85rem !important;
+        text-transform: uppercase !important;
+    }
+
+    input[type="file"].form-control::file-selector-button:hover {
+        background: linear-gradient(135deg, var(--primary-pastel) 0%, #c9a8d8 100%) !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 4px 12px rgba(116, 67, 121, 0.15) !important;
+    }
+
+    /* ==================== BUTTONS ==================== */
+    .btn {
+        padding: 13px 28px !important;
+        border: none !important;
+        border-radius: 10px !important;
+        font-size: 0.95rem !important;
+        font-weight: 700 !important;
+        cursor: pointer !important;
+        transition: all 0.3s ease !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.8px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 8px !important;
+        width: 100% !important;
+        font-family: 'Poppins', sans-serif !important;
+        animation: slideInUp 0.6s ease-out backwards !important;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, var(--primary-pastel) 0%, var(--primary-light) 100%) !important;
+        color: var(--text-dark) !important;
+        box-shadow: 0 4px 12px rgba(116, 67, 121, 0.15) !important;
+    }
+
+    .btn-primary:hover {
+        background: linear-gradient(135deg, var(--primary-light) 0%, #b891c1 100%) !important;
+        transform: translateY(-3px) !important;
+        box-shadow: 0 8px 20px rgba(116, 67, 121, 0.2) !important;
+    }
+
+    .btn-primary:active {
+        transform: translateY(-1px) !important;
+    }
+
+    .btn-primary i {
+        transition: transform 0.3s ease !important;
+        font-size: 1rem !important;
+    }
+
+    .btn-primary:hover i {
+        transform: translateY(-2px) !important;
+    }
+
+    .btn-secondary {
+        background: linear-gradient(135deg, var(--primary-pastel) 0%, var(--primary-light) 100%) !important;
+        color: var(--text-dark) !important;
+        box-shadow: 0 4px 12px rgba(116, 67, 121, 0.12) !important;
+    }
+
+    .btn-secondary:hover {
+        background: linear-gradient(135deg, var(--primary-light) 0%, #b891c1 100%) !important;
+        transform: translateY(-3px) !important;
+        box-shadow: 0 8px 20px rgba(116, 67, 121, 0.18) !important;
     }
 
     /* ==================== TABLE STYLING ==================== */
     .table {
-        width: 100%;
-        border-collapse: separate;
-        border-spacing: 0;
-        margin: 0;
-        font-size: 0.95rem;
-        background: var(--white);
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: inset 0 1px 3px rgba(116, 67, 121, 0.05);
-        animation: slideUp 0.6s ease-out;
+        width: 100% !important;
+        border-collapse: separate !important;
+        border-spacing: 0 !important;
+        font-size: 0.95rem !important;
+        background: var(--white) !important;
+        border-radius: 10px !important;
+        overflow: hidden !important;
+        box-shadow: 0 2px 8px rgba(116, 67, 121, 0.08) !important;
+        animation: slideInUp 0.6s ease-out !important;
     }
 
     .table thead {
-        background: linear-gradient(135deg, #744379 0%, #5a3560 100%);
-        color: var(--white);
+        background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-dark) 100%) !important;
+        color: var(--white) !important;
     }
 
     .table th {
-        padding: 16px;
-        font-weight: 700;
-        text-align: left;
-        text-transform: uppercase;
-        letter-spacing: 0.8px;
-        font-size: 0.85rem;
-        border-bottom: 2px solid var(--border-light);
-        animation: slideInDown 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+        padding: 16px !important;
+        font-weight: 700 !important;
+        text-align: left !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.8px !important;
+        font-size: 0.8rem !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+        animation: slideInDown 0.6s ease-out backwards !important;
     }
 
     .table th:nth-child(1) {
-        animation-delay: 0.1s;
+        animation-delay: 0.1s !important;
     }
 
     .table th:nth-child(2) {
-        animation-delay: 0.2s;
+        animation-delay: 0.15s !important;
     }
 
     .table th:nth-child(3) {
-        animation-delay: 0.3s;
+        animation-delay: 0.2s !important;
     }
 
     .table th:nth-child(4) {
-        animation-delay: 0.4s;
+        animation-delay: 0.25s !important;
     }
 
     .table th i {
-        margin-right: 8px;
-        opacity: 0.9;
-        animation: rotate360 4s linear infinite;
+        margin-right: 6px !important;
+        opacity: 0.9 !important;
     }
 
     .table td {
-        padding: 14px 16px;
-        border-bottom: 1px solid var(--border-light);
-        transition: all 0.3s ease;
-        color: var(--text-dark);
+        padding: 14px 16px !important;
+        border-bottom: 1px solid #f0f0f0 !important;
+        transition: background-color 0.3s ease !important;
+        color: var(--text-dark) !important;
     }
 
     .table tbody tr {
-        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        animation: slideInRight 0.5s ease-out backwards;
+        animation: slideInUp 0.5s ease-out backwards !important;
     }
 
     .table tbody tr:nth-child(1) {
-        animation-delay: 0s;
+        animation-delay: 0s !important;
     }
 
     .table tbody tr:nth-child(2) {
-        animation-delay: 0.1s;
+        animation-delay: 0.05s !important;
     }
 
     .table tbody tr:nth-child(3) {
-        animation-delay: 0.2s;
+        animation-delay: 0.1s !important;
     }
 
     .table tbody tr:hover {
-        background-color: var(--bg-hover);
-        box-shadow: inset 0 0 0 2px rgba(116, 67, 121, 0.1);
-        transform: scale(1.01);
+        background-color: #f9f9fb !important;
     }
 
     .table tbody tr:last-child td {
-        border-bottom: none;
+        border-bottom: none !important;
     }
 
     /* ==================== TABLE CONTENT ==================== */
     .file-item {
-        display: flex;
-        align-items: center;
-        gap: 12px;
+        display: flex !important;
+        align-items: center !important;
+        gap: 10px !important;
     }
 
     .file-item i {
-        font-size: 1.3rem;
-        color: var(--primary-purple);
-        flex-shrink: 0;
-        animation: pulse 2s ease-in-out infinite;
+        font-size: 1.2rem !important;
+        color: var(--primary-purple) !important;
+        flex-shrink: 0 !important;
     }
 
     .file-name {
-        word-break: break-all;
-        font-weight: 500;
-        transition: color 0.3s ease;
+        word-break: break-all !important;
+        font-weight: 500 !important;
+        transition: color 0.3s ease !important;
     }
 
     .table tbody tr:hover .file-name {
-        color: var(--primary-purple);
+        color: var(--primary-purple) !important;
     }
 
     .delete-btn {
-        background: none;
-        border: none;
-        color: var(--danger-color);
-        cursor: pointer;
-        font-size: 1.2rem;
-        padding: 6px 10px;
-        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        border-radius: 6px;
-        display: inline-flex;
-        align-items: center;
-        position: relative;
+        background: none !important;
+        border: none !important;
+        color: #ef4444 !important;
+        cursor: pointer !important;
+        font-size: 1.1rem !important;
+        padding: 6px 10px !important;
+        transition: all 0.3s ease !important;
+        border-radius: 6px !important;
+        display: inline-flex !important;
+        align-items: center !important;
     }
 
     .delete-btn:hover {
-        background: rgba(231, 76, 60, 0.15);
-        transform: scale(1.2) rotate(-10deg);
-        animation: pulse 0.6s ease-out;
+        background: rgba(239, 68, 68, 0.1) !important;
+        transform: scale(1.15) !important;
     }
 
     /* ==================== EMPTY STATE ==================== */
     .empty-state {
-        text-align: center;
-        padding: 50px 30px;
-        color: var(--text-gray);
-        animation: fadeInUp 0.6s ease-out;
+        text-align: center !important;
+        padding: 50px 30px !important;
+        color: var(--text-gray) !important;
     }
 
     .empty-state i {
-        font-size: 3.5rem;
-        margin-bottom: 16px;
-        color: var(--primary-purple);
-        opacity: 0.4;
-        animation: floatIcon 4s ease-in-out infinite;
+        font-size: 3.5rem !important;
+        margin-bottom: 16px !important;
+        color: var(--primary-purple) !important;
+        opacity: 0.2 !important;
+        animation: floatSoft 3s ease-in-out infinite !important;
     }
 
     .empty-state p {
-        font-size: 1.05rem;
-        margin: 0;
+        font-size: 1rem !important;
+        font-weight: 600 !important;
     }
 
-    /* ==================== DIALOG STYLING ==================== */
+    /* ==================== FORM TEXT ==================== */
+    .form-text {
+        font-size: 0.8rem !important;
+        color: rgba(255, 255, 255, 0.7) !important;
+        margin-top: 8px !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+    }
+
+    .form-text i {
+        color: #3b82f6 !important;
+        font-size: 0.8rem !important;
+    }
+
+    /* ==================== BUTTON GROUP ==================== */
+    .button-group {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 14px !important;
+        margin-top: 28px !important;
+        animation: slideInUp 0.6s ease-out 0.2s backwards !important;
+    }
+
+    @media (max-width: 600px) {
+        .button-group {
+            grid-template-columns: 1fr !important;
+        }
+    }
+
+    /* ==================== DIALOG ==================== */
     .ui-dialog {
-        background: var(--white);
+        background: var(--white) !important;
         border-radius: 12px !important;
-        box-shadow: var(--shadow-xl) !important;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1) !important;
         border: none !important;
-        animation: scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        animation: scaleIn 0.4s ease-out !important;
     }
 
     .ui-dialog .ui-dialog-titlebar {
-        background: linear-gradient(135deg, #744379 0%, #5a3560 100%);
-        color: var(--white);
-        border: none;
-        border-radius: 12px 12px 0 0;
-        padding: 18px 20px;
-        font-weight: 700;
-        letter-spacing: 0.5px;
-    }
-
-    .ui-dialog .ui-dialog-title {
-        font-size: 1.1rem;
-    }
-
-    .ui-dialog .ui-dialog-titlebar .ui-button {
-        background: rgba(255, 255, 255, 0.2);
-        color: var(--white);
-        transition: all 0.3s ease;
-        border: none;
-    }
-
-    .ui-dialog .ui-dialog-titlebar .ui-button:hover {
-        background: rgba(255, 255, 255, 0.3);
-        transform: rotate(90deg);
+        background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-dark) 100%) !important;
+        color: var(--white) !important;
+        border: none !important;
+        padding: 20px !important;
+        font-weight: 700 !important;
     }
 
     .ui-dialog .ui-dialog-buttonpane {
-        background: var(--bg-hover);
-        border-top: 1px solid var(--border-light);
-        padding: 16px 20px;
-        margin: 0;
-        border-radius: 0 0 12px 12px;
+        background: #f9f9fb !important;
+        border-top: 1px solid #e5e7eb !important;
+        padding: 16px !important;
     }
 
     .ui-dialog .ui-dialog-buttonpane .ui-button {
-        background: var(--primary-purple);
-        color: var(--white);
-        border: none;
-        padding: 10px 24px;
-        border-radius: 8px;
-        font-weight: 600;
-        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        text-transform: uppercase;
-        font-size: 0.85rem;
-        letter-spacing: 0.5px;
-        margin: 0 4px;
+        background: linear-gradient(135deg, var(--primary-pastel) 0%, var(--primary-light) 100%) !important;
+        color: var(--text-dark) !important;
+        border: none !important;
+        padding: 8px 20px !important;
+        border-radius: 8px !important;
+        font-weight: 700 !important;
+        margin: 0 4px !important;
+        transition: all 0.3s ease !important;
     }
 
     .ui-dialog .ui-dialog-buttonpane .ui-button:hover {
-        background: var(--primary-dark);
-        transform: translateY(-3px);
-        box-shadow: var(--shadow-md);
+        transform: translateY(-2px) !important;
+        box-shadow: 0 4px 12px rgba(116, 67, 121, 0.15) !important;
     }
 
     /* ==================== PROGRESS DIALOG ==================== */
     #DialogProgressBar {
-        background: var(--white);
-        border-radius: 12px;
-        padding: 0;
-        animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        background: var(--white) !important;
+        border-radius: 12px !important;
+        animation: scaleIn 0.4s ease-out !important;
     }
 
     #DialogProgressBar p {
-        margin: 0;
-        padding: 25px;
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        font-weight: 600;
-        color: var(--primary-purple);
-        font-size: 1.05rem;
-        animation: slideInRight 0.6s ease-out;
+        margin: 0 !important;
+        padding: 24px !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 12px !important;
+        font-weight: 700 !important;
+        color: var(--primary-purple) !important;
+        font-size: 1rem !important;
     }
 
-    .ui-icon-circle-check {
-        color: var(--success-color) !important;
-        font-size: 1.8rem !important;
-        animation: rotate360 1s linear infinite;
-    }
-
-    /* ==================== UTILITY CLASSES ==================== */
-    .fa-trash,
-    .bi-trash {
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .fa-trash:hover,
-    .bi-trash:hover {
-        color: var(--danger-color);
-        transform: scale(1.2);
-    }
-
+    /* ==================== UTILITY ==================== */
     .search {
         display: none !important;
     }
@@ -830,259 +551,105 @@
     }
 
     #logo_ {
-        max-width: 180px;
-        height: auto;
-        filter: drop-shadow(0 4px 8px rgba(255, 255, 255, 0.15));
-        transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        margin-bottom: 20px;
-        animation: bounceIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        max-width: 180px !important;
+        height: auto !important;
+        margin-bottom: 25px !important;
+        animation: slideInDown 0.7s ease-out !important;
+        transition: transform 0.3s ease !important;
     }
 
     #logo_:hover {
-        transform: scale(1.08) rotateY(5deg);
-        filter: drop-shadow(0 8px 16px rgba(255, 255, 255, 0.25));
+        transform: scale(1.08) !important;
     }
 
-    /* ==================== FILE SIZE HELPER TEXT ==================== */
-    .form-text {
-        font-size: 0.85rem;
-        color: var(--text-gray);
-        margin-top: 8px;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        animation: slideInUp 0.6s ease-out 0.3s backwards;
-    }
-
-    .form-text i {
-        color: var(--info-color);
-        animation: pulse 2s ease-in-out infinite;
-    }
-
-    /* ==================== BUTTON GROUP ==================== */
-    .button-group {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-        margin-top: 25px;
-        animation: slideUp 0.6s ease-out 0.4s backwards;
-    }
-
-    @media (max-width: 600px) {
-        .button-group {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    /* ==================== EXTRA SHAREPOINT SPECIFICITY ==================== */
-    html body .lang .card {
-        background: var(--white) !important;
-        border-radius: 12px !important;
-        box-shadow: var(--shadow-lg) !important;
-    }
-
-    html body .lang .form-control {
-        background-color: var(--white) !important;
-        color: var(--text-dark) !important;
-        border: 2px solid var(--white) !important;
-        border-radius: 10px !important;
-    }
-
-    html body .lang .btn-primary {
-        background: var(--primary-purple) !important;
-        color: var(--white) !important;
-        border: 2px solid var(--primary-purple) !important;
-    }
-
-    html body .lang .btn-secondary {
-        background: var(--white) !important;
-        color: var(--primary-purple) !important;
-        border: 2px solid var(--white) !important;
-    }
-
-    html body .lang .table {
-        background: var(--white) !important;
-        box-shadow: inset 0 1px 3px rgba(116, 67, 121, 0.05) !important;
-    }
-
-    html body .lang .table thead {
-        background: linear-gradient(135deg, #744379 0%, #5a3560 100%) !important;
-        color: var(--white) !important;
-    }
-
-    html body .lang .page-header {
-        color: var(--white) !important;
-    }
-
-    html body .lang .card-section-title {
-        color: var(--primary-purple) !important;
-    }
-
-    /* ==================== RESPONSIVE DESIGN ==================== */
+    /* ==================== RESPONSIVE ==================== */
     @media (max-width: 768px) {
+        .lang {
+            padding: 25px 12px !important;
+        }
+
         .page-header h1 {
-            font-size: 2rem;
-        }
-
-        .form-row {
-            grid-template-columns: 1fr;
-            gap: 16px;
-        }
-
-        .col-md-4 {
-            width: 100%;
+            font-size: 2rem !important;
+            gap: 10px !important;
         }
 
         .card-section {
-            padding: 20px;
+            padding: 28px !important;
+        }
+
+        .card-section-title {
+            font-size: 1.1rem !important;
         }
 
         .table {
-            font-size: 0.9rem;
+            font-size: 0.85rem !important;
         }
 
         .table th,
         .table td {
-            padding: 12px;
+            padding: 10px 12px !important;
         }
 
         .btn {
-            padding: 12px 20px;
-            font-size: 0.9rem;
-        }
-
-        label {
-            font-size: 0.9rem;
-        }
-
-        .form-control {
-            padding: 11px 14px;
-            font-size: 0.9rem;
-        }
-
-        .button-group {
-            grid-template-columns: 1fr;
-            gap: 10px;
+            padding: 11px 22px !important;
+            font-size: 0.85rem !important;
         }
     }
 
     @media (max-width: 480px) {
-        .page-header h1 {
-            font-size: 1.5rem;
-            gap: 8px;
+        .lang {
+            padding: 16px 10px !important;
         }
 
-        .page-header p {
-            font-size: 0.95rem;
+        .page-header h1 {
+            font-size: 1.6rem !important;
         }
 
         .card-section {
-            padding: 16px;
+            padding: 20px !important;
         }
 
-        .form-row {
-            gap: 12px;
-        }
-
-        .table {
-            display: block;
-            overflow-x: auto;
-        }
-
-        .ui-dialog {
-            width: 90% !important;
-            margin: auto !important;
-        }
-
-        .btn {
-            padding: 10px 16px;
-            font-size: 0.85rem;
-        }
-
-        .empty-state {
-            padding: 35px 20px;
-        }
-
-        .empty-state i {
-            font-size: 2.5rem;
+        .button-group {
+            gap: 10px !important;
+            margin-top: 20px !important;
         }
     }
 
-    /* ==================== SCROLLBAR STYLING ==================== */
+    /* ==================== SCROLLBAR ==================== */
     ::-webkit-scrollbar {
-        width: 10px;
-        height: 10px;
+        width: 8px !important;
     }
 
     ::-webkit-scrollbar-track {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(116, 67, 121, 0.08) !important;
     }
 
     ::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.3);
-        border-radius: 5px;
-        transition: all 0.3s ease;
+        background: linear-gradient(180deg, var(--primary-purple), var(--primary-dark)) !important;
+        border-radius: 4px !important;
     }
 
     ::-webkit-scrollbar-thumb:hover {
-        background: rgba(255, 255, 255, 0.5);
-    }
-
-    /* ==================== PRINT STYLES ==================== */
-    @media print {
-        body {
-            background: var(--white);
-        }
-
-        .btn {
-            display: none;
-        }
-
-        .card {
-            box-shadow: none;
-            border: 1px solid var(--border-light);
-        }
-
-        .page-header {
-            color: var(--text-dark);
-        }
+        background: var(--primary-dark) !important;
     }
 
 </style>
 
-<!-- ==================== SHAREPOINT FIX JAVASCRIPT ==================== -->
+<!-- ==================== FONT AWESOME ==================== -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- ==================== SHAREPOINT FIX ==================== -->
 <script>
-    // Override SharePoint styles on page load
     $(document).ready(function() {
-        // Apply forced styles to override SharePoint
         var applySharePointFix = function() {
-            $('body').css({
-                'background': 'linear-gradient(135deg, #744379 0%, #5a3560 100%) !important'
-            });
-            
             $('.form-control').each(function() {
                 $(this).css({
                     'background-color': '#ffffff !important',
-                    'color': '#2c3e50 !important',
-                    'border': '2px solid #ffffff !important'
+                    'color': '#1a1a2e !important'
                 });
-            });
-            
-            $('.btn-primary').each(function() {
-                $(this).css({
-                    'background': '#744379 !important',
-                    'color': '#ffffff !important',
-                    'border-color': '#744379 !important'
-                });
-            });
-            
-            $('.table thead').css({
-                'background': 'linear-gradient(135deg, #744379 0%, #5a3560 100%) !important',
-                'color': '#ffffff !important'
             });
         };
         
-        // Apply fix immediately and on intervals
         applySharePointFix();
         setInterval(applySharePointFix, 1000);
     });
@@ -1096,8 +663,8 @@
 <div class="lang">
     <!-- ==================== HEADER ==================== -->
     <div class="page-header">
-        <h1><i class="bi bi-cloud-upload"></i> File Management Portal</h1>
-        <p>Upload and manage your files securely and efficiently</p>
+        <h1><i class="fas fa-cloud-upload"></i> File Management</h1>
+        <p>Upload and manage your files securely</p>
     </div>
 
     <!-- ==================== MAIN CARD ==================== -->
@@ -1105,34 +672,30 @@
         <!-- ==================== UPLOAD SECTION ==================== -->
         <div class="card-section">
             <div class="card-section-title">
-                <i class="bi bi-arrow-up-circle-fill"></i>
-                Upload Your Files
+                <i class="fas fa-arrow-up"></i>
+                Upload Files
             </div>
 
             <!-- File Name Input -->
             <div class="form-group">
                 <label ar="اسم الملف المرفق" for="FileName_DISC">
-                    <i class="bi bi-file-earmark-text"></i> Attachment File Name
+                    <i class="fas fa-file-alt"></i> File Name
                 </label>
-                <div class="form-control-wrapper">
-                    <input ar="اسم الملف المرفق" type="text" class="form-control" id="FileName_DISC" 
-                        placeholder="Enter your file name here" />
-                </div>
+                <input ar="اسم الملف المرفق" type="text" class="form-control" id="FileName_DISC" 
+                    placeholder="Enter file name" />
             </div>
 
             <!-- File Input -->
             <div class="form-group attachment">
                 <label ar="مرفق" for="inputTypeFiles_DISC">
-                    <i class="bi bi-folder-plus"></i> Choose File
+                    <i class="fas fa-folder-open"></i> Select File
                 </label>
-                <div class="form-control-wrapper">
-                    <input type="File" id="inputTypeFiles_DISC" class="form-control" 
-                        accept=".docx,.doc,.pdf,.jpg,.jpeg,.png,.xls,.xlsx" />
-                </div>
+                <input type="File" id="inputTypeFiles_DISC" class="form-control" 
+                    accept=".docx,.doc,.pdf,.jpg,.jpeg,.png,.xls,.xlsx" />
                 <div class="form-text">
-                    <i class="bi bi-info-circle"></i>
-                    <span ar="الحد الأقصى للملف: 8 ميجابايت | الصيغ المدعومة: PDF, DOC, DOCX, XLS, XLSX, JPG, PNG">
-                        Max file size: 8 MB | Supported: PDF, DOC, DOCX, XLS, XLSX, JPG, PNG
+                    <i class="fas fa-info-circle"></i>
+                    <span ar="الحد الأقصى للملف: 8 ميجابايت">
+                        Max: 8 MB | PDF, DOC, DOCX, XLS, XLSX, JPG, PNG
                     </span>
                 </div>
             </div>
@@ -1140,18 +703,18 @@
             <!-- Buttons -->
             <div class="button-group">
                 <button ar="إرفق الملف" type="button" id="btnUploadFiles_DISC" class="btn btn-primary">
-                    <i class="bi bi-upload"></i> Upload File
+                    <i class="fas fa-upload"></i> Upload
                 </button>
                 <button ar="مسح" type="button" class="btn btn-secondary" onclick="document.getElementById('FileName_DISC').value=''; document.getElementById('inputTypeFiles_DISC').value='';">
-                    <i class="bi bi-arrow-counterclockwise"></i> Clear
+                    <i class="fas fa-redo-alt"></i> Clear
                 </button>
             </div>
         </div>
 
         <!-- ==================== FILES TABLE SECTION ==================== -->
-        <div class="card-section" style="background: linear-gradient(to bottom, #ffffff 0%, #f8f7fb 100%);">
+        <div class="card-section">
             <div class="card-section-title">
-                <i class="bi bi-file-earmark-check"></i>
+                <i class="fas fa-file-check"></i>
                 Attached Files
             </div>
             
@@ -1159,16 +722,16 @@
                 <thead>
                     <tr>
                         <th ar="الملفات المرفقة" width="50%">
-                            <i class="bi bi-file-text"></i> File Name
+                            <i class="fas fa-file"></i> File Name
                         </th>
-                        <th ar="الحجم" width="25%">
-                            <i class="bi bi-file-earmark"></i> Size
+                        <th ar="الحجم" width="20%">
+                            <i class="fas fa-database"></i> Size
                         </th>
-                        <th ar="التاريخ" width="15%">
-                            <i class="bi bi-calendar"></i> Date
+                        <th ar="التاريخ" width="20%">
+                            <i class="fas fa-calendar-alt"></i> Date
                         </th>
                         <th ar="الإجراء" width="10%">
-                            <i class="bi bi-gear"></i> Action
+                            <i class="fas fa-trash"></i> Action
                         </th>
                     </tr>
                 </thead>
@@ -1176,8 +739,8 @@
                     <tr>
                         <td colspan="4">
                             <div class="empty-state">
-                                <i class="bi bi-inbox"></i>
-                                <p ar="لا توجد ملفات مرفوعة بعد">No files uploaded yet</p>
+                                <i class="fas fa-inbox"></i>
+                                <p ar="لا توجد ملفات مرفوعة بعد">No files yet</p>
                             </div>
                         </td>
                     </tr>
@@ -1189,14 +752,14 @@
     <!-- ==================== PROGRESS DIALOG ==================== -->
     <div id="DialogProgressBar" title="Upload Progress">
         <p ar="جاري الإرفاق">
-            <i class="bi bi-check-circle-fill ui-icon-circle-check"></i>
-            Uploading your file...
+            <i class="fas fa-spinner"></i>
+            Uploading...
         </p>
     </div>
 
 </div>
 
-<!-- ==================== ORIGINAL JAVASCRIPT - FULLY PRESERVED ==================== -->
+<!-- ==================== ORIGINAL JAVASCRIPT ==================== -->
 <script>
     function hideEdit() {  
         var edit = document.getElementById("Ribbon.ListForm.Display.Manage.EditItem-Large");
@@ -1208,7 +771,6 @@
         _spBodyOnLoadFunctionNames.push("hideEdit");
     }
     
-    // URL parameter helper
     function getParameterByName(name, url) {
         if (!url) url = window.location.href;
         name = name.replace(/[\[\]]/g, "\\$&");
@@ -1233,7 +795,6 @@
             $("#SPForm").closest(".lang").prepend(myvar);
         }
 
-        // Input Filter Plugin
         (function($) {
             $.fn.inputFilter = function(callback, errMsg) {
                 return this.on("input keydown keyup mousedown mouseup select contextmenu drop focusout", function(e) {
@@ -1258,22 +819,14 @@
             };
         }(jQuery));
 
-        // Mobile Number Filter
-        if(getParameterByName("ar")=="y") {
-            $(".MobileNumber").inputFilter(function(value) {
-                return /^\d*$/.test(value) && (value === "" || parseInt(value) <= 99999999); 
-            }, "غير صالح");
-        } else {
-            $(".MobileNumber").inputFilter(function(value) {
-                return /^\d*$/.test(value) && (value === "" || parseInt(value) <= 99999999); 
-            }, "Invalid");
-        }
+        $(".MobileNumber").inputFilter(function(value) {
+            return /^\d*$/.test(value) && (value === "" || parseInt(value) <= 99999999); 
+        }, "Invalid");
 
-        // Browser check
         $(".browser").hide();
 
         if(getParameterByName("ar")=="y") {
-            // RTL handling
+            // RTL
         } else {
             $("#btnUploadFiles_DISC").attr("style","margin-top:-48px !important");
         }
@@ -1285,7 +838,6 @@
             FolderName_ = URL.split("Lists/")[1].split("/")[0];
         }
 
-        // Hide upload on display form
         if(URL.indexOf("DispForm.aspx")>0) {
             $("#FileName_DISC").closest("div").hide();
             $("#btnUploadFiles_DISC").closest("div").hide();
@@ -1310,7 +862,6 @@
             }, 1000);
         }
 
-        // Dialog confirmation
         $( "#dialog-confirm" ).dialog({
             modal: true,
             resizable: false,
@@ -1330,7 +881,6 @@
             }
         }); 
 
-        // Upload button click handler
         $("#btnUploadFiles_DISC").click(function(){ 
             if($("#FileName_DISC").val() != "") { 
                 if($("#inputTypeFiles_DISC").val() != "") {
@@ -1339,33 +889,20 @@
                         FileUpload(FolderName_);
                     }
                 } else {
-                    if(getParameterByName("ar")=="y") { 
-                        alert("رجاءا ارفق الملف");
-                    } else {
-                        alert("Please attach the file");
-                    }
+                    alert("Please attach the file");
                 } 
             } else {
-                if(getParameterByName("ar")=="y") { 
-                    alert("مطلوب إرفاق اسم الملف");
-                } else {
-                    alert("Attachment File Name is Required");
-                }
+                alert("Attachment File Name is Required");
             }
         });
 
-        // File size validation
         if(document.getElementById("inputTypeFiles_DISC")) {
             document.getElementById("inputTypeFiles_DISC").addEventListener("change", function () {
                 if (this.files.length > 0) {
                     const fileSize = this.files.item(0).size;
                     const fileMb = fileSize / 1024 ** 2;
                     if (fileMb >= 8) {
-                        if(getParameterByName("ar")=="y") { 
-                            alert("اختار ملف حجمة اقل من ٨ ميجابيت");
-                        } else {
-                            alert("Please select a file less than 8 MB.");
-                        }
+                        alert("Please select a file less than 8 MB.");
                         this.value = '';
                     }
                 }
@@ -1373,7 +910,6 @@
         }
     });
 
-    // Metadata function
     function MetaData(file) {
         updateObject = {
             __metadata: {
