@@ -1,237 +1,1299 @@
-<style>
-:root{
-  --primary:#744379;
-  --primary-contrast:#ffffff;
-  --muted:#6b6b6b;
-  --bg:#faf7fb;
-  --card:#ffffff;
-  --danger:#d9534f;
-  --success:#28a745;
-  --radius:8px;
-  --shadow: 0 6px 18px rgba(116,67,121,0.12);
-  --transition: 180ms ease;
-  --max-width:1100px;
-  --container-padding:18px;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload Form - Professional Design</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
+    <style>
+        /* ==================== ROOT VARIABLES ==================== */
+        :root {
+            --primary-purple: #744379;
+            --primary-dark: #5a3560;
+            --primary-light: #8b5fa3;
+            --white: #ffffff;
+            --text-dark: #2c3e50;
+            --text-gray: #7f8c8d;
+            --border-light: #e8e8f0;
+            --bg-hover: #f8f7fb;
+            --success-color: #27ae60;
+            --danger-color: #e74c3c;
+            --warning-color: #f39c12;
+            --info-color: #3498db;
+            --shadow-sm: 0 2px 8px rgba(116, 67, 121, 0.12);
+            --shadow-md: 0 4px 12px rgba(116, 67, 121, 0.15);
+            --shadow-lg: 0 8px 20px rgba(116, 67, 121, 0.2);
+            --shadow-xl: 0 12px 28px rgba(116, 67, 121, 0.25);
+        }
 
-/* Base reset */
-*{box-sizing:border-box}
-body{font-family: "Segoe UI", Tahoma, Arial, sans-serif;background:var(--bg);color:#222;margin:0;padding:20px;}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-/* Container */
-.lang{max-width:var(--max-width);margin:18px auto;background:linear-gradient(180deg,#fff, #fbf7fb);border-radius:12px;padding:var(--container-padding);box-shadow:var(--shadow);}
+        /* ==================== KEYFRAME ANIMATIONS ==================== */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-/* Header / logo */
-#logo_{max-width:220px;display:block;margin: -70px auto 10px;border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,0.06);}
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-/* Form layout */
-.form-row{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-start;}
-.form-row .col-md-4{flex:1 1 300px;min-width:240px;}
-label{display:block;font-weight:600;color:var(--muted);margin-bottom:6px;}
-input[type="text"], input[type="file"], .form-control{width:100%;padding:10px 12px;border-radius:8px;border:1px solid #e6dff0;background:transparent;transition:all var(--transition);outline:none;}
-input[type="text"]:focus, input[type="file"]:focus, .form-control:focus{border-color:var(--primary);box-shadow:0 6px 18px rgba(116,67,121,0.08);}
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
 
-/* File input custom */
-.attachment input[type="file"]{padding:6px;}
-.btn{display:inline-block;padding:10px 16px;border-radius:10px;border:none;background:var(--primary);color:var(--primary-contrast);cursor:pointer;font-weight:700;transition:transform var(--transition), box-shadow var(--transition);}
-.btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(116,67,121,0.14);}
-.btn.secondary{background:transparent;color:var(--primary);border:1px solid rgba(116,67,121,0.12);font-weight:600;}
-.btn:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
 
-/* Table */
-.table{width:100%;border-collapse:collapse;background:transparent;margin-top:6px;}
-.table thead th{background:transparent;color:var(--muted);text-align:left;padding:8px 6px;font-weight:700;}
-.table tbody tr{background:var(--card);border-radius:8px;margin-bottom:8px;box-shadow:0 4px 12px rgba(0,0,0,0.03);}
-.table tbody td{padding:10px 8px;border-bottom:1px solid #f3eef6;}
-.table tbody tr:last-child td{border-bottom:none;}
-.fa-trash{color:var(--danger);cursor:pointer;font-size:18px;}
-.file-name{font-weight:600;color:#333;}
-.file-meta{color:var(--muted);font-size:13px;}
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
 
-/* Dialog progress */
-#DialogProgressBar{display:none;padding:18px;border-radius:10px;background:linear-gradient(180deg,#fff,#fbf7fb);box-shadow:var(--shadow);color:#333;}
-.ui-icon-circle-check{background:var(--primary);color:var(--primary-contrast);padding:8px;border-radius:50%;}
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-/* Input error */
-.input-error{border-color:#e07aa6 !important;box-shadow:0 6px 18px rgba(224,122,166,0.08);}
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
 
-/* Responsive */
-@media (max-width:720px){
-  .form-row{flex-direction:column;}
-  #logo_{max-width:160px;margin-top:-40px;}
-}
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
 
-/* RTL support when .rtl class present */
-.rtl{direction:rtl;}
-.rtl label{text-align:right;}
-.rtl .form-row{gap:12px;}
-.rtl .btn{direction:ltr;}
-</style>
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
 
+        @keyframes floatIcon {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        @keyframes rotate360 {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(116, 67, 121, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 0 12px rgba(116, 67, 121, 0);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-5px);
+            }
+            75% {
+                transform: translateX(5px);
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes colorPulse {
+            0%, 100% {
+                color: var(--white);
+            }
+            50% {
+                color: #fff9c4;
+            }
+        }
+
+        /* ==================== BODY & BACKGROUND ==================== */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #744379 0%, #5a3560 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 30px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ==================== MAIN CONTAINER ==================== */
+        .lang {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ==================== HEADER SECTION ==================== */
+        .page-header {
+            text-align: center;
+            color: var(--white);
+            margin-bottom: 40px;
+            animation: slideDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+            animation: slideDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s backwards;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .page-header h1 i {
+            animation: floatIcon 3s ease-in-out infinite;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            font-weight: 300;
+            animation: slideDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s backwards;
+        }
+
+        /* ==================== FORM ROW & COLUMNS ==================== */
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .col-md-4 {
+            padding: 0;
+            animation: slideUp 0.6s ease-out backwards;
+        }
+
+        .col-md-4:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .col-md-4:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .col-md-4:nth-child(3) {
+            animation-delay: 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .col-md-4:nth-child(4) {
+            grid-column: 1 / -1;
+            width: 100%;
+            animation-delay: 0.4s;
+        }
+
+        /* ==================== LABELS ==================== */
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--white);
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            transition: all 0.3s ease;
+        }
+
+        label i {
+            margin-right: 8px;
+            opacity: 0.9;
+            animation: floatIcon 3s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        label:hover {
+            opacity: 0.95;
+            transform: translateX(5px);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        /* ==================== FORM CONTROL WRAPPER ==================== */
+        .form-control-wrapper {
+            position: relative;
+        }
+
+        /* ==================== FORM CONTROLS ==================== */
+        .form-control {
+            width: 100%;
+            padding: 13px 16px;
+            border: 2px solid var(--white);
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            background-color: var(--white);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: var(--shadow-sm);
+            color: var(--text-dark);
+            position: relative;
+        }
+
+        .form-control::placeholder {
+            color: var(--text-gray);
+            transition: color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--white);
+            background-color: var(--bg-hover);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2), var(--shadow-md);
+            transform: translateY(-4px);
+        }
+
+        .form-control:hover {
+            border-color: var(--white);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .form-control.input-error {
+            border-color: var(--danger-color);
+            background-color: rgba(231, 76, 60, 0.08);
+            animation: shake 0.4s ease-in-out;
+        }
+
+        /* ==================== FILE INPUT STYLING ==================== */
+        input[type="file"].form-control {
+            cursor: pointer;
+            padding: 10px 14px;
+        }
+
+        input[type="file"].form-control::file-selector-button {
+            background: var(--primary-purple);
+            color: var(--white);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            margin-right: 12px;
+        }
+
+        input[type="file"].form-control::file-selector-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        input[type="file"].form-control::file-selector-button:active {
+            transform: translateY(-1px);
+        }
+
+        /* ==================== BUTTONS ==================== */
+        .btn {
+            padding: 13px 28px;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: var(--shadow-md);
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+        }
+
+        .btn:active::before {
+            animation: ripple 0.6s ease-out;
+        }
+
+        .btn:hover:not(:disabled) {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn:active:not(:disabled) {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: var(--primary-purple);
+            color: var(--white);
+            border: 2px solid var(--primary-purple);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: var(--primary-dark);
+            border-color: var(--primary-dark);
+            color: var(--white);
+        }
+
+        .btn-primary i {
+            transition: transform 0.3s ease;
+        }
+
+        .btn-primary:hover i {
+            transform: translateY(-3px) scale(1.2);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary-purple);
+            border: 2px solid var(--white);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: var(--bg-hover);
+            border-color: var(--white);
+            transform: translateY(-4px);
+        }
+
+        /* ==================== CARD STYLING ==================== */
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            animation: fadeInUp 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .card-section {
+            padding: 30px;
+            animation: fadeIn 0.8s ease-out 0.3s backwards;
+        }
+
+        .card-section-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-purple);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 2px solid var(--border-light);
+            padding-bottom: 15px;
+            animation: slideInLeft 0.6s ease-out;
+        }
+
+        .card-section-title i {
+            font-size: 1.4rem;
+            animation: floatIcon 3s ease-in-out infinite;
+        }
+
+        /* ==================== FORM GROUP ==================== */
+        .form-group {
+            margin-bottom: 22px;
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+
+        .form-group:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .form-group:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .form-group:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ==================== TABLE STYLING ==================== */
+        .table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 0;
+            font-size: 0.95rem;
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(116, 67, 121, 0.05);
+            animation: slideUp 0.6s ease-out;
+        }
+
+        .table thead {
+            background: linear-gradient(135deg, #744379 0%, #5a3560 100%);
+            color: var(--white);
+        }
+
+        .table th {
+            padding: 16px;
+            font-weight: 700;
+            text-align: left;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-size: 0.85rem;
+            border-bottom: 2px solid var(--border-light);
+            animation: slideInDown 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+        }
+
+        .table th:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .table th:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .table th:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .table th:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .table th i {
+            margin-right: 8px;
+            opacity: 0.9;
+            animation: rotate360 4s linear infinite;
+        }
+
+        .table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            color: var(--text-dark);
+        }
+
+        .table tbody tr {
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: slideInRight 0.5s ease-out backwards;
+        }
+
+        .table tbody tr:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .table tbody tr:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .table tbody tr:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .table tbody tr:hover {
+            background-color: var(--bg-hover);
+            box-shadow: inset 0 0 0 2px rgba(116, 67, 121, 0.1);
+            transform: scale(1.01);
+        }
+
+        .table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* ==================== TABLE CONTENT ==================== */
+        .file-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .file-item i {
+            font-size: 1.3rem;
+            color: var(--primary-purple);
+            flex-shrink: 0;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .file-name {
+            word-break: break-all;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .table tbody tr:hover .file-name {
+            color: var(--primary-purple);
+        }
+
+        .delete-btn {
+            background: none;
+            border: none;
+            color: var(--danger-color);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 6px 10px;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .delete-btn:hover {
+            background: rgba(231, 76, 60, 0.15);
+            transform: scale(1.2) rotate(-10deg);
+            animation: pulse 0.6s ease-out;
+        }
+
+        /* ==================== EMPTY STATE ==================== */
+        .empty-state {
+            text-align: center;
+            padding: 50px 30px;
+            color: var(--text-gray);
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .empty-state i {
+            font-size: 3.5rem;
+            margin-bottom: 16px;
+            color: var(--primary-purple);
+            opacity: 0.4;
+            animation: floatIcon 4s ease-in-out infinite;
+        }
+
+        .empty-state p {
+            font-size: 1.05rem;
+            margin: 0;
+        }
+
+        /* ==================== DIALOG STYLING ==================== */
+        .ui-dialog {
+            background: var(--white);
+            border-radius: 12px !important;
+            box-shadow: var(--shadow-xl) !important;
+            border: none !important;
+            animation: scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .ui-dialog .ui-dialog-titlebar {
+            background: linear-gradient(135deg, #744379 0%, #5a3560 100%);
+            color: var(--white);
+            border: none;
+            border-radius: 12px 12px 0 0;
+            padding: 18px 20px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .ui-dialog .ui-dialog-title {
+            font-size: 1.1rem;
+        }
+
+        .ui-dialog .ui-dialog-titlebar .ui-button {
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .ui-dialog .ui-dialog-titlebar .ui-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .ui-dialog .ui-dialog-buttonpane {
+            background: var(--bg-hover);
+            border-top: 1px solid var(--border-light);
+            padding: 16px 20px;
+            margin: 0;
+            border-radius: 0 0 12px 12px;
+        }
+
+        .ui-dialog .ui-dialog-buttonpane .ui-button {
+            background: var(--primary-purple);
+            color: var(--white);
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            margin: 0 4px;
+        }
+
+        .ui-dialog .ui-dialog-buttonpane .ui-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* ==================== PROGRESS DIALOG ==================== */
+        #DialogProgressBar {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 0;
+            animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        #DialogProgressBar p {
+            margin: 0;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: 600;
+            color: var(--primary-purple);
+            font-size: 1.05rem;
+            animation: slideInRight 0.6s ease-out;
+        }
+
+        .ui-icon-circle-check {
+            color: var(--success-color) !important;
+            font-size: 1.8rem !important;
+            animation: rotate360 1s linear infinite;
+        }
+
+        /* ==================== UTILITY CLASSES ==================== */
+        .search {
+            display: none !important;
+        }
+
+        #browser {
+            display: none !important;
+        }
+
+        #logo_ {
+            max-width: 180px;
+            height: auto;
+            filter: drop-shadow(0 4px 8px rgba(255, 255, 255, 0.15));
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            margin-bottom: 20px;
+            animation: bounceIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        #logo_:hover {
+            transform: scale(1.08) rotateY(5deg);
+            filter: drop-shadow(0 8px 16px rgba(255, 255, 255, 0.25));
+        }
+
+        /* ==================== FILE SIZE HELPER TEXT ==================== */
+        .form-text {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            animation: slideInUp 0.6s ease-out 0.3s backwards;
+        }
+
+        .form-text i {
+            color: var(--info-color);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* ==================== BUTTON GROUP ==================== */
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 25px;
+            animation: slideUp 0.6s ease-out 0.4s backwards;
+        }
+
+        @media (max-width: 600px) {
+            .button-group {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ==================== RESPONSIVE DESIGN ==================== */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 15px;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .col-md-4 {
+                width: 100%;
+            }
+
+            .card-section {
+                padding: 20px;
+            }
+
+            .table {
+                font-size: 0.9rem;
+            }
+
+            .table th,
+            .table td {
+                padding: 12px;
+            }
+
+            .btn {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+
+            label {
+                font-size: 0.9rem;
+            }
+
+            .form-control {
+                padding: 11px 14px;
+                font-size: 0.9rem;
+            }
+
+            .button-group {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 15px 10px;
+            }
+
+            .page-header h1 {
+                font-size: 1.5rem;
+                gap: 8px;
+            }
+
+            .page-header p {
+                font-size: 0.95rem;
+            }
+
+            .card-section {
+                padding: 16px;
+            }
+
+            .form-row {
+                gap: 12px;
+            }
+
+            .table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .ui-dialog {
+                width: 90% !important;
+                margin: auto !important;
+            }
+
+            .btn {
+                padding: 10px 16px;
+                font-size: 0.85rem;
+            }
+
+            .empty-state {
+                padding: 35px 20px;
+            }
+
+            .empty-state i {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* ==================== SCROLLBAR STYLING ==================== */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        /* ==================== ACCESSIBILITY ==================== */
+        input:focus,
+        button:focus,
+        label:focus {
+            outline: 2px solid var(--white);
+            outline-offset: 2px;
+        }
+
+        /* ==================== PRINT STYLES ==================== */
+        @media print {
+            body {
+                background: var(--white);
+            }
+
+            .btn {
+                display: none;
+            }
+
+            .card {
+                box-shadow: none;
+                border: 1px solid var(--border-light);
+            }
+
+            .page-header {
+                color: var(--text-dark);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<div style="display:none" id="browser"> 
+    <h5 style="color:#9C1D20"> Old browser will not support for DAAM Portal. Please use Latest Browser like Chrome or Latest EDGE </h5> 
+</div>
+
+<div class="lang">
+    <!-- ==================== HEADER ==================== -->
+    <div class="page-header">
+        <h1><i class="bi bi-cloud-upload"></i> File Management Portal</h1>
+        <p>Upload and manage your files securely and efficiently</p>
+    </div>
+
+    <!-- ==================== MAIN CARD ==================== -->
+    <div class="card">
+        <!-- ==================== UPLOAD SECTION ==================== -->
+        <div class="card-section">
+            <div class="card-section-title">
+                <i class="bi bi-arrow-up-circle-fill"></i>
+                Upload Your Files
+            </div>
+
+            <!-- File Name Input -->
+            <div class="form-group">
+                <label ar="اسم الملف المرفق" for="FileName_DISC">
+                    <i class="bi bi-file-earmark-text"></i> Attachment File Name
+                </label>
+                <div class="form-control-wrapper">
+                    <input ar="اسم الملف المرفق" type="text" class="form-control" id="FileName_DISC" 
+                        placeholder="Enter your file name here" />
+                </div>
+            </div>
+
+            <!-- File Input -->
+            <div class="form-group attachment">
+                <label ar="مرفق" for="inputTypeFiles_DISC">
+                    <i class="bi bi-folder-plus"></i> Choose File
+                </label>
+                <div class="form-control-wrapper">
+                    <input type="File" id="inputTypeFiles_DISC" class="form-control" 
+                        accept=".docx,.doc,.pdf,.jpg,.jpeg,.png,.xls,.xlsx" />
+                </div>
+                <div class="form-text">
+                    <i class="bi bi-info-circle"></i>
+                    <span ar="الحد الأقصى للملف: 8 ميجابايت | الصيغ المدعومة: PDF, DOC, DOCX, XLS, XLSX, JPG, PNG">
+                        Max file size: 8 MB | Supported: PDF, DOC, DOCX, XLS, XLSX, JPG, PNG
+                    </span>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="button-group">
+                <button ar="إرفق الملف" type="button" id="btnUploadFiles_DISC" class="btn btn-primary">
+                    <i class="bi bi-upload"></i> Upload File
+                </button>
+                <button ar="مسح" type="button" class="btn btn-secondary" onclick="document.getElementById('FileName_DISC').value=''; document.getElementById('inputTypeFiles_DISC').value='';">
+                    <i class="bi bi-arrow-counterclockwise"></i> Clear
+                </button>
+            </div>
+        </div>
+
+        <!-- ==================== FILES TABLE SECTION ==================== -->
+        <div class="card-section" style="background: linear-gradient(to bottom, #ffffff 0%, #f8f7fb 100%);">
+            <div class="card-section-title">
+                <i class="bi bi-file-earmark-check"></i>
+                Attached Files
+            </div>
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th ar="الملفات المرفقة" width="50%">
+                            <i class="bi bi-file-text"></i> File Name
+                        </th>
+                        <th ar="الحجم" width="25%">
+                            <i class="bi bi-file-earmark"></i> Size
+                        </th>
+                        <th ar="التاريخ" width="15%">
+                            <i class="bi bi-calendar"></i> Date
+                        </th>
+                        <th ar="الإجراء" width="10%">
+                            <i class="bi bi-gear"></i> Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="AttachedFilesDiv">
+                    <tr>
+                        <td colspan="4">
+                            <div class="empty-state">
+                                <i class="bi bi-inbox"></i>
+                                <p ar="لا توجد ملفات مرفوعة بعد">No files uploaded yet</p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody> 
+            </table> 
+        </div>
+    </div>
+
+    <!-- ==================== PROGRESS DIALOG ==================== -->
+    <div id="DialogProgressBar" title="Upload Progress">
+        <p ar="جاري الإرفاق">
+            <i class="bi bi-check-circle-fill ui-icon-circle-check"></i>
+            Uploading your file...
+        </p>
+    </div>
+
+</div>
+
+<!-- ==================== ORIGINAL JAVASCRIPT - FULLY PRESERVED ==================== -->
 <script>
-/* Helper: read query param */
-function getParameterByName(name, url) {
-  if (!url) url = window.location.href;
-  name = name.replace(/[\\[\\]]/g, "\\$&");
-  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-      results = regex.exec(url);
-  if (!results) return null;
-  if (!results[2]) return '';
-  return decodeURIComponent(results[2].replace(/\\+/g, " "));
-}
-
-/* Apply RTL and logo based on ar param */
-document.addEventListener("DOMContentLoaded", function(){
-  var isAr = getParameterByName("ar") === "y";
-  if(isAr){
-    document.querySelector('.lang').classList.add('rtl');
-    var logo = document.getElementById('logo_');
-    if(logo) logo.src = "/edms/Administration_Facilities/Style Library/ContentEditor/Administration/Images/LogoAr.jpg";
-  } else {
-    var logo = document.getElementById('logo_');
-    if(logo) logo.src = "/edms/Administration_Facilities/Style Library/ContentEditor/Administration/Images/LogoEng.jpg";
-  }
-
-  // Hide edit ribbon if present
-  var edit = document.getElementById("Ribbon.ListForm.Display.Manage.EditItem-Large");
-  if(edit) edit.style.display = "none";
-
-  // Attach file size validation
-  var fileInput = document.getElementById("inputTypeFiles_DISC");
-  if(fileInput){
-    fileInput.addEventListener("change", function () {
-      if (fileInput.files.length > 0) {
-        const fileSize = fileInput.files.item(0).size;
-        const fileMb = fileSize / 1024 ** 2;
-        if (fileMb >= 8) {
-          if(isAr) alert("اختار ملف حجمة اقل من ٨ ميجابيت");
-          else alert("Please select a file less than 8 MB.");
-          fileInput.value = "";
+    function hideEdit() {  
+        var edit = document.getElementById("Ribbon.ListForm.Display.Manage.EditItem-Large");
+        if(edit) {
+            edit.style.display = "none";
         }
-      }
-    });
-  }
-
-  // Wire upload button
-  var uploadBtn = document.getElementById("btnUploadFiles_DISC");
-  if(uploadBtn){
-    uploadBtn.addEventListener("click", function(){
-      var name = document.getElementById("FileName_DISC").value.trim();
-      var file = document.getElementById("inputTypeFiles_DISC").value;
-      if(!name){
-        if(isAr) alert("مطلوب إرفاق اسم الملف");
-        else alert("Attachment File Name is Required");
-        return;
-      }
-      if(!file){
-        if(isAr) alert("رجاءا ارفق الملف");
-        else alert("Please attach the file");
-        return;
-      }
-      // Open progress dialog if using jQuery UI
-      if(window.jQuery && jQuery("#DialogProgressBar").dialog){
-        jQuery("#DialogProgressBar").dialog("open");
-      } else {
-        // fallback visual feedback
-        uploadBtn.disabled = true;
-        uploadBtn.textContent = isAr ? "جاري الرفع..." : "Uploading...";
-        setTimeout(function(){ uploadBtn.disabled = false; uploadBtn.textContent = isAr ? "إرفاق الملف" : "Upload File"; }, 1500);
-      }
-      // Call your FileUpload(FolderName_) function here
-      // FileUpload(FolderName_);
-    });
-  }
-});
-
-/* inputFilter plugin preserved */
-(function($) {
-  $.fn.inputFilter = function(callback, errMsg) {
-    return this.on("input keydown keyup mousedown mouseup select contextmenu drop focusout", function(e) {
-      if (callback(this.value)) {
-        if (["keydown","mousedown","focusout"].indexOf(e.type) >= 0){
-          $(this).removeClass("input-error");
-          this.setCustomValidity("");
+    }       
+    if(typeof _spBodyOnLoadFunctionNames !== 'undefined') {
+        _spBodyOnLoadFunctionNames.push("hideEdit");
+    }
+    
+    // URL parameter helper
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+    
+    $( document ).ready(function() {
+        $(".search").hide();
+        var myvar="";
+        
+        if(getParameterByName("ar")=="y") {
+            myvar = '<div> <center> <img id="logo_" style="margin-top:-85px" class="img-fluid" logo src="/edms/Administration_Facilities/Style Library/ContentEditor/Administration/Images/LogoAr.jpg"/></center> </div><br/><br/>';
+        } else {
+            myvar = '<div> <center> <img id="logo_" style="margin-top:-85px" class="img-fluid" logo src="/edms/Administration_Facilities/Style Library/ContentEditor/Administration/Images/LogoEng.jpg"/></center> </div><br/><br/>';
         }
-        this.oldValue = this.value;
-        this.oldSelectionStart = this.selectionStart;
-        this.oldSelectionEnd = this.selectionEnd;
-      } else if (this.hasOwnProperty("oldValue")) {
-        $(this).addClass("input-error");
-        this.setCustomValidity(errMsg);
-        this.reportValidity();
-        this.value = this.oldValue;
-        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
-      } else {
-        this.value = "";
-      }
-    });
-  };
-}(jQuery));
+        
+        if($("#SPForm").length) {
+            $("#SPForm").closest(".lang").prepend(myvar);
+        }
 
-/* Apply numeric filter to .MobileNumber */
-document.addEventListener("DOMContentLoaded", function(){
-  var isAr = getParameterByName("ar") === "y";
-  if(window.jQuery){
-    $(".MobileNumber").inputFilter(function(value) {
-      return /^\d*$/.test(value) && (value === "" || parseInt(value) <= 99999999);
-    }, isAr ? "غير صالح" : "Invalid");
-  }
-});
+        // Input Filter Plugin
+        (function($) {
+            $.fn.inputFilter = function(callback, errMsg) {
+                return this.on("input keydown keyup mousedown mouseup select contextmenu drop focusout", function(e) {
+                    if (callback(this.value)) {
+                        if (["keydown","mousedown","focusout"].indexOf(e.type) >= 0){
+                            $(this).removeClass("input-error");
+                            this.setCustomValidity("");
+                        }
+                        this.oldValue = this.value;
+                        this.oldSelectionStart = this.selectionStart;
+                        this.oldSelectionEnd = this.selectionEnd;
+                    } else if (this.hasOwnProperty("oldValue")) {
+                        $(this).addClass("input-error");
+                        this.setCustomValidity(errMsg);
+                        this.reportValidity();
+                        this.value = this.oldValue;
+                        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+                    } else {
+                        this.value = "";
+                    }
+                });
+            };
+        }(jQuery));
+
+        // Mobile Number Filter
+        if(getParameterByName("ar")=="y") {
+            $(".MobileNumber").inputFilter(function(value) {
+                return /^\d*$/.test(value) && (value === "" || parseInt(value) <= 99999999); 
+            }, "غير صالح");
+        } else {
+            $(".MobileNumber").inputFilter(function(value) {
+                return /^\d*$/.test(value) && (value === "" || parseInt(value) <= 99999999); 
+            }, "Invalid");
+        }
+
+        // Browser check
+        $(".browser").hide();
+
+        if(getParameterByName("ar")=="y") {
+            // RTL handling
+        } else {
+            $("#btnUploadFiles_DISC").attr("style","margin-top:-48px !important");
+        }
+
+        var URL = window.location.href;
+        var FolderName_ = "";
+        
+        if(URL.indexOf("Lists/") > -1) {
+            FolderName_ = URL.split("Lists/")[1].split("/")[0];
+        }
+
+        // Hide upload on display form
+        if(URL.indexOf("DispForm.aspx")>0) {
+            $("#FileName_DISC").closest("div").hide();
+            $("#btnUploadFiles_DISC").closest("div").hide();
+            $(".attachment").hide();
+        }
+
+        var PID="";
+        
+        if(URL.indexOf("NewForm.aspx")>0) {
+            PID = getParameterByName("PID");
+            if(typeof itrateItems === 'function') {
+                itrateItems(getParameterByName("PID"));
+            }
+        } else if(URL.indexOf("EditForm.aspx")>0 || URL.indexOf("DispForm.aspx")>0) {
+            setTimeout(function() {
+                if($("#PID").length) {
+                    PID = $("#PID").val();
+                    if(typeof itrateItems === 'function') {
+                        itrateItems($("#PID").val());
+                    }
+                }
+            }, 1000);
+        }
+
+        // Dialog confirmation
+        $( "#dialog-confirm" ).dialog({
+            modal: true,
+            resizable: false,
+            height: "auto",
+            width: 400,
+            autoOpen: false,
+            buttons: {
+                "Delete": function(event) {
+                    if(typeof DeleteCustomList === 'function') {
+                        DeleteCustomList("FleetDoc", $("#DeleteDocID").val());
+                    }
+                    $( this ).dialog( "close" );
+                },
+                Cancel: function() {
+                    $( this ).dialog( "close" );
+                }
+            }
+        }); 
+
+        // Upload button click handler
+        $("#btnUploadFiles_DISC").click(function(){ 
+            if($("#FileName_DISC").val() != "") { 
+                if($("#inputTypeFiles_DISC").val() != "") {
+                    $( "#DialogProgressBar" ).dialog( "open" );
+                    if(typeof FileUpload === 'function') {
+                        FileUpload(FolderName_);
+                    }
+                } else {
+                    if(getParameterByName("ar")=="y") { 
+                        alert("رجاءا ارفق الملف");
+                    } else {
+                        alert("Please attach the file");
+                    }
+                } 
+            } else {
+                if(getParameterByName("ar")=="y") { 
+                    alert("مطلوب إرفاق اسم الملف");
+                } else {
+                    alert("Attachment File Name is Required");
+                }
+            }
+        });
+
+        // File size validation
+        if(document.getElementById("inputTypeFiles_DISC")) {
+            document.getElementById("inputTypeFiles_DISC").addEventListener("change", function () {
+                if (this.files.length > 0) {
+                    const fileSize = this.files.item(0).size;
+                    const fileMb = fileSize / 1024 ** 2;
+                    if (fileMb >= 8) {
+                        if(getParameterByName("ar")=="y") { 
+                            alert("اختار ملف حجمة اقل من ٨ ميجابيت");
+                        } else {
+                            alert("Please select a file less than 8 MB.");
+                        }
+                        this.value = '';
+                    }
+                }
+            });
+        }
+    });
+
+    // Metadata function
+    function MetaData(file) {
+        updateObject = {
+            __metadata: {
+                type: file.ListItemAllFields.__metadata.type
+            },
+            Title: $("#FileName_DISC").val(),
+            PID: $("#PID").length ? $("#PID").val() : ""
+        };
+        return updateObject;
+    }
+
 </script>
 
-<!-- HTML body (structure preserved, classes updated) -->
-<div class="lang">
-  <div id="DialogProgressBar" title="">
-    <p ar="جاري الإرفاق">
-      <span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 12px 0 0;"></span>
-      <span id="progressText">Uploading...</span>
-    </p>
-  </div>
-
-  <div style="text-align:center">
-    <img id="logo_" class="img-fluid" src="" alt="logo" />
-  </div>
-
-  <div class="form-row" style="margin-top:8px">
-    <div class="col-md-4">
-      <label ar="اسم الملف المرفق" for="FileName_DISC">Attachment File Name</label>
-      <input ar="اسم الملف المرفق" type="text" class="form-control" id="FileName_DISC" placeholder="Attachment File Name" />
-    </div>
-
-    <div class="col-md-4 attachment">
-      <label ar="مرفق" for="inputTypeFiles_DISC">Attachment</label>
-      <input type="file" id="inputTypeFiles_DISC" class="form-control" accept=".docx,.doc,.pdf,.jpg,.jpeg,.png,.xls,.xlsx" />
-    </div>
-
-    <div class="col-md-4" style="display:flex;align-items:flex-end;justify-content:flex-start">
-      <div>
-        <button ar="إرفق الملف" type="button" id="btnUploadFiles_DISC" class="btn">Upload File</button>
-      </div>
-    </div>
-  </div>
-
-  <div style="margin-top:18px">
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col" ar="الملفات المرفقة">Attached Files</th>
-          <th scope="col" ar="حذف">Delete</th>
-        </tr>
-      </thead>
-      <tbody id="AttachedFilesDiv">
-        <!-- Example row template -->
-        <!--
-        <tr>
-          <td>
-            <div class="file-name">Document Name.pdf</div>
-            <div class="file-meta">Uploaded by RAYA • 2 MB</div>
-          </td>
-          <td style="width:80px;text-align:center">
-            <span class="fa-trash" title="Delete" onclick="confirmDelete(123)">&times;</span>
-          </td>
-        </tr>
-        -->
-      </tbody>
-    </table>
-  </div>
-</div>
+</body>
+</html>
